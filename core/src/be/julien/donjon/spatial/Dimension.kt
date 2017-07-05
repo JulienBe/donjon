@@ -1,8 +1,5 @@
-package be.julien.donjon.world
+package be.julien.donjon.spatial
 
-/**
- * Created by julien on 04/07/17.
- */
 class Dimension(internal val row: Int, internal val col: Int) {
     internal val surface = row * col
 }

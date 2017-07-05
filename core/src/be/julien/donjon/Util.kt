@@ -1,12 +1,12 @@
 package be.julien.donjon
 
 import com.badlogic.gdx.Gdx
-
-/**
- * Created by julien on 04/07/17.
- */
+import java.util.*
 
 object Util {
+
+    val rnd = Random()
+
     fun out(string: String) {
         Gdx.app.log("Out", string.toString())
     }
