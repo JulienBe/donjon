@@ -1,4 +1,4 @@
-package be.julien.donjon
+package be.julien.donjon.graphics
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
@@ -6,9 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 
-/**
- * Created by julien on 04/07/17.
- */
 class Drawer {
     internal val pixel = Texture(Gdx.files.internal("square.png"))
     internal val batch = SpriteBatch()
