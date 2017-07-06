@@ -1,11 +1,8 @@
-package be.julien.donjon
+package be.julien.donjon.util
 
 import com.badlogic.gdx.Gdx
-import java.util.*
 
 object Util {
-
-    val rnd = Random()
 
     fun out(string: String) {
         Gdx.app.log("Out", string.toString())

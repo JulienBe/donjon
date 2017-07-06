@@ -1,6 +1,8 @@
 package be.julien.donjon.graphics
 
+import be.julien.donjon.spatial.Position
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
@@ -37,8 +39,12 @@ class Drawer {
         batch.dispose()
     }
 
-    fun drawAbsolute(line: Int, row: Int) {
-        batch.setColor(0.25f * row.toFloat(), 0.25f * line.toFloat(), 0.33f * line.toFloat(), 1f)
-        batch.draw(pixel, line.toFloat(), row.toFloat())
+    fun drawAbsolute(pos: Position) {
+        batch.draw(pixel, pos.x.toFloat(), pos.y.toFloat())
+        batch.setColor(Color.WHITE)
+    }
+
+    fun color(color: Color) {
+        batch.setColor(color)
     }
 }

@@ -10,3 +10,9 @@ class Position(var x: Int, var y: Int) {
         y = WorldWiz.trimY(y)
     }
 }
+
+object PositionPool {
+    fun get(x: Int, y: Int): Position {
+        return Position(x, y)
+    }
+}

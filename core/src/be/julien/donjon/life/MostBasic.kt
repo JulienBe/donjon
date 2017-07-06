@@ -1,15 +1,15 @@
 package be.julien.donjon.life
 
-import be.julien.donjon.Util
 import be.julien.donjon.spatial.Direction
 import be.julien.donjon.spatial.Position
+import be.julien.donjon.util.Rnd
 
-class MostBasic(pos: Position, val right: Float, val left: Float, val forward: Float, var direction: Direction) : Life(pos) {
+class MostBasic(pos: Position, val right: Float = Rnd.float(), val left: Float = Rnd.float(), val forward: Float = Rnd.float(), var direction: Direction = Rnd.direction()) : Life(pos) {
 
     override fun act() {
-        val leftRoll = Util.rnd.nextFloat() * left
-        val rightRoll = Util.rnd.nextFloat() * right
-        val forwardRoll = Util.rnd.nextFloat() * forward
+        val leftRoll = Rnd.float(left)
+        val rightRoll = Rnd.float(right)
+        val forwardRoll = Rnd.float(forward)
         if (leftRoll > rightRoll && leftRoll > rightRoll)
             direction.steerLeft()
         else if (rightRoll > forwardRoll)
@@ -17,7 +17,5 @@ class MostBasic(pos: Position, val right: Float, val left: Float, val forward: F
         else
             pos.move(direction)
     }
-
-
 
 }
