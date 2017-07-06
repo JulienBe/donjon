@@ -6,7 +6,7 @@ import be.julien.donjon.util.Rnd
 
 class MostBasic(pos: Position, val right: Float = Rnd.float(), val left: Float = Rnd.float(), val forward: Float = Rnd.float(), var direction: Direction = Rnd.direction()) : Life(pos) {
 
-    override fun act() {
+    override fun act(delta: Float) {
         val leftRoll = Rnd.float(left)
         val rightRoll = Rnd.float(right)
         val forwardRoll = Rnd.float(forward)

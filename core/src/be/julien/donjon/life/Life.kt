@@ -6,7 +6,7 @@ import be.julien.donjon.util.Util
 import com.badlogic.gdx.graphics.Color
 
 abstract class Life(val pos: Position) {
-    abstract fun act()
+    abstract fun act(delta: Float)
     fun draw(drawer: Drawer) {
         drawer.color(Color.BLACK)
         drawer.drawAbsolute(pos)

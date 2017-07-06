@@ -15,8 +15,8 @@ class World {
         Square(PositionPool.get(Util.lineToRow(i, WorldWiz.dim.col), Util.lineToCol(i, WorldWiz.dim.col)))})
     internal val lifeforms = GdxArr<Life>()
 
-    fun act() {
-
+    fun act(delta: Float) {
+        lifeforms.forEach { l -> l.act(delta) }
     }
 
     fun draw(drawer: Drawer) {
@@ -49,9 +49,9 @@ object WorldWiz {
         return 0
     }
     fun trimX(x: Int): Int {
-        return trim(x, dim.col)
+        return trim(x, dim.col - 1)
     }
     fun trimY(y: Int): Int {
-        return trim(y, dim.row)
+        return trim(y, dim.row - 1)
     }
 }

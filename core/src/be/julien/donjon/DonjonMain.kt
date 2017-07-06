@@ -20,7 +20,7 @@ class DonjonMain : ApplicationAdapter() {
     }
 
     override fun render() {
-        world.act()
+        world.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)
     }
 
