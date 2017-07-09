@@ -9,6 +9,7 @@ import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2Comp
 import be.julien.donjon.spatial.PosPool
 import be.julien.donjon.util.Rnd
+import be.julien.donjon.util.Time
 
 class World {
 
@@ -18,6 +19,7 @@ class World {
 
     fun act(delta: Float) {
         lifeforms.forEach { l -> l.act(delta) }
+        Time.act(delta)
     }
 
     fun draw(drawer: Drawer) {
