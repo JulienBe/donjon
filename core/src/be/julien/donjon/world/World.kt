@@ -6,13 +6,14 @@ import be.julien.donjon.util.Util
 import be.julien.donjon.life.Life
 import be.julien.donjon.life.MostBasic
 import be.julien.donjon.spatial.Dimension
-import be.julien.donjon.spatial.PositionPool
+import be.julien.donjon.spatial.Vec2Comp
+import be.julien.donjon.spatial.PosPool
 import be.julien.donjon.util.Rnd
 
 class World {
 
     internal val squares = Array(WorldWiz.dim.surface, { i ->
-        Square(PositionPool.get(Util.lineToRow(i, WorldWiz.dim.col), Util.lineToCol(i, WorldWiz.dim.col)))})
+        Square(PosPool.get(Util.lineToRow(i, WorldWiz.dim.col), Util.lineToCol(i, WorldWiz.dim.col)))})
     internal val lifeforms = GdxArr<Life>()
 
     fun act(delta: Float) {
@@ -30,9 +31,9 @@ class World {
     }
 
     private fun newLife(): Life {
-        return MostBasic(PositionPool.get(
-                    Rnd.int(WorldWiz.dim.col),
-                    Rnd.int(WorldWiz.dim.row))
+        return MostBasic(Vec2Comp.get(
+                    Rnd.float(WorldWiz.dim.col.toFloat()),
+                    Rnd.float(WorldWiz.dim.row.toFloat()))
                 )
     }
 }

@@ -1,21 +1,20 @@
 package be.julien.donjon.life
 
-import be.julien.donjon.spatial.Direction
-import be.julien.donjon.spatial.Position
+import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.spatial.Vec2Comp
 import be.julien.donjon.util.Rnd
 
-class MostBasic(pos: Position, val right: Float = Rnd.float(), val left: Float = Rnd.float(), val forward: Float = Rnd.float(), var direction: Direction = Rnd.direction()) : Life(pos) {
+class MostBasic(pos: Vec2, val right: Float = Rnd.float(), val left: Float = Rnd.float(), val forward: Float = Rnd.float(), var dir: Vec2 = Vec2Comp.rnd()) : Life(pos) {
 
     override fun act(delta: Float) {
         val leftRoll = Rnd.float(left)
         val rightRoll = Rnd.float(right)
         val forwardRoll = Rnd.float(forward)
         if (leftRoll > rightRoll && leftRoll > rightRoll)
-            direction.steerLeft()
+            dir.steer(90f, delta)
         else if (rightRoll > forwardRoll)
-            direction.steerRight()
-        else
-            pos.move(direction)
+            dir.steer(-90f, delta)
+        pos.move(dir, delta)
     }
 
 }

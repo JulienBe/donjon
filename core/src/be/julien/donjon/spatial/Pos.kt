@@ -2,7 +2,7 @@ package be.julien.donjon.spatial
 
 import be.julien.donjon.world.WorldWiz
 
-class Position(var x: Int, var y: Int) {
+class Pos(var x: Int, var y: Int) {
     fun move(dir: Direction) {
         x += dir.x
         y += dir.y
@@ -11,8 +11,8 @@ class Position(var x: Int, var y: Int) {
     }
 }
 
-object PositionPool {
-    fun get(x: Int, y: Int): Position {
-        return Position(x, y)
+object PosPool {
+    fun get(x: Int, y: Int): Pos {
+        return Pos(x, y)
     }
 }

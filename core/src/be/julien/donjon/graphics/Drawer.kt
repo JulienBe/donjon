@@ -1,6 +1,7 @@
 package be.julien.donjon.graphics
 
-import be.julien.donjon.spatial.Position
+import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.spatial.Pos
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
@@ -17,7 +18,7 @@ class Drawer {
     internal val cam = cam()
 
     private fun cam(): OrthographicCamera {
-        val camera = OrthographicCamera(30f * ratio, 30f * ratio)
+        val camera = OrthographicCamera(30f * ratio, 30f)
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f)
         camera.update()
         return camera
@@ -39,8 +40,12 @@ class Drawer {
         batch.dispose()
     }
 
-    fun drawAbsolute(pos: Position) {
+    fun drawAbsolute(pos: Pos) {
         batch.draw(pixel, pos.x.toFloat(), pos.y.toFloat())
+        batch.setColor(Color.WHITE)
+    }
+    fun drawAbsolute(pos: Vec2) {
+        batch.draw(pixel, pos.x, pos.y)
         batch.setColor(Color.WHITE)
     }
 
