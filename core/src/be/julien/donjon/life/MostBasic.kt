@@ -1,10 +1,9 @@
 package be.julien.donjon.life
 
 import be.julien.donjon.spatial.Vec2
-import be.julien.donjon.spatial.Vec2Comp
 import be.julien.donjon.util.Rnd
 
-class MostBasic(pos: Vec2, val right: Float = Rnd.float(), val left: Float = Rnd.float(), val forward: Float = Rnd.float(), var dir: Vec2 = Vec2Comp.rnd()) : Life(pos) {
+class MostBasic(pos: Vec2, deadCallback: (life: Life) -> Unit, val right: Float, val left: Float, val forward: Float, var dir: Vec2) : Life(pos, deadCallback) {
 
     override fun act(delta: Float) {
         super.act(delta)

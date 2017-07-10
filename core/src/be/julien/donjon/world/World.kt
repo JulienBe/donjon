@@ -4,11 +4,10 @@ import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.util.Util
 import be.julien.donjon.life.Life
-import be.julien.donjon.life.MostBasic
+import be.julien.donjon.life.LifeComp
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2Comp
 import be.julien.donjon.spatial.PosPool
-import be.julien.donjon.util.Rnd
 import be.julien.donjon.util.Time
 
 class World {
@@ -33,10 +32,11 @@ class World {
     }
 
     private fun newLife(): Life {
-        return MostBasic(Vec2Comp.get(
-                    Rnd.float(WorldWiz.dim.col.toFloat()),
-                    Rnd.float(WorldWiz.dim.row.toFloat()))
-                )
+        return LifeComp.mostBasic(Vec2Comp.getRandWorld(), this::deadLife)
+    }
+
+    fun deadLife(life: Life) {
+        lifeforms.removeValue(life, true)
     }
 }
 

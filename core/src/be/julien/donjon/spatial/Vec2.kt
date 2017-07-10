@@ -1,5 +1,7 @@
 package be.julien.donjon.spatial
 
+import be.julien.donjon.util.Rnd
+import be.julien.donjon.world.WorldWiz
 import com.badlogic.gdx.math.Vector2
 
 class Vec2(x: Float, y: Float) : Vector2(x, y) {
@@ -28,5 +30,9 @@ object Vec2Comp {
 
     fun rnd(): Vec2 {
         return get(0f, 1f).setToRandomDirection() as Vec2
+    }
+
+    fun getRandWorld(): Vec2 {
+        return get(Rnd.float(WorldWiz.dim.col.toFloat()), Rnd.float(WorldWiz.dim.row.toFloat()))
     }
 }
