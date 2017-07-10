@@ -12,8 +12,6 @@ import be.julien.donjon.util.Time
 
 class World {
 
-    internal val squares = Array(WorldWiz.dim.surface, { i ->
-        Square(PosPool.get(Util.lineToRow(i, WorldWiz.dim.col), Util.lineToCol(i, WorldWiz.dim.col)))})
     internal val lifeforms = GdxArr<Life>()
 
     fun act(delta: Float) {
@@ -22,7 +20,6 @@ class World {
     }
 
     fun draw(drawer: Drawer) {
-        squares.forEach { s -> s.draw(drawer) }
         lifeforms.forEach { l -> l.draw(drawer) }
     }
 

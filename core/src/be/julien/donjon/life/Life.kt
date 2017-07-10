@@ -32,7 +32,7 @@ abstract class Life(val pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool
     }
 
     fun draw(drawer: Drawer) {
-        drawer.color(Color.BLACK)
+        drawer.color(Color.YELLOW)
         drawer.drawAbsolute(pos)
     }
 }
