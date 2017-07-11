@@ -5,6 +5,7 @@ import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.util.Util
 import be.julien.donjon.life.Life
 import be.julien.donjon.life.LifeComp
+import be.julien.donjon.physics.BoxWorld
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2Comp
 import be.julien.donjon.spatial.PosPool
@@ -24,6 +25,7 @@ class World {
     }
 
     fun spawn() {
+        BoxWorld.init()
         for (i in 1 .. WorldWiz.initLife)
             lifeforms.add(newLife())
     }

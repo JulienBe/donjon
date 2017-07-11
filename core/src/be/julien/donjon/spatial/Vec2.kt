@@ -24,6 +24,9 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
 }
 
 object Vec2Comp {
+
+    val global = Vec2(0f, 0f)
+
     fun get(x: Float, y: Float): Vec2 {
         return Vec2(x, y)
     }
