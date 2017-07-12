@@ -41,7 +41,7 @@ object BoxHelper {
         fixtureDef.shape = shape
 //        fixtureDef.filter.categoryBits = category
 //        fixtureDef.filter.maskBits = mask
-        fixtureDef.isSensor = true
+        fixtureDef.isSensor = false
         fixtureDef.density = 0f
         fixtureDef.friction = 0f
         fixtureDef.restitution = 0f

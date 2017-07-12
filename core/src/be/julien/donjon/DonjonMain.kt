@@ -15,6 +15,7 @@ class DonjonMain : ApplicationAdapter() {
     lateinit internal var drawer: Drawer
 
     override fun create() {
+        BoxWorld.init()
         drawer = Drawer()
         Gdx.input.inputProcessor = input
         input.addInput(Input.Keys.SPACE, { world.spawn()})

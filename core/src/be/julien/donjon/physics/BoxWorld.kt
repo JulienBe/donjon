@@ -1,7 +1,6 @@
 package be.julien.donjon.physics
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.util.Util
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef
@@ -16,7 +15,9 @@ object BoxWorld {
     private val position = 2
     private var accumulator = 0f
 
-    fun init() {}
+    fun init() {
+        world.setContactListener(CollisionMaster())
+    }
 
     fun act(deltaTime: Float) {
         // fixed time step max frame time to avoid spiral of death (on slow devices)

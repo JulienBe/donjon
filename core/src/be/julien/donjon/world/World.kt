@@ -25,7 +25,6 @@ class World {
     }
 
     fun spawn() {
-        BoxWorld.init()
         for (i in 1 .. WorldWiz.initLife)
             lifeforms.add(newLife())
     }

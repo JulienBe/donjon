@@ -8,10 +8,13 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
     fun act() {
         if (nextTrigger < Time.time) {
             nextTrigger = Time.time + interval
-            value += increment
-            callback?.check(this)
-            Util.out("" + value + " - " + Time.time + " " + interval)
+            step()
         }
+    }
+
+    fun step() {
+        value += increment
+        callback?.check(this)
     }
 
     fun setCallback(callbackValue: Int, method: () -> Unit) {

@@ -16,7 +16,7 @@ abstract class Life(val pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool
 
     internal var energy = initEnergy()
     internal val size = Rectangle(0f, 0f, 1f, 1f)
-    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, size, this, pos)
+    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.DynamicBody, size, this, pos)
     internal var speed = 5f
 
     init {
@@ -44,6 +44,11 @@ abstract class Life(val pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool
     fun draw(drawer: Drawer) {
         drawer.color(Color.YELLOW)
         drawer.drawAbsolute(body.pos(), size)
+    }
+
+    fun collidesWith(any: Any) {
+        println("collision life")
+        energy.step()
     }
 }
 
