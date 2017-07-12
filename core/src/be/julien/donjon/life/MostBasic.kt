@@ -16,4 +16,5 @@ class MostBasic(pos: Vec2, deadCallback: (life: Life) -> Unit, val right: Float,
             body.steer(-90f, delta)
     }
 
+
 }

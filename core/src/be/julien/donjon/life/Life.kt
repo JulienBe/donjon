@@ -12,16 +12,11 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(val pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool.Poolable, BoxObject {
+abstract class Life(pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool.Poolable, BoxObject {
 
     internal var energy = initEnergy()
     internal val size = Rectangle(0f, 0f, 1f, 1f)
-    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.DynamicBody, size, this, pos)
-    internal var speed = 5f
-
-    init {
-        body.initSpeed(speed)
-    }
+    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.DynamicBody, size, this, pos, 5f)
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)

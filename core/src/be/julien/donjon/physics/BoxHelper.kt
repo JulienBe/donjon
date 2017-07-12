@@ -10,8 +10,8 @@ object BoxHelper {
 
     internal val ppm = 20f
 
-    fun createRectangle(bodyType: BodyDef.BodyType, rectangle: Rectangle, boxObject: BoxObject, pos: Vec2): BoxBody {
-        val b = BoxBody(createBody(bodyType, createRectangleShape(rectangle), boxObject, pos))
+    fun createRectangle(bodyType: BodyDef.BodyType, rectangle: Rectangle, boxObject: BoxObject, pos: Vec2, speed: Float): BoxBody {
+        val b = BoxBody(createBody(bodyType, createRectangleShape(rectangle), boxObject, pos), speed)
         return b
     }
 
