@@ -3,6 +3,7 @@ package be.julien.donjon.world
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.life.Life
+import be.julien.donjon.physics.Collider
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.util.Time
 
@@ -11,7 +12,13 @@ class World {
     internal val lifeforms = GdxArr<Life>()
 
     fun act(delta: Float) {
-        lifeforms.forEach { l -> l.act(delta) }
+        lifeforms.forEach { l ->
+            if (l.dead)
+                lifeforms.removeValue(l, true)
+            else
+                l.act(delta)
+        }
+        Collider.check(lifeforms)
         Time.act(delta)
     }
 
@@ -25,7 +32,7 @@ class World {
     }
 
     private fun newLife(): Life {
-        return Life.mostBasic(this::deadLife)
+        return Life.mostBasic()
     }
 
     fun deadLife(life: Life) {

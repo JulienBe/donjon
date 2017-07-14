@@ -9,14 +9,14 @@ object BoxHelper {
 
     internal val ppm = 20f
 
-    fun createRectangle(bodyType: BodyDef.BodyType, rectangle: Rectangle, boxObject: BoxObject, pos: Vec2): BoxBody {
-        val b = BoxBody(createBody(bodyType, createRectangleShape(rectangle), boxObject, pos))
+    fun createRectangle(bodyType: BodyDef.BodyType, rectangle: Rectangle): BoxBody {
+        val b = BoxBody(createBody(bodyType, createRectangleShape(rectangle)))
         return b
     }
 
-    private fun createBody(bodyType: BodyDef.BodyType, shape: Shape, boxObject: BoxObject, pos: Vec2): Body {
+    private fun createBody(bodyType: BodyDef.BodyType, shape: Shape): Body {
         val b = BoxWorld.createBody(createBodyDef(bodyType))
-        createFixture(b, shape, boxObject)
+        createFixture(b, shape)
         shape.dispose()
         b.isFixedRotation = true
         b.angularDamping = 0f
@@ -24,7 +24,7 @@ object BoxHelper {
         b.gravityScale = 0f
         b.linearDamping = 0f
         b.linearVelocity = Vector2.Y
-        b.setTransform(pos, 0f)
+        b.setTransform(Vector2.Zero, 0f)
         return b
     }
 
@@ -35,7 +35,7 @@ object BoxHelper {
         return bodyDef
     }
 
-    private fun createFixture(b: Body, shape: Shape, obj: BoxObject): Fixture {
+    private fun createFixture(b: Body, shape: Shape): Fixture {
         val fixtureDef = FixtureDef()
         fixtureDef.shape = shape
 //        fixtureDef.filter.categoryBits = category
@@ -45,7 +45,6 @@ object BoxHelper {
         fixtureDef.friction = 0f
         fixtureDef.restitution = 0f
         val fixture = b.createFixture(fixtureDef)
-        fixture.userData = obj
         return fixture
     }
 
@@ -54,10 +53,6 @@ object BoxHelper {
         val center = Vec2.get(rectangle.x + rectangle.width * 0.5f, rectangle.y + rectangle.height * 0.5f)
         polygon.setAsBox((rectangle.width * 0.5f), (rectangle.height * 0.5f), center, 0.0f)
         return polygon
-    }
-
-    fun  createSensor(body: BoxBody) {
-
     }
 
 }

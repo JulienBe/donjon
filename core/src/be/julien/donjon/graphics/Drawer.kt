@@ -1,6 +1,7 @@
 package be.julien.donjon.graphics
 
 import be.julien.donjon.physics.b2d.BoxHelper
+import be.julien.donjon.spatial.Rect
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
@@ -41,11 +42,15 @@ class Drawer {
     }
 
     fun color(color: Color) {
-        batch.setColor(color)
+        batch.color = color
     }
 
     fun drawAbsolute(pos: Vector2, size: Rectangle) {
         batch.draw(pixel, pos.x, pos.y, size.width, size.height)
-        batch.setColor(Color.WHITE)
+        batch.color = Color.WHITE
+    }
+    fun drawAbsolute(rect: Rect) {
+        batch.draw(pixel, rect.x, rect.y, rect.width, rect.height)
+        batch.color = Color.WHITE
     }
 }

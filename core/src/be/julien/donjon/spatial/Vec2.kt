@@ -23,8 +23,6 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
     }
 
     companion object {
-        val global = Vec2(0f, 0f)
-
         fun get(x: Float, y: Float): Vec2 {
             return Vec2(x, y)
         }
@@ -34,7 +32,7 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
         }
 
         fun getRandWorld(): Vec2 {
-            return get(Rnd.float(WorldWiz.dim.col.toFloat()), Rnd.float(WorldWiz.dim.row.toFloat()))
+            return get(Rnd.col(), Rnd.row())
         }
     }
 }
