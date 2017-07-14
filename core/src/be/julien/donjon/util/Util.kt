@@ -15,4 +15,5 @@ object Util {
     fun lineToCol(line: Int, columns: Int): Int {
         return line % columns
     }
+
 }

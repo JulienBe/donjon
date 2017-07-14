@@ -17,4 +17,6 @@ object Rnd {
     fun direction(): Direction {
         return Direction.values()[int(Direction.values().size)]
     }
+
+    fun float(): Float = rnd.nextFloat()
 }

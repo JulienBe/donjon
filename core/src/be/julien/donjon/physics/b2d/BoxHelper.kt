@@ -1,7 +1,6 @@
-package be.julien.donjon.physics
+package be.julien.donjon.physics.b2d
 
 import be.julien.donjon.spatial.Vec2
-import be.julien.donjon.spatial.Vec2Comp
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
@@ -52,9 +51,13 @@ object BoxHelper {
 
     private fun createRectangleShape(rectangle: Rectangle): Shape {
         val polygon = PolygonShape()
-        val center = Vec2Comp.get(rectangle.x + rectangle.width * 0.5f, rectangle.y + rectangle.height * 0.5f)
+        val center = Vec2.get(rectangle.x + rectangle.width * 0.5f, rectangle.y + rectangle.height * 0.5f)
         polygon.setAsBox((rectangle.width * 0.5f), (rectangle.height * 0.5f), center, 0.0f)
         return polygon
+    }
+
+    fun  createSensor(body: BoxBody) {
+
     }
 
 }

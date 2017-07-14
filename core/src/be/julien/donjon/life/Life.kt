@@ -1,8 +1,9 @@
 package be.julien.donjon.life
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.physics.BoxHelper
-import be.julien.donjon.physics.BoxObject
+import be.julien.donjon.physics.b2d.BoxHelper
+import be.julien.donjon.physics.b2d.BoxObject
+import be.julien.donjon.spatial.Mover
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.util.Rnd
 import be.julien.donjon.util.TimeInt
@@ -12,7 +13,7 @@ import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool.Poolable, BoxObject {
+abstract class Life(pos: Vec2, dir: Vec2 = Vec2.getRandWorld(), var deadCallback: (life: Life) -> Unit): Mover(pos, dir), Pool.Poolable, BoxObject {
 
     internal var energy = initEnergy()
     internal val size = Rectangle(0f, 0f, 1f, 1f)
@@ -45,10 +46,10 @@ abstract class Life(pos: Vec2, var deadCallback: (life: Life) -> Unit): Pool.Poo
         println("collision life")
         energy.step()
     }
-}
 
-object LifeComp {
-    fun mostBasic(pos: Vec2, deadCallback: (life: Life) -> Unit, right: Float = Rnd.float(), left: Float = Rnd.float(), forward: Float = Rnd.float()): MostBasic {
-        return MostBasic(pos, deadCallback, right, left, forward)
+    companion object {
+        fun mostBasic(deadCallback: (life: Life) -> Unit, pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), right: Float = Rnd.float(), left: Float = Rnd.float(), forward: Float = Rnd.float()): MostBasic {
+            return MostBasic(pos, dir, deadCallback, right, left, forward)
+        }
     }
 }

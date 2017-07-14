@@ -21,21 +21,20 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
     fun steer(angleDegree: Float, delta: Float) {
         rotate(angleDegree * delta)
     }
-}
 
-object Vec2Comp {
+    companion object {
+        val global = Vec2(0f, 0f)
 
-    val global = Vec2(0f, 0f)
+        fun get(x: Float, y: Float): Vec2 {
+            return Vec2(x, y)
+        }
 
-    fun get(x: Float, y: Float): Vec2 {
-        return Vec2(x, y)
-    }
+        fun rnd(): Vec2 {
+            return get(0f, 1f).setToRandomDirection() as Vec2
+        }
 
-    fun rnd(): Vec2 {
-        return get(0f, 1f).setToRandomDirection() as Vec2
-    }
-
-    fun getRandWorld(): Vec2 {
-        return get(Rnd.float(WorldWiz.dim.col.toFloat()), Rnd.float(WorldWiz.dim.row.toFloat()))
+        fun getRandWorld(): Vec2 {
+            return get(Rnd.float(WorldWiz.dim.col.toFloat()), Rnd.float(WorldWiz.dim.row.toFloat()))
+        }
     }
 }

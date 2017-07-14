@@ -1,6 +1,6 @@
 package be.julien.donjon.graphics
 
-import be.julien.donjon.physics.BoxHelper
+import be.julien.donjon.physics.b2d.BoxHelper
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20

@@ -1,4 +1,4 @@
-package be.julien.donjon.physics
+package be.julien.donjon.physics.b2d
 
 import be.julien.donjon.graphics.Drawer
 import com.badlogic.gdx.math.Vector2
@@ -14,10 +14,6 @@ object BoxWorld {
     private val velocity = 6
     private val position = 2
     private var accumulator = 0f
-
-    fun init() {
-        world.setContactListener(CollisionMaster())
-    }
 
     fun act(deltaTime: Float) {
         // fixed time step max frame time to avoid spiral of death (on slow devices)

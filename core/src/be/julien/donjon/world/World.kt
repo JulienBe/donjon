@@ -2,13 +2,8 @@ package be.julien.donjon.world
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.util.Util
 import be.julien.donjon.life.Life
-import be.julien.donjon.life.LifeComp
-import be.julien.donjon.physics.BoxWorld
 import be.julien.donjon.spatial.Dimension
-import be.julien.donjon.spatial.Vec2Comp
-import be.julien.donjon.spatial.PosPool
 import be.julien.donjon.util.Time
 
 class World {
@@ -30,7 +25,7 @@ class World {
     }
 
     private fun newLife(): Life {
-        return LifeComp.mostBasic(Vec2Comp.getRandWorld(), this::deadLife)
+        return Life.mostBasic(this::deadLife)
     }
 
     fun deadLife(life: Life) {
