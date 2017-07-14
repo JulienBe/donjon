@@ -17,7 +17,7 @@ abstract class Life(pos: Vec2, dir: Vec2 = Vec2.getRandWorld(), var deadCallback
 
     internal var energy = initEnergy()
     internal val size = Rectangle(0f, 0f, 1f, 1f)
-    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.DynamicBody, size, this, pos, 5f)
+    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, size, this, pos)
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)
@@ -33,13 +33,15 @@ abstract class Life(pos: Vec2, dir: Vec2 = Vec2.getRandWorld(), var deadCallback
         deadCallback.invoke(this)
     }
 
-    open fun act(delta: Float) {
+    override fun act(delta: Float) {
+        super.act(delta)
+        body.setPos(pos)
         energy.act()
     }
 
     fun draw(drawer: Drawer) {
         drawer.color(Color.YELLOW)
-        drawer.drawAbsolute(body.pos(), size)
+        drawer.drawAbsolute(pos, size)
     }
 
     fun collidesWith(any: Any) {
@@ -49,6 +51,7 @@ abstract class Life(pos: Vec2, dir: Vec2 = Vec2.getRandWorld(), var deadCallback
 
     companion object {
         fun mostBasic(deadCallback: (life: Life) -> Unit, pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), right: Float = Rnd.float(), left: Float = Rnd.float(), forward: Float = Rnd.float()): MostBasic {
+            dir.nor()
             return MostBasic(pos, dir, deadCallback, right, left, forward)
         }
     }
