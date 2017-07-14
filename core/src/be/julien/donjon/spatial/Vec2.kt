@@ -1,7 +1,6 @@
 package be.julien.donjon.spatial
 
 import be.julien.donjon.util.Rnd
-import be.julien.donjon.world.WorldWiz
 import com.badlogic.gdx.math.Vector2
 
 class Vec2(x: Float, y: Float) : Vector2(x, y) {
@@ -32,7 +31,7 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
         }
 
         fun getRandWorld(): Vec2 {
-            return get(Rnd.col(), Rnd.row())
+            return get(Rnd.width(), Rnd.height())
         }
     }
 }

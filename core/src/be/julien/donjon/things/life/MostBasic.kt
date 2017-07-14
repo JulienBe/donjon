@@ -1,4 +1,4 @@
-package be.julien.donjon.life
+package be.julien.donjon.things.life
 
 import be.julien.donjon.spatial.Rect
 import be.julien.donjon.spatial.Vec2
@@ -6,15 +6,15 @@ import be.julien.donjon.util.Rnd
 
 class MostBasic(rect: Rect, dir: Vec2,  val right: Float, val left: Float, val forward: Float) : Life(rect, dir) {
 
-    override fun act(delta: Float) {
-        super.act(delta)
+    override fun act(delta: Float): Boolean {
         val leftRoll = Rnd.float(left)
         val rightRoll = Rnd.float(right)
         val forwardRoll = Rnd.float(forward)
         if (leftRoll > rightRoll && leftRoll > rightRoll)
-            steer(90f)
+            steer(90f * delta)
         else if (rightRoll > forwardRoll)
-            steer(-90f)
+            steer(-90f * delta)
+        return super.act(delta)
     }
 
 }

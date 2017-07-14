@@ -10,12 +10,13 @@ import com.badlogic.gdx.Input
 
 class DonjonMain : ApplicationAdapter() {
 
-    internal val world = World()
+    internal lateinit var world: World
     internal val input = InputHub()
     lateinit internal var drawer: Drawer
 
     override fun create() {
         drawer = Drawer()
+        world = World()
         Gdx.input.inputProcessor = input
         input.addInput(Input.Keys.SPACE, { world.spawn()})
     }
@@ -24,7 +25,7 @@ class DonjonMain : ApplicationAdapter() {
         world.act(Gdx.graphics.deltaTime)
         BoxWorld.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)
-        BoxWorld.render(drawer)
+//        BoxWorld.render(drawer)
     }
 
     override fun dispose() {

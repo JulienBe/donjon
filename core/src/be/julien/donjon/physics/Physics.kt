@@ -1,10 +1,10 @@
 package be.julien.donjon.physics
 
-import be.julien.donjon.life.Life
+import be.julien.donjon.things.Thing
 
 object Physics {
 
-    fun intersect(l1: Life, l2: Life): Boolean {
-        return l1.rect.overlaps(l2.rect)
+    fun intersect(t1: Thing, t2: Thing): Boolean {
+        return t1.rect.overlaps(t2.rect)
     }
 }

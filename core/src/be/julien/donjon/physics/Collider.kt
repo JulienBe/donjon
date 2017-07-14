@@ -1,15 +1,15 @@
 package be.julien.donjon.physics
 
 import be.julien.donjon.GdxArr
-import be.julien.donjon.life.Life
+import be.julien.donjon.things.Thing
 
 object Collider {
-    fun check(lifeforms: GdxArr<Life>) {
-        for (i in 0.until(lifeforms.size))
-            for (j in (i+1).until(lifeforms.size))
-                if (Physics.intersect(lifeforms[i], lifeforms[j])) {
-                    lifeforms[i].collidesWith(lifeforms[j])
-                    lifeforms[j].collidesWith(lifeforms[i])
+    fun check(things: GdxArr<Thing>) {
+        for (i in 0.until(things.size))
+            for (j in (i+1).until(things.size))
+                if (Physics.intersect(things[i], things[j])) {
+                    things[i].collidesWith(things[j])
+                    things[j].collidesWith(things[i])
                 }
     }
 }

@@ -1,6 +1,5 @@
 package be.julien.donjon.graphics
 
-import be.julien.donjon.physics.b2d.BoxHelper
 import be.julien.donjon.spatial.Rect
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -14,8 +13,6 @@ import com.badlogic.gdx.math.Vector2
 class Drawer {
     internal val pixel = Texture(Gdx.files.internal("square.png"))
     internal val batch = SpriteBatch()
-    internal val screenWidth: Float = Gdx.graphics.width / BoxHelper.ppm
-    internal val screenHeight: Float = Gdx.graphics.height / BoxHelper.ppm
     internal val cam = cam()
 
     private fun cam(): OrthographicCamera {
@@ -30,7 +27,7 @@ class Drawer {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
         cam.update()
-        batch.setProjectionMatrix(cam.combined)
+        batch.projectionMatrix = cam.combined
 
         batch.begin()
         stuffToDraw.invoke(this)
@@ -52,5 +49,11 @@ class Drawer {
     fun drawAbsolute(rect: Rect) {
         batch.draw(pixel, rect.x, rect.y, rect.width, rect.height)
         batch.color = Color.WHITE
+    }
+
+    companion object {
+        internal val ratio =  Gdx.graphics.width / Gdx.graphics.height
+        internal val screenWidth: Float = 160f
+        internal val screenHeight: Float = screenWidth / ratio
     }
 }

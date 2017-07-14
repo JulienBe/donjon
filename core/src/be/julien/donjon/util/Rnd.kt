@@ -1,7 +1,7 @@
 package be.julien.donjon.util
 
+import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.spatial.Direction
-import be.julien.donjon.world.WorldWiz
 import java.util.*
 
 object Rnd {
@@ -21,6 +21,6 @@ object Rnd {
 
     fun float(): Float = rnd.nextFloat()
 
-    fun col(): Float = float(WorldWiz.dim.col.toFloat())
-    fun row(): Float = float(WorldWiz.dim.row.toFloat())
+    fun width(): Float = float(Drawer.screenWidth)
+    fun height(): Float = float(Drawer.screenHeight)
 }

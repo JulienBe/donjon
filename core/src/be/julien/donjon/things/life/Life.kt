@@ -1,10 +1,11 @@
-package be.julien.donjon.life
+package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.b2d.BoxHelper
 import be.julien.donjon.spatial.Mover
 import be.julien.donjon.spatial.Rect
 import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.things.Thing
 import be.julien.donjon.util.Rnd
 import be.julien.donjon.util.TimeInt
 import be.julien.donjon.util.TimeIntComp
@@ -16,7 +17,6 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
 
     internal var energy = initEnergy()
     internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, rect)
-    var dead = false
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)
@@ -32,18 +32,18 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
         dead = true
     }
 
-    override fun act(delta: Float) {
-        super.act(delta)
+    override fun act(delta: Float): Boolean {
         body.setPos(rect)
         energy.act()
+        return super.act(delta)
     }
 
-    fun draw(drawer: Drawer) {
+    override fun draw(drawer: Drawer) {
         drawer.color(Color.YELLOW)
-        drawer.drawAbsolute(rect)
+        super.draw(drawer)
     }
 
-    fun collidesWith(any: Any) {
+    override fun collidesWith(thing: Thing) {
         println("collision life")
         energy.step()
     }
