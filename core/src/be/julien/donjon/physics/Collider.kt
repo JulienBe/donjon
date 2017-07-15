@@ -5,11 +5,15 @@ import be.julien.donjon.things.Thing
 
 object Collider {
     fun check(things: GdxArr<Thing>) {
-        for (i in 0.until(things.size))
-            for (j in (i+1).until(things.size))
-                if (Physics.intersect(things[i], things[j])) {
-                    things[i].collidesWith(things[j])
-                    things[j].collidesWith(things[i])
+        for (i in 0.until(things.size)) {
+            val a = things[i]
+            for (j in (i + 1).until(things.size)) {
+                val b = things[j]
+                if (Physics.intersect(a, b)) {
+                    things[i].collidesWith(a)
+                    things[j].collidesWith(b)
                 }
+            }
+        }
     }
 }

@@ -39,16 +39,16 @@ class World {
 
     fun spawn() {
         for (i in 1 .. initLife)
-            things.add(newLife())
+            newLife()
     }
 
-    private fun newLife(): Life {
-        return Life.mostBasic()
+    private fun newLife() {
+        val l = Life.mostBasic()
+        things.add(l)
+        things.addAll(l.sensors)
     }
 
-    fun deadThing(thing: Thing) {
-        things.removeValue(thing, true)
-    }
+    fun deadThing(thing: Thing) = things.removeValue(thing, true)
 
     companion object {
         val initLife = 10
