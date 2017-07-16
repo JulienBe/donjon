@@ -18,7 +18,8 @@ class DonjonMain : ApplicationAdapter() {
         drawer = Drawer()
         world = World()
         Gdx.input.inputProcessor = input
-        input.addInput(Input.Keys.SPACE, { world.spawn()})
+        input.addInput(Input.Keys.SPACE, { world.spawn() })
+        input.addInput(Input.Keys.D, { world.debug() })
     }
 
     override fun render() {

@@ -12,6 +12,8 @@ import be.julien.donjon.util.Time
 class World {
 
     internal val things = GdxArr<Thing>()
+    internal val sensors = GdxArr<Thing>()
+    internal var debug = false
 
     init {
         val left = Wall(Rect.get(0f, 0f, Wall.width, Drawer.screenHeight))
@@ -25,16 +27,20 @@ class World {
     }
 
     fun act(delta: Float) {
-        things.forEach { l ->
-            if (l.act(delta))
-                deadThing(l)
+        things.forEach {
+            if (it.act(delta))
+                deadThing(it)
         }
+        sensors.forEach { it.act(delta) }
         Collider.check(things)
+        Collider.sensors(sensors, things)
         Time.act(delta)
     }
 
     fun draw(drawer: Drawer) {
-        things.forEach { l -> l.draw(drawer) }
+        things.forEach { it.draw(drawer) }
+        if (debug)
+            sensors.forEach { it.draw(drawer) }
     }
 
     fun spawn() {
@@ -45,10 +51,17 @@ class World {
     private fun newLife() {
         val l = Life.mostBasic()
         things.add(l)
-        things.addAll(l.sensors)
+        sensors.addAll(l.sensors)
     }
 
-    fun deadThing(thing: Thing) = things.removeValue(thing, true)
+    fun deadThing(thing: Thing) {
+        things.removeValue(thing, true)
+        sensors.removeAll(thing.sensors, true)
+    }
+
+    fun debug() {
+        debug = !debug
+    }
 
     companion object {
         val initLife = 10
@@ -67,4 +80,5 @@ class World {
             return trim(y, Drawer.screenHeight - 1f)
         }
     }
+
 }

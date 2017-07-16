@@ -16,4 +16,13 @@ object Collider {
             }
         }
     }
+
+    fun sensors(sensors: GdxArr<Thing>, things: GdxArr<Thing>) {
+        sensors.forEach { s ->
+            things.forEach { t ->
+                if (Physics.intersect(s, t))
+                    s.collidesWith(t)
+            }
+        }
+    }
 }

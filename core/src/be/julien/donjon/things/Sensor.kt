@@ -4,7 +4,6 @@ import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.spatial.Rect
 import be.julien.donjon.spatial.Vec2
-import be.julien.donjon.util.Util
 import com.badlogic.gdx.graphics.Color
 
 class Sensor internal constructor(var anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float): Thing(Rect.get(width)) {
@@ -25,7 +24,6 @@ class Sensor internal constructor(var anchor: Thing, sensorLength: Float, val of
     }
 
     override fun draw(drawer: Drawer) {
-        Util.out("DRAW")
         drawer.color(Color.RED)
         super.draw(drawer)
     }

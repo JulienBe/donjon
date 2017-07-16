@@ -51,9 +51,9 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
     override fun angle(): Float = dir.angle()
 
     companion object {
-        fun mostBasic(rect: Rect = Rect.rndPos(2f, 2f), dir: Vec2 = Vec2.getRandWorld(), right: Float = Rnd.float(), left: Float = Rnd.float(), forward: Float = Rnd.float()): MostBasic {
+        fun mostBasic(rect: Rect = Rect.rndPos(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
-            return MostBasic(rect, dir, right, left, forward)
+            return MostBasic(rect, dir)
         }
     }
 }

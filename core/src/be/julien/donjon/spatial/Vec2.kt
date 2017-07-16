@@ -17,8 +17,9 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
         rotate90(-1)
     }
 
-    fun steer(angleDegree: Float, delta: Float) {
+    fun steer(angleDegree: Float, delta: Float): Vec2 {
         rotate(angleDegree * delta)
+        return this
     }
 
     companion object {
@@ -32,6 +33,10 @@ class Vec2(x: Float, y: Float) : Vector2(x, y) {
 
         fun getRandWorld(): Vec2 {
             return get(Rnd.width(), Rnd.height())
+        }
+
+        fun getRnd(): Vec2 {
+            return get(0f, 1f).steer(Rnd.float(360f), 1f)
         }
     }
 }
