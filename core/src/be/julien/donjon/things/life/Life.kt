@@ -6,6 +6,7 @@ import be.julien.donjon.physics.b2d.BoxHelper
 import be.julien.donjon.spatial.Mover
 import be.julien.donjon.spatial.Rect
 import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.util.TimeInt
 import be.julien.donjon.util.TimeIntComp
@@ -44,7 +45,10 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
     }
 
     override fun collidesWith(thing: Thing) {
-        energy.step()
+        when (thing) {
+            is Energy -> energy.add(thing.getEnergy())
+            else -> energy.step()
+        }
     }
 
     override fun angle(): Float = dir.angle()

@@ -81,4 +81,6 @@ class Collect {
         }
     }
 
+    fun  nbEnergy(): Int = stuff[Mask.Energy]!!.size
+
 }

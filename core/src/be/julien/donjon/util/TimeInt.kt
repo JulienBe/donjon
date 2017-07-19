@@ -20,6 +20,10 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
     fun setCallback(callbackValue: Int, method: () -> Unit) {
         callback = CallbackComp.get(callbackValue, method)
     }
+
+    fun add(i: Int) {
+        value += i
+    }
 }
 
 object TimeIntComp {

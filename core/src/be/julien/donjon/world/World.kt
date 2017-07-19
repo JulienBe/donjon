@@ -2,6 +2,7 @@ package be.julien.donjon.world
 
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.spatial.Rect
+import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.Wall
 import be.julien.donjon.things.life.Life
@@ -24,6 +25,8 @@ class World {
         collection.check()
         collection.act(delta)
         Time.act(delta)
+        if (collection.nbEnergy() < 10)
+            collection.add(Energy.get())
     }
 
     fun draw(drawer: Drawer) {
