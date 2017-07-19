@@ -39,4 +39,9 @@ class Sensor internal constructor(var anchor: Thing, sensorLength: Float, val of
     fun checked() {
         colliders.clear()
     }
+
+    fun containersEnergy(): Boolean {
+        colliders.forEach { if (it is Energy) return true }
+        return false
+    }
 }

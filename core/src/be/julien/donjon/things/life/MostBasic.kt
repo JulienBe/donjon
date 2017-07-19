@@ -24,9 +24,12 @@ class MostBasic(rect: Rect, dir: Vec2) : Life(rect, dir) {
 
     private fun colliders(s: Sensor, delta: Float) {
         if (s.colliders.count() > 0) {
-            steer(s.offsetAngle + 180, delta * steeringSpeed)
-            s.checked()
+            if (s.containersEnergy())
+                steer(s.offsetAngle, delta * steeringSpeed)
+            else
+                steer(s.offsetAngle + 180, delta * steeringSpeed)
         }
+        s.checked()
     }
 
 }
