@@ -1,12 +1,12 @@
 package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.b2d.BoxHelper
 import be.julien.donjon.spatial.Mover
 import be.julien.donjon.spatial.Rect
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Thing
-import be.julien.donjon.util.Rnd
 import be.julien.donjon.util.TimeInt
 import be.julien.donjon.util.TimeIntComp
 import com.badlogic.gdx.graphics.Color
@@ -29,7 +29,7 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
     }
 
     private fun noEnergy(): Unit {
-        dead = true
+        die()
     }
 
     override fun act(delta: Float): Boolean {
@@ -44,11 +44,12 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
     }
 
     override fun collidesWith(thing: Thing) {
-        println("collision life")
         energy.step()
     }
 
     override fun angle(): Float = dir.angle()
+
+    override fun mask(): Mask = Mask.Life
 
     companion object {
         fun mostBasic(rect: Rect = Rect.rndPos(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {

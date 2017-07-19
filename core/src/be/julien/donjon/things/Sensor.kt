@@ -2,6 +2,7 @@ package be.julien.donjon.things
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.physics.Mask
 import be.julien.donjon.spatial.Rect
 import be.julien.donjon.spatial.Vec2
 import com.badlogic.gdx.graphics.Color
@@ -17,10 +18,9 @@ class Sensor internal constructor(var anchor: Thing, sensorLength: Float, val of
     }
 
     override fun act(delta: Float): Boolean {
-        colliders.clear()
         offset.setAngle(offsetAngle + anchor.angle())
         rect.set(anchor.rect.centerX() + offset.x - haldWidth, anchor.rect.centerY() + offset.y - haldWidth)
-        return false
+        return dead
     }
 
     override fun draw(drawer: Drawer) {
@@ -28,9 +28,15 @@ class Sensor internal constructor(var anchor: Thing, sensorLength: Float, val of
         super.draw(drawer)
     }
 
+    override fun mask(): Mask = Mask.Sensor
+
     companion object {
         fun get(anchor: Thing, sensorLength: Float, offsetAngle: Float, width: Float): Sensor {
             return Sensor(anchor, sensorLength, offsetAngle, width)
         }
+    }
+
+    fun checked() {
+        colliders.clear()
     }
 }
