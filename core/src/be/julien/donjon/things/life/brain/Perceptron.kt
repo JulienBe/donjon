@@ -4,7 +4,7 @@ import be.julien.donjon.util.Rnd
 
 class Perceptron(n: Int) : Brain(n) {
 
-    var weights = Array(n) { Rnd.float()}
+    var weights = Array(n) { Rnd.float() }
 
     override fun decide(array: FloatArray): Int {
         return feedforward(array)

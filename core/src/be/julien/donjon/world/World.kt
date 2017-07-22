@@ -1,7 +1,7 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.world.shapes.Rect
+import be.julien.donjon.world.shapes.RectShape
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.Wall
@@ -14,10 +14,10 @@ class World {
     internal var debug = false
 
     init {
-        val left = Wall(Rect.get(0f, 0f, Wall.width, Drawer.screenHeight))
-        val right = Wall(Rect.get(Drawer.screenWidth - Wall.width, 0f, Wall.width, Drawer.screenHeight))
-        val top = Wall(Rect.get(0f, Drawer.screenHeight - Wall.width, Drawer.screenWidth, Wall.width))
-        val bottom = Wall(Rect.get(0f, 0f, Drawer.screenWidth, Wall.width))
+        val left = Wall(RectShape.get(0f, 0f, Wall.width, Drawer.screenHeight))
+        val right = Wall(RectShape.get(Drawer.screenWidth - Wall.width, 0f, Wall.width, Drawer.screenHeight))
+        val top = Wall(RectShape.get(0f, Drawer.screenHeight - Wall.width, Drawer.screenWidth, Wall.width))
+        val bottom = Wall(RectShape.get(0f, 0f, Drawer.screenWidth, Wall.width))
         collection.add(left, right, top, bottom)
     }
 

@@ -1,9 +1,9 @@
 package be.julien.donjon.spatial
 
 import be.julien.donjon.things.Thing
-import be.julien.donjon.world.shapes.Rect
+import be.julien.donjon.world.shapes.RectShape
 
-abstract class Mover(rect: Rect, val dir: Vec2): Thing(rect) {
+abstract class Mover(rect: RectShape, val dir: Vec2): Thing(rect) {
     fun steer(angle: Float, delta: Float) {
         dir.rotate(angle * delta)
     }

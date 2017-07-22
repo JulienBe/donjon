@@ -1,9 +1,9 @@
 package be.julien.donjon.things
 
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.world.shapes.Rect
+import be.julien.donjon.world.shapes.RectShape
 
-class Energy(rect: Rect) : Thing(rect) {
+class Energy(rect: RectShape) : Thing(rect) {
 
     var stored = 10
     override fun mask(): Mask = Mask.Energy
@@ -24,7 +24,7 @@ class Energy(rect: Rect) : Thing(rect) {
 
     companion object {
         fun get(): Energy {
-            return Energy(Rect.rndPos(1f, 1f))
+            return Energy(RectShape.rndPos(1f, 1f))
         }
     }
 }

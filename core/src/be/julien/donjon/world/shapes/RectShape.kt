@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.physics.box2d.PolygonShape
 
-class Rect internal constructor(x: Float, y: Float, width: Float, height: Float): Shape() {
+class RectShape internal constructor(x: Float, y: Float, width: Float, height: Float): Shape() {
 
     val rect = Rectangle(x, y, width, height)
 
@@ -41,20 +41,20 @@ class Rect internal constructor(x: Float, y: Float, width: Float, height: Float)
 
     override fun overlaps(shape: Shape): Boolean {
         when (shape) {
-            is Rect -> return shape.rect.overlaps(rect)
+            is RectShape -> return shape.rect.overlaps(rect)
             else -> return super.overlaps(shape)
         }
     }
     companion object {
-        fun rndPos(width: Float, height: Float): Rect {
-            return Rect(Rnd.width(), Rnd.height(), width, height)
+        fun rndPos(width: Float, height: Float): RectShape {
+            return RectShape(Rnd.width(), Rnd.height(), width, height)
         }
 
-        fun get(x: Float, y: Float, width: Float, height: Float): Rect {
-            return Rect(x, y, width, height)
+        fun get(x: Float, y: Float, width: Float, height: Float): RectShape {
+            return RectShape(x, y, width, height)
         }
-        fun get(width: Float): Rect {
-            return Rect(-width, -width, width, width)
+        fun get(width: Float): RectShape {
+            return RectShape(-width, -width, width, width)
         }
     }
 

@@ -4,7 +4,7 @@ import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.b2d.BoxHelper
 import be.julien.donjon.spatial.Mover
-import be.julien.donjon.world.shapes.Rect
+import be.julien.donjon.world.shapes.RectShape
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(r: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir), Pool.Poolable {
+abstract class Life(r: RectShape, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir), Pool.Poolable {
 
     internal var energy = initEnergy()
     internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, r)
@@ -56,7 +56,7 @@ abstract class Life(r: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir), Po
     override fun mask(): Mask = Mask.Life
 
     companion object {
-        fun mostBasic(rect: Rect = Rect.rndPos(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {
+        fun mostBasic(rect: RectShape = RectShape.rndPos(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
             return MostBasic(rect, dir)
         }

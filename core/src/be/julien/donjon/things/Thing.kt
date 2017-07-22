@@ -3,10 +3,11 @@ package be.julien.donjon.things
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
+import be.julien.donjon.things.sensors.SquareSensor
 import be.julien.donjon.world.shapes.Shape
 
 abstract class Thing(val shape: Shape) {
-    val sensors = GdxArr<Sensor>()
+    val sensors = GdxArr<SquareSensor>()
 
     internal var dead = false
 
