@@ -3,7 +3,7 @@ package be.julien.donjon.things
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.spatial.Rect
+import be.julien.donjon.world.shapes.Rect
 import be.julien.donjon.spatial.Vec2
 import com.badlogic.gdx.graphics.Color
 
@@ -19,7 +19,7 @@ class Sensor internal constructor(var anchor: Thing, sensorLength: Float, val of
 
     override fun act(delta: Float): Boolean {
         offset.setAngle(offsetAngle + anchor.angle())
-        rect.set(anchor.rect.centerX() + offset.x - haldWidth, anchor.rect.centerY() + offset.y - haldWidth)
+        shape.setPos(anchor.shape.x() + offset.x - haldWidth, anchor.shape.y() + offset.y - haldWidth)
         return dead
     }
 

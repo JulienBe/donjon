@@ -1,7 +1,7 @@
 package be.julien.donjon.things
 
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.spatial.Rect
+import be.julien.donjon.world.shapes.Rect
 
 class Energy(rect: Rect) : Thing(rect) {
 

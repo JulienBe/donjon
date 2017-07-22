@@ -1,6 +1,6 @@
 package be.julien.donjon.things.life
 
-import be.julien.donjon.spatial.Rect
+import be.julien.donjon.world.shapes.Rect
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Sensor
 

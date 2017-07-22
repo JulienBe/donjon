@@ -3,9 +3,9 @@ package be.julien.donjon.things
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.spatial.Rect
+import be.julien.donjon.world.shapes.Shape
 
-abstract class Thing(val rect: Rect) {
+abstract class Thing(val shape: Shape) {
     val sensors = GdxArr<Sensor>()
 
     internal var dead = false
@@ -17,7 +17,7 @@ abstract class Thing(val rect: Rect) {
         return dead
     }
     open fun draw(drawer: Drawer): Unit {
-        drawer.drawAbsolute(rect)
+        drawer.drawAbsolute(shape)
     }
     abstract fun collidesWith(thing: Thing)
     open fun angle(): Float = 0f

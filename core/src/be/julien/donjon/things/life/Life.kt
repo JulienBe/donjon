@@ -4,7 +4,7 @@ import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.b2d.BoxHelper
 import be.julien.donjon.spatial.Mover
-import be.julien.donjon.spatial.Rect
+import be.julien.donjon.world.shapes.Rect
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
@@ -14,10 +14,10 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, dir), Pool.Poolable {
+abstract class Life(r: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir), Pool.Poolable {
 
     internal var energy = initEnergy()
-    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, rect)
+    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, r)
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)
@@ -34,7 +34,7 @@ abstract class Life(rect: Rect, dir: Vec2 = Vec2.getRandWorld()): Mover(rect, di
     }
 
     override fun act(delta: Float): Boolean {
-        body.setPos(rect)
+        body.setPos(shape)
         energy.act()
         return super.act(delta)
     }

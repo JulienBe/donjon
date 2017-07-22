@@ -1,16 +1,12 @@
 package be.julien.donjon.physics.b2d
 
-import be.julien.donjon.spatial.Vec2
-import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
 
 object BoxHelper {
 
-    internal val ppm = 20f
-
-    fun createRectangle(bodyType: BodyDef.BodyType, rectangle: Rectangle): BoxBody {
-        val b = BoxBody(createBody(bodyType, createRectangleShape(rectangle)))
+    fun createRectangle(bodyType: BodyDef.BodyType, shape: be.julien.donjon.world.shapes.Shape): BoxBody {
+        val b = BoxBody(createBody(bodyType, shape.b2dShape()))
         return b
     }
 
@@ -46,13 +42,6 @@ object BoxHelper {
         fixtureDef.restitution = 0f
         val fixture = b.createFixture(fixtureDef)
         return fixture
-    }
-
-    private fun createRectangleShape(rectangle: Rectangle): Shape {
-        val polygon = PolygonShape()
-        val center = Vec2.get(rectangle.x + rectangle.width * 0.5f, rectangle.y + rectangle.height * 0.5f)
-        polygon.setAsBox((rectangle.width * 0.5f), (rectangle.height * 0.5f), center, 0.0f)
-        return polygon
     }
 
 }

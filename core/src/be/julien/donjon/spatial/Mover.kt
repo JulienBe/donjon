@@ -1,14 +1,14 @@
 package be.julien.donjon.spatial
 
 import be.julien.donjon.things.Thing
+import be.julien.donjon.world.shapes.Rect
 
 abstract class Mover(rect: Rect, val dir: Vec2): Thing(rect) {
     fun steer(angle: Float, delta: Float) {
         dir.rotate(angle * delta)
     }
     override fun act(delta: Float): Boolean {
-        rect.x += dir.x * delta
-        rect.y += dir.y * delta
+        shape.mv(dir, delta)
         return super.act(delta)
     }
 }
