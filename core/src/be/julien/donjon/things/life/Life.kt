@@ -2,22 +2,22 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.b2d.BoxHelper
-import be.julien.donjon.spatial.Mover
-import be.julien.donjon.world.shapes.RectShape
+import be.julien.donjon.physics.b2d.BoxBody
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.util.TimeInt
 import be.julien.donjon.util.TimeIntComp
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(r: RectShape, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir), Pool.Poolable {
+abstract class Life(boxBody: BoxBody, pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld()): Thing(boxBody, pos, dir), Pool.Poolable {
 
     internal var energy = initEnergy()
-    internal val body = BoxHelper.createRectangle(BodyDef.BodyType.KinematicBody, r)
+
+    init {
+        dir.scl(4f)
+    }
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)
@@ -34,13 +34,12 @@ abstract class Life(r: RectShape, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir
     }
 
     override fun act(delta: Float): Boolean {
-        body.setPos(shape)
         energy.act()
         return super.act(delta)
     }
 
     override fun draw(drawer: Drawer) {
-        drawer.color(Color.YELLOW)
+        drawer.color(Color.GRAY)
         super.draw(drawer)
     }
 
@@ -56,9 +55,9 @@ abstract class Life(r: RectShape, dir: Vec2 = Vec2.getRandWorld()): Mover(r, dir
     override fun mask(): Mask = Mask.Life
 
     companion object {
-        fun mostBasic(rect: RectShape = RectShape.rndPos(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {
+        fun mostBasic(boxBody: BoxBody = BoxBody.getRect(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
-            return MostBasic(rect, dir)
+            return MostBasic(boxBody, Vec2.getRandWorld(), dir)
         }
     }
 }

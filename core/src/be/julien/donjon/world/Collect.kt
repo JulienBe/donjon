@@ -43,38 +43,6 @@ class Collect {
         }
     }
 
-    fun check() {
-        for (i in 0.until(keys.size)) {
-            checkMask(i)
-        }
-    }
-
-    private fun checkMask(i: Int) {
-        val maskA = keys.elementAt(i)
-        for (j in i.until(keys.size)) {
-            val maskB = keys.elementAt(j)
-            if (maskA.collidesWith(maskB)) {
-                checkCollision(maskA, maskB)
-            } else if (maskB.collidesWith(maskA)) {
-                checkCollision(maskB, maskA)
-            }
-        }
-    }
-
-    private fun checkCollision(from: Mask, to: Mask) {
-        val arrayFrom = stuff[from]
-        val arrayTo = stuff[to]
-        arrayFrom!!.forEach { a ->
-            for (i in 0.until(arrayTo!!.size)) {
-                val b = arrayTo.get(i)
-                if (Physics.intersect(a, b) && a != b) {
-                    a.collidesWith(b)
-                    b.collidesWith(a)
-                }
-            }
-        }
-    }
-
     fun draw(drawer: Drawer) {
         stuff.forEach { mask, gdxArr ->
             gdxArr.forEach { it.draw(drawer) }

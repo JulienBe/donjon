@@ -1,7 +1,5 @@
 package be.julien.donjon.physics;
 
-import org.jetbrains.annotations.NotNull;
-
 public enum Mask {
 
     Life(Val.life, Val.life, Val.wall, Val.energy),
@@ -20,9 +18,6 @@ public enum Mask {
         System.out.println("" + this.flag + " with : " + colliders);
     }
 
-    public boolean collidesWith(@NotNull Mask other) {
-        return (other.colliders & flag) == flag;
-    }
 }
 
 class Val {

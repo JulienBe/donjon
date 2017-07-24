@@ -3,7 +3,7 @@ package be.julien.donjon.spatial
 import be.julien.donjon.util.Rnd
 import com.badlogic.gdx.math.Vector2
 
-class Vec2(x: Float, y: Float) : Vector2(x, y) {
+class Vec2 private constructor(x: Float, y: Float) : Vector2(x, y) {
     fun move(dir: Vec2, delta: Float) {
         x += dir.x * delta
         y += dir.y * delta

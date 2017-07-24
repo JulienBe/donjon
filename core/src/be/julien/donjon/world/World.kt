@@ -14,15 +14,14 @@ class World {
     internal var debug = false
 
     init {
-        val left = Wall(RectShape.get(0f, 0f, Wall.width, Drawer.screenHeight))
-        val right = Wall(RectShape.get(Drawer.screenWidth - Wall.width, 0f, Wall.width, Drawer.screenHeight))
-        val top = Wall(RectShape.get(0f, Drawer.screenHeight - Wall.width, Drawer.screenWidth, Wall.width))
-        val bottom = Wall(RectShape.get(0f, 0f, Drawer.screenWidth, Wall.width))
+        val left = Wall(0f, 0f, Wall.width, Drawer.screenHeight)
+        val right = Wall(Drawer.screenWidth - Wall.width, 0f, Wall.width, Drawer.screenHeight)
+        val top = Wall(0f, Drawer.screenHeight - Wall.width, Drawer.screenWidth, Wall.width)
+        val bottom = Wall(0f, 0f, Drawer.screenWidth, Wall.width)
         collection.add(left, right, top, bottom)
     }
 
     fun act(delta: Float) {
-        collection.check()
         collection.act(delta)
         Time.act(delta)
         if (collection.nbEnergy() < 10)
@@ -52,7 +51,7 @@ class World {
     }
 
     companion object {
-        val initLife = 200
+        val initLife = 1
         fun trim(i: Float, max: Float): Float {
             if (i > 0)
                 if (i < max)

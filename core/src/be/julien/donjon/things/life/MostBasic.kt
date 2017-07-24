@@ -1,10 +1,11 @@
 package be.julien.donjon.things.life
 
-import be.julien.donjon.world.shapes.RectShape
+import be.julien.donjon.physics.b2d.BoxBody
+import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
 
-class MostBasic(rect: RectShape, dir: Vec2) : Life(rect, dir) {
+class MostBasic(boxBody: BoxBody, pos: Vec2, dir: Vec2) : Life(boxBody, pos, dir) {
 
     internal val right = SquareSensor.get(this, 3f, 45f, 1f)
     internal val left = SquareSensor.get(this, 3f, -45f, 1f)
@@ -16,6 +17,8 @@ class MostBasic(rect: RectShape, dir: Vec2) : Life(rect, dir) {
         sensors.add(right)
         sensors.add(straight)
     }
+
+    override fun dimension(): Dimension = dimension
 
     override fun act(delta: Float): Boolean {
         sensors.forEach { colliders(it, delta) }
@@ -32,4 +35,7 @@ class MostBasic(rect: RectShape, dir: Vec2) : Life(rect, dir) {
         s.checked()
     }
 
+    companion object {
+        val dimension = Dimension.get(2f, 2f)
+    }
 }

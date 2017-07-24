@@ -3,17 +3,20 @@ package be.julien.donjon.things.sensors
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.world.shapes.RectShape
+import be.julien.donjon.physics.b2d.BoxBody
+import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import com.badlogic.gdx.graphics.Color
 
-class SquareSensor internal constructor(var anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float): Thing(RectShape.get(width)) {
+class SquareSensor internal constructor(var anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float): Thing(BoxBody.getRect(width, width), Vec2.get(0f, 0f), Vec2.get(0f, 0f)) {
 
     internal val colliders = GdxArr<Thing>()
     internal val offset = Vec2.get(sensorLength, 0f)
-    internal val haldWidth = width / 2f
+    internal val dim = Dimension.get(width, width)
+
+    override fun dimension(): Dimension = dim
 
     override fun collidesWith(thing: Thing) {
         colliders.add(thing)
@@ -21,7 +24,7 @@ class SquareSensor internal constructor(var anchor: Thing, sensorLength: Float, 
 
     override fun act(delta: Float): Boolean {
         offset.setAngle(offsetAngle + anchor.angle())
-        shape.setPos(anchor.shape.x() + offset.x - haldWidth, anchor.shape.y() + offset.y - haldWidth)
+        boxBody.setPos(anchor.x() + offset.x - dim.halfWidth, anchor.y() + offset.y - dim.halfWidth)
         return dead
     }
 

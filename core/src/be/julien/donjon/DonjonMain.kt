@@ -15,6 +15,7 @@ class DonjonMain : ApplicationAdapter() {
     lateinit internal var drawer: Drawer
 
     override fun create() {
+        BoxWorld.load()
         drawer = Drawer()
         world = World()
         Gdx.input.inputProcessor = input
@@ -26,7 +27,7 @@ class DonjonMain : ApplicationAdapter() {
         world.act(Gdx.graphics.deltaTime)
         BoxWorld.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)
-//        BoxWorld.render(drawer)
+        BoxWorld.render(drawer)
     }
 
     override fun dispose() {
