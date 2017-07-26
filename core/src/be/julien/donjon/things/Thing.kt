@@ -8,9 +8,12 @@ import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
 
-abstract class Thing(val boxBody: BoxBody, val pos: Vec2, val dir: Vec2) {
-    val sensors = GdxArr<SquareSensor>()
+abstract class Thing(val pos: Vec2, val dir: Vec2, val body: BoxBody) {
 
+    init {
+        body.setRef(this)
+    }
+    val sensors = GdxArr<SquareSensor>()
     internal var dead = false
 
     /**
@@ -18,16 +21,22 @@ abstract class Thing(val boxBody: BoxBody, val pos: Vec2, val dir: Vec2) {
      */
     open fun act(delta: Float): Boolean {
         pos.move(dir, delta)
-        boxBody.setPos(pos.x, pos.y)
+        body.setPos(pos.x, pos.y)
         return dead
     }
 
     open fun draw(drawer: Drawer): Unit {
+        drawer.drawAbsolute(this)
     }
 
     fun steer(angle: Float, delta: Float) {
         dir.rotate(angle * delta)
     }
+
+    fun hw(): Float = dimension().halfWidth
+    fun w(): Float = dimension().width
+    fun hh(): Float = dimension().halfHeight
+    fun h(): Float = dimension().height
 
     open fun angle(): Float = 0f
     open fun die(): Unit {
@@ -35,8 +44,8 @@ abstract class Thing(val boxBody: BoxBody, val pos: Vec2, val dir: Vec2) {
         sensors.forEach { it.dead = true }
     }
 
-    fun x(): Float = boxBody.x()
-    fun y(): Float = boxBody.y()
+    fun x(): Float = body.x()
+    fun y(): Float = body.y()
 
     abstract fun collidesWith(thing: Thing)
     abstract fun mask(): Mask

@@ -11,7 +11,7 @@ import be.julien.donjon.util.TimeIntComp
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(boxBody: BoxBody, pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld()): Thing(boxBody, pos, dir), Pool.Poolable {
+abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), body: BoxBody): Thing(pos, dir, body), Pool.Poolable {
 
     internal var energy = initEnergy()
 
@@ -55,9 +55,9 @@ abstract class Life(boxBody: BoxBody, pos: Vec2 = Vec2.getRandWorld(), dir: Vec2
     override fun mask(): Mask = Mask.Life
 
     companion object {
-        fun mostBasic(boxBody: BoxBody = BoxBody.getRect(2f, 2f), dir: Vec2 = Vec2.getRnd()): MostBasic {
+        fun mostBasic(dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
-            return MostBasic(boxBody, Vec2.getRandWorld(), dir)
+            return MostBasic(Vec2.getRandWorld(), dir)
         }
     }
 }

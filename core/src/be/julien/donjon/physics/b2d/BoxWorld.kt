@@ -15,7 +15,9 @@ object BoxWorld {
     private val position = 2
     private var accumulator = 0f
 
-    fun load() {}
+    fun load() {
+        world.setContactListener(CollisionMaster())
+    }
 
     fun act(deltaTime: Float) {
         // fixed time step max frame time to avoid spiral of death (on slow devices)

@@ -5,7 +5,7 @@ import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
 
-class MostBasic(boxBody: BoxBody, pos: Vec2, dir: Vec2) : Life(boxBody, pos, dir) {
+class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir, BoxBody.getRect(pos.x, pos.y, dim.width, dim.height)) {
 
     internal val right = SquareSensor.get(this, 3f, 45f, 1f)
     internal val left = SquareSensor.get(this, 3f, -45f, 1f)
@@ -18,7 +18,7 @@ class MostBasic(boxBody: BoxBody, pos: Vec2, dir: Vec2) : Life(boxBody, pos, dir
         sensors.add(straight)
     }
 
-    override fun dimension(): Dimension = dimension
+    override fun dimension(): Dimension = dim
 
     override fun act(delta: Float): Boolean {
         sensors.forEach { colliders(it, delta) }
@@ -36,6 +36,6 @@ class MostBasic(boxBody: BoxBody, pos: Vec2, dir: Vec2) : Life(boxBody, pos, dir
     }
 
     companion object {
-        val dimension = Dimension.get(2f, 2f)
+        val dim = Dimension.get(2f, 2f)
     }
 }

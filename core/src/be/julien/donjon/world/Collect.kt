@@ -3,7 +3,6 @@ package be.julien.donjon.world
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.Physics
 import be.julien.donjon.things.Thing
 
 class Collect {

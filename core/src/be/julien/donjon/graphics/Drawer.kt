@@ -1,5 +1,6 @@
 package be.julien.donjon.graphics
 
+import be.julien.donjon.things.Thing
 import be.julien.donjon.world.shapes.Shape
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
@@ -51,5 +52,9 @@ class Drawer {
         internal val ratio =  Gdx.graphics.width / Gdx.graphics.height
         internal val screenWidth: Float = 160f
         internal val screenHeight: Float = screenWidth / ratio
+    }
+
+    fun drawAbsolute(t: Thing) {
+        batch.draw(pixel, t.x(), t.y(), t.dimension().width, t.dimension().height)
     }
 }

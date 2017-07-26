@@ -1,6 +1,7 @@
 package be.julien.donjon.physics.b2d
 
 import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.things.Thing
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
 
@@ -18,7 +19,7 @@ class BoxBody(val body: Body) {
     }
 
     companion object {
-        fun getRect(width: Float, height: Float): BoxBody {
+        private fun getRect(width: Float, height: Float): BoxBody {
             val polygon = PolygonShape()
             val center = Vec2.get(width * 0.5f, height * 0.5f)
             polygon.setAsBox(width * 0.5f, height * 0.5f, center, 0.0f)
@@ -31,15 +32,19 @@ class BoxBody(val body: Body) {
         }
     }
 
+    fun setRef(thing: Thing) {
+        body.userData = thing
+    }
+
 }
 
 internal object BoxHelper {
-    fun createRectangle(shape: com.badlogic.gdx.physics.box2d.Shape): BoxBody {
+    fun createRectangle(shape: Shape): BoxBody {
         val b = BoxBody(createBody(shape))
         return b
     }
 
-    private fun createBody(shape: com.badlogic.gdx.physics.box2d.Shape): Body {
+    private fun createBody(shape: Shape): Body {
         val b = BoxWorld.createBody(createBodyDef())
         createFixture(b, shape)
         shape.dispose()
@@ -60,7 +65,7 @@ internal object BoxHelper {
         return bodyDef
     }
 
-    private fun createFixture(b: Body, shape: com.badlogic.gdx.physics.box2d.Shape): Fixture {
+    private fun createFixture(b: Body, shape: Shape): Fixture {
         val fixtureDef = FixtureDef()
         fixtureDef.shape = shape
 //        fixtureDef.filter.categoryBits = category
@@ -69,7 +74,6 @@ internal object BoxHelper {
         fixtureDef.density = 0f
         fixtureDef.friction = 0f
         fixtureDef.restitution = 0f
-        val fixture = b.createFixture(fixtureDef)
-        return fixture
+        return b.createFixture(fixtureDef)
     }
 }
