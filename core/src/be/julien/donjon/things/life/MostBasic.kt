@@ -1,11 +1,10 @@
 package be.julien.donjon.things.life
 
-import be.julien.donjon.physics.b2d.BoxBody
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
 
-class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir, BoxBody.getRect(pos.x, pos.y, dim.width, dim.height)) {
+class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
 
     internal val right = SquareSensor.get(this, 3f, 45f, 1f)
     internal val left = SquareSensor.get(this, 3f, -45f, 1f)

@@ -1,11 +1,10 @@
 package be.julien.donjon.things
 
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.b2d.BoxBody
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 
-class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, BoxBody.getRect(pos.x, pos.y, dim.width, dim.height)) {
+class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
 
     var stored = 10
     override fun mask(): Mask = Mask.Energy

@@ -3,16 +3,12 @@ package be.julien.donjon.things
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.b2d.BoxBody
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
 
-abstract class Thing(val pos: Vec2, val dir: Vec2, val body: BoxBody) {
+abstract class Thing(val pos: Vec2, val dir: Vec2) {
 
-    init {
-        body.setRef(this)
-    }
     val sensors = GdxArr<SquareSensor>()
     internal var dead = false
 
@@ -21,7 +17,6 @@ abstract class Thing(val pos: Vec2, val dir: Vec2, val body: BoxBody) {
      */
     open fun act(delta: Float): Boolean {
         pos.move(dir, delta)
-        body.setPos(pos.x, pos.y)
         return dead
     }
 
@@ -44,8 +39,8 @@ abstract class Thing(val pos: Vec2, val dir: Vec2, val body: BoxBody) {
         sensors.forEach { it.dead = true }
     }
 
-    fun x(): Float = body.x()
-    fun y(): Float = body.y()
+    fun x(): Float = pos.x
+    fun y(): Float = pos.y
 
     abstract fun collidesWith(thing: Thing)
     abstract fun mask(): Mask

@@ -2,7 +2,6 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.b2d.BoxBody
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
@@ -11,7 +10,7 @@ import be.julien.donjon.util.TimeIntComp
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.utils.Pool
 
-abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), body: BoxBody): Thing(pos, dir, body), Pool.Poolable {
+abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld()): Thing(pos, dir), Pool.Poolable {
 
     internal var energy = initEnergy()
 

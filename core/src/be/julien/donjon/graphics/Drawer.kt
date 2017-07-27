@@ -56,5 +56,6 @@ class Drawer {
 
     fun drawAbsolute(t: Thing) {
         batch.draw(pixel, t.x(), t.y(), t.dimension().width, t.dimension().height)
+        batch.color = Color.WHITE
     }
 }

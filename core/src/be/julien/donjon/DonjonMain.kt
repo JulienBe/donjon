@@ -2,7 +2,6 @@ package be.julien.donjon
 
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.inputs.InputHub
-import be.julien.donjon.physics.b2d.BoxWorld
 import be.julien.donjon.world.World
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
@@ -15,7 +14,6 @@ class DonjonMain : ApplicationAdapter() {
     lateinit internal var drawer: Drawer
 
     override fun create() {
-        BoxWorld.load()
         drawer = Drawer()
         world = World()
         Gdx.input.inputProcessor = input
@@ -25,9 +23,7 @@ class DonjonMain : ApplicationAdapter() {
 
     override fun render() {
         world.act(Gdx.graphics.deltaTime)
-        BoxWorld.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)
-        BoxWorld.render(drawer)
     }
 
     override fun dispose() {
