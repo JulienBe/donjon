@@ -75,7 +75,7 @@ class Collect {
         arrayFrom!!.forEach { a ->
             for (i in 0.until(arrayTo!!.size)) {
                 val b = arrayTo.get(i)
-                if (a.shape().collidesWith(a, b)) {
+                if (a.shape().collidesWith(a, b) && a != b) {
                     a.collidesWith(b)
                     b.collidesWith(a)
                 }

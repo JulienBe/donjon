@@ -22,7 +22,7 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) {
     }
 
     open fun draw(drawer: Drawer): Unit {
-//        drawer.drawAbsolute(this)
+        drawer.drawAbsolute(this)
     }
 
     fun steer(angle: Float, delta: Float) {
