@@ -1,7 +1,6 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.world.shapes.RectShape
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.Wall
@@ -22,6 +21,7 @@ class World {
     }
 
     fun act(delta: Float) {
+        collection.check()
         collection.act(delta)
         Time.act(delta)
         if (collection.nbEnergy() < 10)

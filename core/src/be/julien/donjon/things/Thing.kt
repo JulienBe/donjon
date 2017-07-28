@@ -3,6 +3,7 @@ package be.julien.donjon.things
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
+import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
@@ -21,7 +22,7 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) {
     }
 
     open fun draw(drawer: Drawer): Unit {
-        drawer.drawAbsolute(this)
+//        drawer.drawAbsolute(this)
     }
 
     fun steer(angle: Float, delta: Float) {
@@ -45,5 +46,6 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) {
     abstract fun collidesWith(thing: Thing)
     abstract fun mask(): Mask
     abstract fun dimension(): Dimension
+    abstract fun shape(): Shape
 
 }

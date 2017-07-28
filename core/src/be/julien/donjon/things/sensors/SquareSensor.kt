@@ -3,6 +3,8 @@ package be.julien.donjon.things.sensors
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
+import be.julien.donjon.physics.shapes.Shape
+import be.julien.donjon.physics.shapes.Square
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
@@ -16,6 +18,7 @@ class SquareSensor internal constructor(var anchor: Thing, sensorLength: Float, 
     internal val offset = Vec2.get(sensorLength, 0f)
     internal val dim = Dimension.get(width, width)
 
+    override fun shape(): Shape = Square
     override fun dimension(): Dimension = dim
 
     override fun collidesWith(thing: Thing) {

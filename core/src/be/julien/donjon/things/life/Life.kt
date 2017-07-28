@@ -2,6 +2,8 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
+import be.julien.donjon.physics.shapes.Shape
+import be.julien.donjon.physics.shapes.Square
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
@@ -17,6 +19,8 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     init {
         dir.scl(4f)
     }
+
+    override fun shape(): Shape = Square
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)
