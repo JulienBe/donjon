@@ -11,7 +11,7 @@ import be.julien.donjon.util.Rnd
 class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
 
     var angle = Rnd.float(360f)
-    var stored = 10
+    var stored = 40
     var speed = determineSpeed()
 
     private fun determineSpeed() = stored * 8f

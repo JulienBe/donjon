@@ -23,6 +23,8 @@ class Vec2 private constructor(x: Float, y: Float) : Vector2(x, y) {
     }
 
     companion object {
+        val tmp = Vec2(0f, 0f)
+
         fun get(x: Float, y: Float): Vec2 {
             return Vec2(x, y)
         }

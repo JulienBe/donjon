@@ -19,7 +19,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     internal var energy = initEnergy()
 
     init {
-        dir.scl(4f)
+        dir.scl(6f)
     }
 
     override fun shape(): Shape = Square
@@ -39,7 +39,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     }
 
     override fun act(delta: Float): Boolean {
-        Particle.spawn(pos.x + w() * Rnd.float(), pos.y + h() * Rnd.float())
+        Particle.spawn(pos.x + w() * Rnd.float(), pos.y + h() * Rnd.float(), energy.value)
         energy.act()
         return super.act(delta)
     }

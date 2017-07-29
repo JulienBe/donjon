@@ -7,12 +7,12 @@ import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
-import be.julien.donjon.things.sensors.SquareSensor
+import be.julien.donjon.things.sensors.Sensor
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
 
-    val sensors = GdxArr<SquareSensor>()
+    val sensors = GdxArr<Sensor>()
     internal var dead = false
 
     /**
@@ -36,6 +36,8 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
         sensors.forEach { it.dead = true }
     }
 
+    fun centerX(): Float = x() + hw()
+    fun centerY(): Float = y() + hh()
     override fun x(): Float = pos.x
     override fun y(): Float = pos.y
     override fun hw(): Float = dimension().halfWidth

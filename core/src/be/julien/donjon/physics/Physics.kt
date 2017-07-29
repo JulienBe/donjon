@@ -1,5 +1,6 @@
 package be.julien.donjon.physics
 
+import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Thing
 
 object Physics {
@@ -9,4 +10,7 @@ object Physics {
                 me.y() < other.y() + other.h() &&
                 me.h() + me.y() > other.y()
     }
+
+    fun angle(a: Thing, b: Thing): Float = Vec2.tmp.set(a.centerX() - b.centerX(), a.centerY() - b.centerY()).angle()
+
 }
