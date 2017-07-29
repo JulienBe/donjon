@@ -1,15 +1,15 @@
 package be.julien.donjon.graphics
 
-import be.julien.donjon.things.Thing
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class Drawer {
-    internal val pixel = Texture(Gdx.files.internal("square.png"))
+    internal val pixel = TextureRegion(Texture(Gdx.files.internal("square.png")))
     internal val batch = SpriteBatch()
     internal val cam = cam()
 
@@ -41,13 +41,21 @@ class Drawer {
     }
 
     companion object {
-        internal val ratio =  Gdx.graphics.width / Gdx.graphics.height
+        internal val ratio: Float =  Gdx.graphics.width.toFloat() / Gdx.graphics.height.toFloat()
         internal val screenWidth: Float = 160f
         internal val screenHeight: Float = screenWidth / ratio
     }
 
-    fun drawAbsolute(t: Thing) {
-        batch.draw(pixel, t.x(), t.y(), t.dimension().width, t.dimension().height)
+    fun drawAO(d: Drawable) {
+        batch.draw(pixel, d.x(), d.y(), d.w(), d.h())
         batch.color = Color.WHITE
+    }
+    fun drawNAO(d: Drawable) {
+        batch.draw(pixel, d.x(), d.y(), d.hw(), d.hh(), d.w(), d.h(), 1f, 1f, d.angle())
+        batch.color = Color.WHITE
+    }
+
+    fun drawAO(textureRegion: TextureRegion, x: Float, y: Float, width: Float, height: Float) {
+        batch.draw(textureRegion, x, y, width, height)
     }
 }

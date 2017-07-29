@@ -1,12 +1,14 @@
 package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.particles.Particle
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.physics.shapes.Square
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
+import be.julien.donjon.util.Rnd
 import be.julien.donjon.util.TimeInt
 import be.julien.donjon.util.TimeIntComp
 import com.badlogic.gdx.graphics.Color
@@ -37,6 +39,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     }
 
     override fun act(delta: Float): Boolean {
+        Particle.spawn(pos.x + w() * Rnd.float(), pos.y + h() * Rnd.float())
         energy.act()
         return super.act(delta)
     }

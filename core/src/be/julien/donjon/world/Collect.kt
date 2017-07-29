@@ -2,13 +2,15 @@ package be.julien.donjon.world
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.particles.Particle
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.things.Thing
 
 class Collect {
     internal val stuff = HashMap<Mask, GdxArr<Thing>>()
     internal val removedThings = GdxArr<Thing>()
-    internal lateinit var keys: MutableSet<Mask>
+    internal val particles = GdxArr<Particle>()
+    internal var keys: MutableSet<Mask>
 
     init {
         stuff.put(Mask.Life, GdxArr<Thing>())
@@ -32,6 +34,14 @@ class Collect {
     }
 
     fun act(delta: Float) {
+        particles.addAll(particlesToAdd)
+        particles.removeAll(particlesToRemove, true)
+        particlesToAdd.clear()
+        particles.forEach {
+            if (it.act())
+                particlesToRemove.add(it)
+        }
+
         stuff.forEach { mask, gdxArr ->
             removedThings.clear()
             for (i in 0.until(gdxArr.size)) {
@@ -47,6 +57,7 @@ class Collect {
         stuff.forEach { mask, gdxArr ->
             gdxArr.forEach { it.draw(drawer) }
         }
+        particles.forEach { it.draw(drawer) }
     }
 
     fun nbEnergy(): Int = stuff[Mask.Energy]!!.size
@@ -80,6 +91,15 @@ class Collect {
                     b.collidesWith(a)
                 }
             }
+        }
+    }
+
+    companion object {
+        val particlesToAdd = GdxArr<Particle>()
+        val particlesToRemove = GdxArr<Particle>()
+
+        fun add(particle: Particle) {
+            particlesToAdd.add(particle)
         }
     }
 }

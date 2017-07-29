@@ -1,7 +1,6 @@
 package be.julien.donjon.util
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.spatial.Direction
 import java.util.*
 
 object Rnd {
@@ -13,10 +12,6 @@ object Rnd {
 
     fun float(mult: Float = 1f): Float {
         return rnd.nextFloat() * mult
-    }
-
-    fun direction(): Direction {
-        return Direction.values()[int(Direction.values().size)]
     }
 
     fun float(): Float = rnd.nextFloat()

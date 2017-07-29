@@ -1,14 +1,16 @@
 package be.julien.donjon.things
 
 import be.julien.donjon.GdxArr
+import be.julien.donjon.graphics.Drawable
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.SquareSensor
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-abstract class Thing(val pos: Vec2, val dir: Vec2) {
+abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
 
     val sensors = GdxArr<SquareSensor>()
     internal var dead = false
@@ -22,26 +24,28 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) {
     }
 
     open fun draw(drawer: Drawer): Unit {
-        drawer.drawAbsolute(this)
+        drawer.drawAO(this)
     }
 
     fun steer(angle: Float, delta: Float) {
         dir.rotate(angle * delta)
     }
 
-    fun hw(): Float = dimension().halfWidth
-    fun w(): Float = dimension().width
-    fun hh(): Float = dimension().halfHeight
-    fun h(): Float = dimension().height
-
-    open fun angle(): Float = 0f
     open fun die(): Unit {
         dead = true
         sensors.forEach { it.dead = true }
     }
 
-    fun x(): Float = pos.x
-    fun y(): Float = pos.y
+    override fun x(): Float = pos.x
+    override fun y(): Float = pos.y
+    override fun hw(): Float = dimension().halfWidth
+    override fun w(): Float = dimension().width
+    override fun hh(): Float = dimension().halfHeight
+    override fun h(): Float = dimension().height
+    override fun angle(): Float = 0f
+    override fun tr(): TextureRegion {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     abstract fun collidesWith(thing: Thing)
     abstract fun mask(): Mask

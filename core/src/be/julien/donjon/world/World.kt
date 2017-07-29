@@ -24,7 +24,7 @@ class World {
         collection.check()
         collection.act(delta)
         Time.act(delta)
-        if (collection.nbEnergy() < 10)
+        if (collection.nbEnergy() < energy)
             collection.add(Energy.get())
     }
 
@@ -52,6 +52,7 @@ class World {
 
     companion object {
         val initLife = 1
+        val energy = 40
         fun trim(i: Float, max: Float): Float {
             if (i > 0)
                 if (i < max)
