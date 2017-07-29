@@ -1,0 +1,138 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bullet
+  rotate: false
+  xy: 1, 13
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+loop
+  rotate: false
+  xy: 19, 13
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+xp
+  rotate: false
+  xy: 1, 1
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp1
+  rotate: false
+  xy: 37, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp10
+  rotate: false
+  xy: 13, 1
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp11
+  rotate: false
+  xy: 49, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp12
+  rotate: false
+  xy: 25, 1
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp13
+  rotate: false
+  xy: 37, 7
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp14
+  rotate: false
+  xy: 61, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp2
+  rotate: false
+  xy: 49, 7
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp3
+  rotate: false
+  xy: 73, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp4
+  rotate: false
+  xy: 61, 7
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp5
+  rotate: false
+  xy: 85, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp6
+  rotate: false
+  xy: 73, 7
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp7
+  rotate: false
+  xy: 97, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp8
+  rotate: false
+  xy: 85, 7
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+xp9
+  rotate: false
+  xy: 109, 19
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1
+smallloop
+  rotate: false
+  xy: 97, 9
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+square
+  rotate: false
+  xy: 37, 4
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1

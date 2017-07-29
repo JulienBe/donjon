@@ -1,6 +1,7 @@
 package be.julien.donjon.things
 
 import be.julien.donjon.GdxArr
+import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.graphics.Drawable
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
@@ -45,9 +46,7 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
     override fun hh(): Float = dimension().halfHeight
     override fun h(): Float = dimension().height
     override fun angle(): Float = 0f
-    override fun tr(): TextureRegion {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun tr(): TextureRegion = AssetMan.square
 
     abstract fun collidesWith(thing: Thing)
     abstract fun mask(): Mask

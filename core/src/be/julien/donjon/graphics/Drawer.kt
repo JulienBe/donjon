@@ -4,14 +4,13 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class Drawer {
-    internal val pixel = TextureRegion(Texture(Gdx.files.internal("square.png")))
     internal val batch = SpriteBatch()
     internal val cam = cam()
+    private val asset = AssetMan()
 
     private fun cam(): OrthographicCamera {
         val camera = OrthographicCamera(screenWidth, screenHeight)
@@ -47,11 +46,11 @@ class Drawer {
     }
 
     fun drawAO(d: Drawable) {
-        batch.draw(pixel, d.x(), d.y(), d.w(), d.h())
+        batch.draw(d.tr(), d.x(), d.y(), d.w(), d.h())
         batch.color = Color.WHITE
     }
     fun drawNAO(d: Drawable) {
-        batch.draw(pixel, d.x(), d.y(), d.hw(), d.hh(), d.w(), d.h(), 1f, 1f, d.angle())
+        batch.draw(d.tr(), d.x(), d.y(), d.hw(), d.hh(), d.w(), d.h(), 1f, 1f, d.angle())
         batch.color = Color.WHITE
     }
 
