@@ -7,15 +7,15 @@ import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.things.Thing
 import com.badlogic.gdx.graphics.Color
 
-class RoundSensor private constructor(var anchor: Thing, radius: Float): Sensor() {
+class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor) {
 
     val dim = Dimension.get(radius, radius)
     override fun shape(): Shape = Circle
     override fun dimension(): Dimension = dim
 
     override fun act(delta: Float): Boolean {
-        pos.x = anchor.x()
-        pos.y = anchor.y()
+        pos.x = anchor.centerX() - dim.halfWidth
+        pos.y = anchor.centerY() - dim.halfHeight
         return dead
     }
 

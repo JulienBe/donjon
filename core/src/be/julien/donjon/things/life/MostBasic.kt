@@ -10,7 +10,11 @@ import be.julien.donjon.things.sensors.SquareSensor
 class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
 
     internal val steeringSpeed = 2f
-    private val sensor = RoundSensor.get(this, 4f)
+    private val sensor = RoundSensor.get(this, 8f)
+
+    init {
+        sensors.add(sensor)
+    }
 
     override fun dimension(): Dimension = dim
 

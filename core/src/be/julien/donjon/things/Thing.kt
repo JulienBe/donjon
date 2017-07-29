@@ -37,6 +37,12 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
         sensors.forEach { it.dead = true }
     }
 
+    fun isSensor(b: Thing): Boolean {
+        if (b is Sensor)
+            return sensors.contains(b, true)
+        return false
+    }
+
     fun centerX(): Float = x() + hw()
     fun centerY(): Float = y() + hh()
     override fun x(): Float = pos.x

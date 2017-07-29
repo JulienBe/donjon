@@ -6,7 +6,7 @@ import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 
-abstract class Sensor: Thing(Vec2.get(0f, 0f), Vec2.get(0f, 0f)) {
+abstract class Sensor(var anchor: Thing) : Thing(Vec2.get(0f, 0f), Vec2.get(0f, 0f)) {
     internal val colliders = GdxArr<Thing>()
 
     override fun mask(): Mask = Mask.Sensor

@@ -19,7 +19,7 @@ class Particle(var x: Float, var y: Float, var ttl: Int) {
         val dim = Dimension.get(0.3f, 0.3f)
         fun spawn(x: Float, y: Float, energy: Int) {
             Collect.add(
-                    Particle(x - dim.halfWidth, y - dim.halfHeight, Rnd.int(energy) + 5)
+                    Particle(x - dim.halfWidth, y - dim.halfHeight, Rnd.int(energy + 2))
             )
         }
     }

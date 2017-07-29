@@ -4,6 +4,7 @@ import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.particles.Particle
 import be.julien.donjon.physics.Mask
+import be.julien.donjon.physics.Physics
 import be.julien.donjon.things.Thing
 
 class Collect {
@@ -86,7 +87,7 @@ class Collect {
         arrayFrom!!.forEach { a ->
             for (i in 0.until(arrayTo!!.size)) {
                 val b = arrayTo.get(i)
-                if (a.shape().collidesWith(a, b) && a != b) {
+                if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a )) {
                     a.collidesWith(b)
                     b.collidesWith(a)
                 }

@@ -8,8 +8,8 @@ import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Thing
 import com.badlogic.gdx.graphics.Color
 
-class SquareSensor internal constructor(var anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float):
-        Sensor() {
+class SquareSensor internal constructor(anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float):
+        Sensor(anchor) {
 
     internal val offset = Vec2.get(sensorLength, 0f)
     internal val dim = Dimension.get(width, width)
