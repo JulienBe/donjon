@@ -8,7 +8,7 @@ class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
 
     internal val right = SquareSensor.get(this, 3f, 45f, 1f)
     internal val left = SquareSensor.get(this, 3f, -45f, 1f)
-    internal val straight = SquareSensor.get(this, 4f, 0f, 1.5f)
+    internal val straight = SquareSensor.get(this, 4f, 0.1f, 1.5f)
     internal val steeringSpeed = 2f
 
     init {
@@ -29,7 +29,7 @@ class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
             if (s.containersEnergy())
                 steer(s.offsetAngle, delta * steeringSpeed)
             else
-                steer(s.offsetAngle + 180, delta * steeringSpeed)
+                steer(Math.signum(s.offsetAngle) * -180f, delta * steeringSpeed)
         }
         s.checked()
     }

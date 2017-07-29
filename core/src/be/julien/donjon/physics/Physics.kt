@@ -10,4 +10,3 @@ object Physics {
                 me.h() + me.y() > other.y()
     }
 }
-    
