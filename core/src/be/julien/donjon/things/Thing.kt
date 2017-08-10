@@ -5,6 +5,7 @@ import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.graphics.Drawable
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
+import be.julien.donjon.physics.Physics
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
@@ -41,6 +42,20 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
         if (b is Sensor)
             return sensors.contains(b, true)
         return false
+    }
+
+    internal fun goAwayFrom(other: Thing, delta: Float) {
+        if (Physics.angle(other, this) > 180)
+            dir.rotate(-1f)
+        else
+            dir.rotate(1f)
+    }
+
+    internal fun goTowards(other: Thing, delta: Float) {
+        if (Physics.angle(other, this) > 180)
+            dir.rotate(1f)
+        else
+            dir.rotate(-1f)
     }
 
     fun centerX(): Float = x() + hw()

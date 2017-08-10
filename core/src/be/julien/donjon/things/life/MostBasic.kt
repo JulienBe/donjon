@@ -1,11 +1,9 @@
 package be.julien.donjon.things.life
 
-import be.julien.donjon.physics.Physics
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.RoundSensor
 import be.julien.donjon.things.sensors.Sensor
-import be.julien.donjon.things.sensors.SquareSensor
 
 class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
 
@@ -25,12 +23,11 @@ class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
 
     private fun colliders(s: Sensor, delta: Float) {
         if (s.colliders.count() > 0) {
-            val angle = Physics.angle(s, this)
-            if (s.containersEnergy()) {
-                steer(angle, delta * steeringSpeed)
-            } else {
-                steer(angle -180f, delta * steeringSpeed)
-            }
+            val e = s.getEnergy()
+            if (e != null)
+                goTowards(e, delta)
+            else
+                goAwayFrom(s.colliders[0], delta)
         }
         s.checked()
     }

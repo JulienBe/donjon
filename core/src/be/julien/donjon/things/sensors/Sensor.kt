@@ -23,4 +23,9 @@ abstract class Sensor(var anchor: Thing) : Thing(Vec2.get(0f, 0f), Vec2.get(0f, 
     override fun collidesWith(thing: Thing) {
         colliders.add(thing)
     }
+
+    fun getEnergy(): Thing? {
+        colliders.forEach { if (it is Energy) return it }
+        return null
+    }
 }
