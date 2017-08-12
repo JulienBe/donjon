@@ -1,5 +1,8 @@
 package be.julien.donjon.spatial
 
+import be.julien.donjon.GdxArr
+import be.julien.donjon.physics.Physics
+import be.julien.donjon.things.Thing
 import be.julien.donjon.util.Rnd
 import com.badlogic.gdx.math.Vector2
 
@@ -39,6 +42,17 @@ class Vec2 private constructor(x: Float, y: Float) : Vector2(x, y) {
 
         fun getRnd(): Vec2 {
             return get(0f, 1f).steer(Rnd.float(360f), 1f)
+        }
+
+        fun getRandWorld(excluded: GdxArr<Thing>): Vec2 {
+            (1..50).forEach {
+                val v = getRandWorld()
+                excluded.forEach {
+                    if (!Physics.contains(it, v))
+                        return v
+                }
+            }
+            return getRandWorld()
         }
     }
 }

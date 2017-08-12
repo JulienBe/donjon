@@ -45,17 +45,18 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
     }
 
     internal fun goAwayFrom(other: Thing, delta: Float) {
-        if (Physics.angle(other, this) > 180)
-            dir.rotate(-1f)
-        else
-            dir.rotate(1f)
+        dir.rotate(Physics.goAwayMod(other, this) * 2f)
     }
 
     internal fun goTowards(other: Thing, delta: Float) {
-        if (Physics.angle(other, this) > 180)
-            dir.rotate(1f)
-        else
-            dir.rotate(-1f)
+        dir.rotate(Physics.goAwayMod(other, this) * -2f)
+    }
+
+    open fun viscosity(): Float {
+        return 1f
+    }
+
+    open fun collidesWith(thing: Thing) {
     }
 
     fun centerX(): Float = x() + hw()
@@ -69,7 +70,6 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
     override fun angle(): Float = 0f
     override fun tr(): TextureRegion = AssetMan.square
 
-    abstract fun collidesWith(thing: Thing)
     abstract fun mask(): Mask
     abstract fun dimension(): Dimension
     abstract fun shape(): Shape

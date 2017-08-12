@@ -21,6 +21,10 @@ class Collect {
         keys = stuff.keys
     }
 
+    fun walls(): GdxArr<Thing> {
+        return stuff.get(Mask.Wall)!!
+    }
+
     fun add(vararg things: Thing) {
         things.forEach {
             stuff[it.mask()]!!.add(it)
@@ -63,25 +67,25 @@ class Collect {
 
     fun nbEnergy(): Int = stuff[Mask.Energy]!!.size
 
-    fun check() {
+    fun check(delta: Float) {
         for (i in 0.until(keys.size)) {
-            checkMask(i)
+            checkMask(i, delta)
         }
     }
 
-    private fun checkMask(i: Int) {
+    private fun checkMask(i: Int, delta: Float) {
         val maskA = keys.elementAt(i)
         for (j in i.until(keys.size)) {
             val maskB = keys.elementAt(j)
             if (maskA.collidesWith(maskB)) {
-                checkCollision(maskA, maskB)
+                checkCollision(maskA, maskB, delta)
             } else if (maskB.collidesWith(maskA)) {
-                checkCollision(maskB, maskA)
+                checkCollision(maskB, maskA, delta)
             }
         }
     }
 
-    private fun checkCollision(from: Mask, to: Mask) {
+    private fun checkCollision(from: Mask, to: Mask, delta: Float) {
         val arrayFrom = stuff[from]
         val arrayTo = stuff[to]
         arrayFrom!!.forEach { a ->
@@ -90,6 +94,7 @@ class Collect {
                 if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a )) {
                     a.collidesWith(b)
                     b.collidesWith(a)
+                    Physics.resolveOverlap(a, b, delta)
                 }
             }
         }
@@ -103,4 +108,5 @@ class Collect {
             particlesToAdd.add(particle)
         }
     }
+
 }

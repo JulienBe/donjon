@@ -17,7 +17,7 @@ object Physics {
         return noCollision(a, b)
     }
 
-    private fun noCollision(a: Thing, b: Thing): Boolean {
+    private fun noCollision(a: Thing, b: Any): Boolean {
         Util.err("Hu, collision mistake between $a and $b")
         return false
     }
@@ -59,4 +59,50 @@ object Physics {
         val dy = distY - square.hh()
         return (dx * dx + dy * dy) <= (circle.hw() * circle.hw())
     }
+
+    private fun vecInsideSquare(t: Thing, v: Vec2): Boolean {
+        return t.x() < v.x &&
+                t.x() + t.w() > v.x &&
+                t.y() < v.y &&
+                t.h() + t.y() > v.y
+    }
+
+    private fun vecInsideCircle(t: Thing, vec2: Vec2): Boolean {
+        return vec2.dst(t.centerX(), t.centerY()) < t.w()
+    }
+
+    fun goAwayMod(other: Thing, me: Thing): Int {
+        if (cwCloser(other, me))
+            return 1
+        else
+            return -1
+    }
+
+    fun cwCloser(other: Thing, me: Thing): Boolean {
+        // ccw 1
+        // dir x = -y;
+		// dir y = x;
+        val leftX = (other.pos.x + other.dir.x) - (me.pos.x - me.dir.y)
+        val leftY = (other.pos.y + other.dir.y) - (me.pos.y + me.dir.x)
+        // cw -1
+        // dir x = y;
+        // dir y = -x;
+        val rightX = (other.pos.x + other.dir.x) - (me.pos.x + me.dir.y)
+        val rightY = (other.pos.y + other.dir.y) - (me.pos.y - me.dir.x)
+        return (leftX * leftX) + (leftY * leftY) > (rightX * rightX) + (rightY * rightY)
+    }
+
+    fun  resolveOverlap(a: Thing, b: Thing, delta: Float) {
+        a.pos.move(a.dir, -delta * b.viscosity())
+        b.pos.move(b.dir, -delta * a.viscosity())
+    }
+
+    fun contains(thing: Thing, v: Vec2): Boolean {
+        when(thing.shape()) {
+            Square -> return vecInsideSquare(thing, v)
+            Circle -> return vecInsideCircle(thing, v)
+        }
+        return noCollision(thing, v)
+    }
+
 }

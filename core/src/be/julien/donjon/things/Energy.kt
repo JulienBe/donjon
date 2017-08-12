@@ -36,14 +36,15 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
         return 1
     }
 
-    override fun collidesWith(thing: Thing) {
-    }
-
     companion object {
         val dim = Dimension.get(1f, 1f)
         fun get(): Energy {
             return Energy(Vec2.getRandWorld(), Vec2.get(0f, 0f))
         }
+    }
+
+    override fun viscosity(): Float {
+        return 0.5f
     }
 
     override fun angle(): Float = angle

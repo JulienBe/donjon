@@ -21,7 +21,7 @@ class World {
     }
 
     fun act(delta: Float) {
-        collection.check()
+        collection.check(delta)
         collection.act(delta)
         Time.act(delta)
         if (collection.nbEnergy() < energy)
@@ -38,8 +38,7 @@ class World {
     }
 
     private fun newLife() {
-        val l = Life.mostBasic()
-        collection.add(l)
+        collection.add(Life.mostBasic(collection.walls()))
     }
 
     fun deadThing(thing: Thing) {

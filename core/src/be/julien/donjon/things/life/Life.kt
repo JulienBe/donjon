@@ -1,5 +1,6 @@
 package be.julien.donjon.things.life
 
+import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.particles.Particle
 import be.julien.donjon.physics.Mask
@@ -64,6 +65,10 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
         fun mostBasic(dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
             return MostBasic(Vec2.getRandWorld(), dir)
+        }
+
+        fun mostBasic(excluded: GdxArr<Thing>): MostBasic {
+            return MostBasic(Vec2.getRandWorld(excluded), Vec2.getRnd())
         }
     }
 }
