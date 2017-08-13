@@ -27,6 +27,7 @@ class Vec2 private constructor(x: Float, y: Float) : Vector2(x, y) {
 
     companion object {
         val tmp = Vec2(0f, 0f)
+        val zero = Vec2(0f, 0f)
 
         fun get(x: Float, y: Float): Vec2 {
             return Vec2(x, y)
@@ -53,6 +54,10 @@ class Vec2 private constructor(x: Float, y: Float) : Vector2(x, y) {
                 }
             }
             return getRandWorld()
+        }
+
+        fun get(angle: Float): Vec2 {
+            return Vec2(1f, 0f).rotate(angle) as Vec2
         }
     }
 }

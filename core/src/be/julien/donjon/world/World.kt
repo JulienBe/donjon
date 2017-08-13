@@ -3,7 +3,7 @@ package be.julien.donjon.world
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
-import be.julien.donjon.things.Wall
+import be.julien.donjon.things.WallAO
 import be.julien.donjon.things.life.Life
 import be.julien.donjon.util.Time
 
@@ -13,10 +13,10 @@ class World {
     internal var debug = false
 
     init {
-        val left = Wall(0f, 0f, Wall.width, Drawer.screenHeight)
-        val right = Wall(Drawer.screenWidth - Wall.width, 0f, Wall.width, Drawer.screenHeight)
-        val top = Wall(0f, Drawer.screenHeight - Wall.width, Drawer.screenWidth, Wall.width)
-        val bottom = Wall(0f, 0f, Drawer.screenWidth, Wall.width)
+        val left = WallAO(0f, 0f, WallAO.width, Drawer.screenHeight)
+        val right = WallAO(Drawer.screenWidth - WallAO.width, 0f, WallAO.width, Drawer.screenHeight)
+        val top = WallAO(0f, Drawer.screenHeight - WallAO.width, Drawer.screenWidth, WallAO.width)
+        val bottom = WallAO(0f, 0f, Drawer.screenWidth, WallAO.width)
         collection.add(left, right, top, bottom)
     }
 
@@ -30,6 +30,7 @@ class World {
 
     fun draw(drawer: Drawer) {
         collection.draw(drawer)
+//        collection.debug(drawer)
     }
 
     fun spawn() {

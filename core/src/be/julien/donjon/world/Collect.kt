@@ -91,7 +91,7 @@ class Collect {
         arrayFrom!!.forEach { a ->
             for (i in 0.until(arrayTo!!.size)) {
                 val b = arrayTo.get(i)
-                if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a )) {
+                if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a)) {
                     a.collidesWith(b)
                     b.collidesWith(a)
                     Physics.resolveOverlap(a, b, delta)
@@ -103,10 +103,18 @@ class Collect {
     companion object {
         val particlesToAdd = GdxArr<Particle>()
         val particlesToRemove = GdxArr<Particle>()
+        val thingsToAdd = GdxArr<Thing>()
 
         fun add(particle: Particle) {
             particlesToAdd.add(particle)
         }
+        fun add(thing: Thing) {
+            thingsToAdd.add(thing)
+        }
+    }
+
+    fun debug(drawer: Drawer) {
+        walls().forEach { it.debug(drawer) }
     }
 
 }

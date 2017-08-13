@@ -52,6 +52,10 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
         dir.rotate(Physics.goAwayMod(other, this) * -2f)
     }
 
+    internal fun dirCenter(other: Thing): Vec2 {
+        return Physics.dirCenter(other, this)
+    }
+
     open fun viscosity(): Float {
         return 1f
     }

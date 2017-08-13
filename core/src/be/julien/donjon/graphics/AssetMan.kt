@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class AssetMan : AssetErrorListener {
     private val man = AssetManager()
-    //    private val atlas: TextureAtlas = TextureAtlas(Gdx.files.internal(atlas))
 
     init {
         man.setErrorListener(this)
@@ -19,7 +18,7 @@ class AssetMan : AssetErrorListener {
             println("" + System.currentTimeMillis() + " : " + man.progress)
         }
         val atlas = man.get(atlas, TextureAtlas::class.java)
-        square = atlas.findRegion("loop")
+        square = atlas.findRegion("square")
         circle = atlas.findRegion("bullet")
     }
 

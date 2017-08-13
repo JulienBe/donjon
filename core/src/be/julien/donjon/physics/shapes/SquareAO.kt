@@ -1,3 +1,3 @@
 package be.julien.donjon.physics.shapes
 
-object Square : Shape
+object SquareAO : Shape

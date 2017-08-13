@@ -5,7 +5,7 @@ import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.particles.Particle
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
-import be.julien.donjon.physics.shapes.Square
+import be.julien.donjon.physics.shapes.SquareAO
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
@@ -20,10 +20,14 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     internal var energy = initEnergy()
 
     init {
-        dir.scl(6f)
+        norSpeed()
     }
 
-    override fun shape(): Shape = Square
+    override fun shape(): Shape = SquareAO
+
+    internal fun norSpeed() {
+        dir.nor().scl(20f)
+    }
 
     private fun initEnergy(): TimeInt {
         val e = TimeIntComp.get(100, 1f, -1)
@@ -58,7 +62,6 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     }
 
     override fun angle(): Float = dir.angle()
-
     override fun mask(): Mask = Mask.Life
 
     companion object {

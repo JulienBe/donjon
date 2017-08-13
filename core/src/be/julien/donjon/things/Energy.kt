@@ -3,7 +3,7 @@ package be.julien.donjon.things
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
-import be.julien.donjon.physics.shapes.Square
+import be.julien.donjon.physics.shapes.SquareAO
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.util.Rnd
@@ -17,7 +17,7 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
     private fun determineSpeed() = stored * 8f
     override fun mask(): Mask = Mask.Energy
     override fun dimension(): Dimension = dim
-    override fun shape(): Shape = Square
+    override fun shape(): Shape = SquareAO
 
     override fun act(delta: Float): Boolean {
         if (stored <= 0)

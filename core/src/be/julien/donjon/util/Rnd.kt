@@ -7,6 +7,7 @@ object Rnd {
     internal val rnd = Random()
 
     fun int(max: Int): Int {
+        if (max <= 0) return 1
         return rnd.nextInt(max)
     }
 

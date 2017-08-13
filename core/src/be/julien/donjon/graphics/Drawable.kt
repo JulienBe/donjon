@@ -11,4 +11,6 @@ interface Drawable {
     fun x(): Float
     fun y(): Float
     fun tr(): TextureRegion
+    fun debug(drawer: Drawer) {
+    }
 }

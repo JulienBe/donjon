@@ -47,14 +47,19 @@ class Drawer {
 
     fun drawAO(d: Drawable) {
         batch.draw(d.tr(), d.x(), d.y(), d.w(), d.h())
-        batch.color = Color.WHITE
+        color(Color.WHITE)
     }
     fun drawNAO(d: Drawable) {
         batch.draw(d.tr(), d.x(), d.y(), d.hw(), d.hh(), d.w(), d.h(), 1f, 1f, d.angle())
-        batch.color = Color.WHITE
+        color(Color.WHITE)
     }
 
     fun drawAO(textureRegion: TextureRegion, x: Float, y: Float, width: Float, height: Float) {
         batch.draw(textureRegion, x, y, width, height)
+    }
+
+    fun draw(square: TextureRegion, x: Float, y: Float, pivotX: Float, pivotY: Float, width: Float, height: Float, angle: Float) {
+        batch.draw(square, x, y, pivotX, pivotY, width, height, 1f, 1f, angle)
+        color(Color.WHITE)
     }
 }

@@ -1,11 +1,13 @@
 package be.julien.donjon.things.sensors
 
+import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.shapes.Circle
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.things.Thing
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor) {
 
@@ -20,8 +22,12 @@ class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anch
     }
 
     override fun draw(drawer: Drawer) {
-        drawer.color(Color.RED)
-        super.draw(drawer)
+//        drawer.color(Color.GRAY)
+//        super.draw(drawer)
+    }
+
+    override fun tr(): TextureRegion {
+        return AssetMan.circle
     }
 
     companion object {

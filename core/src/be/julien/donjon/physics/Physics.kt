@@ -1,17 +1,19 @@
 package be.julien.donjon.physics
 
 import be.julien.donjon.physics.shapes.Circle
-import be.julien.donjon.physics.shapes.Square
+import be.julien.donjon.physics.shapes.SquareAO
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Thing
 import be.julien.donjon.util.Util
 
 object Physics {
-    fun angle(a: Thing, b: Thing): Float = Vec2.tmp.set(a.centerX() - b.centerX(), a.centerY() - b.centerY()).angle()
+    fun angle(to: Thing, from: Thing): Float = angle(to.centerX(), to.centerY(), from.centerX(), from.centerY())
+
+    fun angle(xTo: Float, yTo: Float, xFrom: Float, yFrom: Float): Float = Vec2.tmp.set(xTo - xFrom, yTo - yFrom).angle()
 
     fun checkCollision(a: Thing, b: Thing): Boolean {
         when(a.shape()) {
-            Square -> return squareCheck(a, b)
+            SquareAO -> return squareCheck(a, b)
             Circle -> return circleCheck(a, b)
         }
         return noCollision(a, b)
@@ -24,14 +26,14 @@ object Physics {
 
     private fun circleCheck(circle: Thing, b: Thing): Boolean {
         when(b.shape()) {
-            Square -> return squareCircle(b, circle)
+            SquareAO -> return squareCircle(b, circle)
         }
         return noCollision(circle, b)
     }
 
     private fun squareCheck(square: Thing, b: Thing): Boolean {
         when(b.shape()) {
-            Square -> return squareSquare(square, b)
+            SquareAO -> return squareSquare(square, b)
             Circle -> return squareCircle(square, b)
         }
         return noCollision(square, b)
@@ -53,7 +55,7 @@ object Physics {
             return false
         if (distX <= square.hw())
             return true
-        if (distY <= circle.hh())
+        if (distY <= square.hh())
             return true
         val dx = distX - square.hw()
         val dy = distY - square.hh()
@@ -99,10 +101,47 @@ object Physics {
 
     fun contains(thing: Thing, v: Vec2): Boolean {
         when(thing.shape()) {
-            Square -> return vecInsideSquare(thing, v)
+            SquareAO -> return vecInsideSquare(thing, v)
             Circle -> return vecInsideCircle(thing, v)
         }
         return noCollision(thing, v)
+    }
+
+    fun dirCenter(other: Thing, me: Thing): Vec2 {
+        return Vec2.get(other.centerX() - me.centerX(), other.centerY() - me.centerY())
+    }
+
+    fun intersectLines(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float, x4: Float, y4: Float): Boolean {
+        return lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4).equals(Vec2.tmp)
+    }
+
+    fun lineIntersection(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float, x4: Float, y4: Float): Vec2 {
+        val s10_x = x2 - x1
+        val s10_y = y2 - y1
+        val s32_x = x4 - x3
+        val s32_y = y4 - y3
+
+        val denom = s10_x * s32_y - s32_x * s10_y
+        if (denom == 0f)
+            return Vec2.zero
+        val denomPositive = denom > 0f
+
+        val s02_x = x1 - x3
+        val s02_y = y1 - y3
+        val s_numer = s10_x * s02_y - s10_y * s02_x
+        if ((s_numer < 0) == denomPositive)
+            return Vec2.zero
+
+        val t_numer = s32_x * s02_y - s32_y * s02_x
+        if ((t_numer < 0) == denomPositive)
+            return Vec2.zero
+
+        if (((s_numer > denom) == denomPositive) || ((t_numer > denom) == denomPositive))
+            return Vec2.zero
+
+        // Collision detected
+        val t = t_numer / denom
+        return Vec2.tmp.set(x1 + (t * s10_x), y1 + (t * s10_y)) as Vec2
     }
 
 }
