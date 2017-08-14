@@ -26,7 +26,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     override fun shape(): Shape = SquareAO
 
     internal fun norSpeed() {
-        dir.nor().scl(20f)
+        dir.nor().scl(10f)
     }
 
     private fun initEnergy(): TimeInt {

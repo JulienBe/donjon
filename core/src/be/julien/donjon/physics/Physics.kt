@@ -144,4 +144,10 @@ object Physics {
         return Vec2.tmp.set(x1 + (t * s10_x), y1 + (t * s10_y)) as Vec2
     }
 
+    fun  distSq(t1: Thing, t2: Thing): Float {
+        val distX = t1.centerX() - t2.centerX()
+        val distY = t1.centerY() - t2.centerY()
+        return (distX * distX) - (distY * distY)
+    }
+
 }
