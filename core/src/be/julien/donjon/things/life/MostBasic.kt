@@ -1,20 +1,24 @@
 package be.julien.donjon.things.life
 
+import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.physics.Physics
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
+import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
 import be.julien.donjon.things.sensors.RoundSensor
 import be.julien.donjon.things.sensors.Sensor
+import be.julien.donjon.world.Collect
 
-class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
+class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
-    internal val wallBase = 1f
-    internal val wallMod = 1f
-    internal val energyMod = 1f
-    internal val energyValueMod = 1f
-    internal val energyDistMod = 1f
+    internal val wallBase = dna.genes[1]
+    internal val wallMod = dna.genes[2]
+    internal val energyMod = dna.genes[3]
+    internal val energyValueMod = dna.genes[4]
+    internal val energyDistMod = dna.genes[5]
+    internal val energyReproduction = dna.genes[6]
     private val sensor = RoundSensor.get(this, 8f)
 
     init {
@@ -28,8 +32,26 @@ class MostBasic(pos: Vec2, dir: Vec2) : Life(pos, dir) {
         return super.act(delta)
     }
 
+    override fun collidesWith(thing: Thing) {
+        super.collidesWith(thing)
+        if (thing is MostBasic && canReproduce()) {
+            reproduce(thing)
+        }
+    }
+
+    override fun reproduce(life: Life) {
+        val mix = dna.mix(life.dna)
+        val otherDir = Vec2.get(dir.x, dir.y)
+        otherDir.rotate(-45f)
+        Collect.add(mostBasic(Vec2.get(pos.x, pos.y), otherDir, mix))
+        dir.rotate(45f)
+        energy.step(51)
+        super.reproduce(life)
+    }
+
     private fun colliders(s: Sensor, delta: Float) {
         val target = Vec2.tmp
+        target.set(0f, 0f)
         var targetValue = 0f
         s.colliders.forEach { it ->
             when (it) {

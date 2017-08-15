@@ -47,6 +47,10 @@ class Collect {
                 particlesToRemove.add(it)
         }
 
+        thingsToAdd.forEach {
+            add(it)
+        }
+        thingsToAdd.clear()
         stuff.forEach { mask, gdxArr ->
             removedThings.clear()
             for (i in 0.until(gdxArr.size)) {
@@ -79,7 +83,8 @@ class Collect {
             val maskB = keys.elementAt(j)
             if (maskA.collidesWith(maskB)) {
                 checkCollision(maskA, maskB, delta)
-            } else if (maskB.collidesWith(maskA)) {
+            }
+            if (maskB.collidesWith(maskA)) {
                 checkCollision(maskB, maskA, delta)
             }
         }
@@ -93,7 +98,6 @@ class Collect {
                 val b = arrayTo.get(i)
                 if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a)) {
                     a.collidesWith(b)
-                    b.collidesWith(a)
                     Physics.resolveOverlap(a, b, delta)
                 }
             }

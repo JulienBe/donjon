@@ -17,11 +17,10 @@ public enum Mask {
         for (byte other : others) {
             colliders |= other;
         }
-        System.out.println("" + this.flag + " with : " + colliders);
     }
 
     public boolean collidesWith(@NotNull Mask other) {
-        return (other.colliders & flag) == flag;
+        return (colliders & other.flag) == other.flag;
     }
 
 }

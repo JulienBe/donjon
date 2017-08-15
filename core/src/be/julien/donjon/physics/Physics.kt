@@ -95,8 +95,8 @@ object Physics {
     }
 
     fun  resolveOverlap(a: Thing, b: Thing, delta: Float) {
-        a.pos.move(a.dir, -delta * b.viscosity())
-        b.pos.move(b.dir, -delta * a.viscosity())
+        a.pos.move(a.dir, -delta * b.viscosity(a))
+//        b.pos.move(b.dir, -delta * a.viscosity())
     }
 
     fun contains(thing: Thing, v: Vec2): Boolean {

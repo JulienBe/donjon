@@ -19,4 +19,7 @@ object Rnd {
 
     fun width(): Float = float(Drawer.screenWidth)
     fun height(): Float = float(Drawer.screenHeight)
+    fun bool(): Boolean {
+        return rnd.nextBoolean()
+    }
 }

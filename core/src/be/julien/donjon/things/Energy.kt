@@ -43,7 +43,7 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
         }
     }
 
-    override fun viscosity(): Float {
+    override fun viscosity(a: Thing): Float {
         return 0.5f
     }
 

@@ -56,7 +56,7 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
         return Physics.dirCenter(other, this)
     }
 
-    open fun viscosity(): Float {
+    open fun viscosity(a: Thing): Float {
         return 1f
     }
 

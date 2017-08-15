@@ -4,6 +4,7 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
 
     private var nextTrigger: Float = Time.time + interval
     private var callback: Callback? = null
+    private val initialVal = value
 
     fun act() {
         if (nextTrigger < Time.time) {
@@ -13,7 +14,11 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
     }
 
     fun step() {
-        value += increment
+        step(1)
+    }
+
+    fun step(steps: Int) {
+        value += increment * steps
         callback?.check(this)
     }
 
@@ -23,6 +28,11 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
 
     fun add(i: Int) {
         value += i
+    }
+
+    fun reset() {
+        value = initialVal
+        nextTrigger = Time.time + interval
     }
 }
 
