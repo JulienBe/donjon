@@ -5,12 +5,15 @@ import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
 import be.julien.donjon.things.life.Life
+import be.julien.donjon.util.Callback
+import be.julien.donjon.util.PeriodicTimer
 import be.julien.donjon.util.Time
 
 class World {
 
-    internal val collection = Collect()
-    internal var debug = false
+    private val collection = Collect()
+    private var debug = false
+    private val addEnergyTimer = PeriodicTimer(1f, Callback(1, this::addEnergy))
 
     init {
         val left = WallAO(0f, 0f, WallAO.width, Drawer.screenHeight)
@@ -23,9 +26,12 @@ class World {
     fun act(delta: Float) {
         collection.check(delta)
         collection.act(delta)
+        addEnergyTimer.act()
         Time.act(delta)
-        if (collection.nbEnergy() < energy)
-            collection.add(Energy.get())
+    }
+
+    fun addEnergy() {
+        collection.add(Energy.get())
     }
 
     fun draw(drawer: Drawer) {

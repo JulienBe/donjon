@@ -1,9 +1,8 @@
 package be.julien.donjon.util
 
-class TimeInt(internal var value: Int, private var interval: Float = 1f, internal var increment: Int) {
+class TimeInt private constructor(internal var value: Int, private var interval: Float = 1f, private var increment: Int, var callback: Callback?) {
 
     private var nextTrigger: Float = Time.time + interval
-    private var callback: Callback? = null
     private val initialVal = value
 
     fun act() {
@@ -23,7 +22,7 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
     }
 
     fun setCallback(callbackValue: Int, method: () -> Unit) {
-        callback = CallbackComp.get(callbackValue, method)
+        callback = Callback.get(callbackValue, method)
     }
 
     fun add(i: Int) {
@@ -33,20 +32,26 @@ class TimeInt(internal var value: Int, private var interval: Float = 1f, interna
     fun reset() {
         value = initialVal
         nextTrigger = Time.time + interval
+        callback?.reset()
+    }
+
+    fun noCallback() {}
+
+    companion object {
+        fun get(value: Int, interval: Float, increment: Int): TimeInt {
+            return TimeInt(value, interval, increment, null)
+        }
+
+        fun get(value: Int, interval: Float, increment: Int, callback: Callback): TimeInt {
+            return TimeInt(value, interval, increment, callback)
+        }
     }
 }
 
-object TimeIntComp {
-    fun get(value: Int, interval: Float, increment: Int): TimeInt {
-        return TimeInt(value, interval, increment)
-    }
-}
-
-
-internal class Callback(var callbackValue: Int, var callback: () -> Unit) {
+class Callback(var callbackValue: Int, var callback: () -> Unit) {
     internal var triggered = false
-    fun check(timeFloat: TimeInt) {
-        if (!triggered && callbackValue == timeFloat.value)
+    fun check(timeInt: TimeInt) {
+        if (!triggered && callbackValue == timeInt.value)
             activate()
     }
 
@@ -54,10 +59,16 @@ internal class Callback(var callbackValue: Int, var callback: () -> Unit) {
         triggered = true
         callback.invoke()
     }
-}
-internal object CallbackComp {
-    fun get(callbackValue: Int, method: () -> Unit): Callback {
-        return Callback(callbackValue, method)
+
+    fun reset() {
+        triggered = false
     }
+
+    companion object {
+        fun get(callbackValue: Int, method: () -> Unit): Callback {
+            return Callback(callbackValue, method)
+        }
+    }
+
 }
 
