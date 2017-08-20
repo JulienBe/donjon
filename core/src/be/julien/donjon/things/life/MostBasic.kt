@@ -13,12 +13,20 @@ import be.julien.donjon.world.Collect
 
 class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
-    internal val wallBase = dna.genes[1]
-    internal val wallMod = dna.genes[2]
-    internal val energyMod = dna.genes[3]
-    internal val energyValueMod = dna.genes[4]
+    /*
+    0.9051367, 0.9773993, 0.79385370, 1.10078560, 1.0269687, 0.9688986, 0.70713985,
+    0.8363497, 0.9080985, 0.82114320, 1.05114350, 1.0641985, 1.0684454, 0.6140407,
+    0.8813086, 0.9116909, 0.77517015, 0.96981364, 1.0421330, 1.0323613, 0.5678359,
+     */
+    internal val wallBase = dna.genes[1] // 0.87 0.87 0.85
+    internal val wallMod = dna.genes[2] // 1.09 1.1 1.15
+    internal val energyMod = dna.genes[3] // 1.07 1.10 1.07
+    internal val energyValueMod = dna.genes[4] // 0.90 0.83 0.88
     internal val energyDistMod = dna.genes[5]
     internal val energyReproduction = dna.genes[6]
+    internal val otherLifeBase = dna.genes[7]
+    internal val canReproduceMod = dna.genes[8]
+    internal val otherLifeMod = dna.genes[9]
     private val sensor = RoundSensor.get(this, 8f)
 
     init {
@@ -57,11 +65,24 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
             when (it) {
                 is Energy -> targetValue = compareEnergy(targetValue, target, it)
                 is WallAO -> targetValue = compareWall(targetValue, target, it)
+                is MostBasic -> targetValue = compareOtherLife(targetValue, target, it)
             }
         }
         dir.add(target)
         norSpeed()
         s.checked()
+    }
+
+    private fun compareOtherLife(currentTargetValue: Float, target: Vec2, other: MostBasic): Float {
+        var newValue = otherLifeBase
+        if (canReproduce())
+            newValue *= canReproduceMod
+        if (currentTargetValue > newValue) {
+            return currentTargetValue
+        } else {
+            target.set(other.centerX(), other.centerY()).nor().scl(otherLifeMod)
+            return newValue
+        }
     }
 
     private fun compareEnergy(currentTargetValue: Float, target: Vec2, energy: Energy): Float {

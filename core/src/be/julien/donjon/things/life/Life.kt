@@ -10,16 +10,15 @@ import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
-import be.julien.donjon.things.sensors.Sensor
+import be.julien.donjon.util.Time
 import be.julien.donjon.util.TimeInt
-import be.julien.donjon.util.TimeIntComp
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.utils.Pool
 
-abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), val dna: DNA = DNA()): Thing(pos, dir), Pool.Poolable {
+abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), val dna: DNA = DNA()): Thing(pos, dir) {
 
+    val initEnergy = 20
     internal var energy = initEnergy()
-    private val canReproduce = TimeIntComp.get(0, 1f, 1)
+    private val canReproduce = TimeInt.get(0, 1f, 1)
 
     init {
         norSpeed()
@@ -32,22 +31,18 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     }
 
     private fun initEnergy(): TimeInt {
-        val e = TimeIntComp.get(100, 1f, -1)
+        val e = TimeInt.get(initEnergy, 1f, -1)
         e.setCallback(0, this::noEnergy)
         return e
     }
 
     open internal fun canReproduce(): Boolean {
-        return canReproduce.value > 5
+        return canReproduce.value > 5 && energy.value > initEnergy
     }
 
     open internal fun reproduce(life: Life) {
-        energy.step(81)
+        energy.step(initEnergy)
         canReproduce.reset()
-    }
-
-    override fun reset() {
-        energy = initEnergy()
     }
 
     private fun noEnergy(): Unit {
@@ -69,7 +64,8 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     override fun collidesWith(thing: Thing) {
         when (thing) {
             is Energy -> energy.add(thing.getEnergy())
-            is WallAO  -> energy.step()
+            is WallAO -> energy.step(2)
+            is Life -> if (!canReproduce()) dir.rotate(energy.value % 360f * Time.delta)
         }
     }
 

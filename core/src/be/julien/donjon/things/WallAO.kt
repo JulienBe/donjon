@@ -43,7 +43,6 @@ class WallAO(x: Float, y: Float, width: Float, height: Float,
                 return it.normal
             }
         }
-        Util.err("Not within any normal " + t)
         return 0f
     }
 

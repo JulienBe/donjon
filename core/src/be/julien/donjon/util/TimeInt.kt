@@ -1,6 +1,6 @@
 package be.julien.donjon.util
 
-class TimeInt private constructor(internal var value: Int, private var interval: Float = 1f, private var increment: Int, var callback: Callback?) {
+class TimeInt private constructor(internal var value: Int, private var interval: Float = 1f, internal var increment: Int, var callback: Callback?) {
 
     private var nextTrigger: Float = Time.time + interval
     private val initialVal = value
@@ -51,8 +51,12 @@ class TimeInt private constructor(internal var value: Int, private var interval:
 class Callback(var callbackValue: Int, var callback: () -> Unit) {
     internal var triggered = false
     fun check(timeInt: TimeInt) {
-        if (!triggered && callbackValue == timeInt.value)
-            activate()
+        if (!triggered) {
+            if (timeInt.increment > 0f && timeInt.value >= callbackValue)
+                activate()
+            else if (timeInt.increment < 0f && timeInt.value <= callbackValue)
+                activate()
+        }
     }
 
     private fun activate() {

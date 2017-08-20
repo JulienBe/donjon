@@ -13,7 +13,7 @@ class World {
 
     private val collection = Collect()
     private var debug = false
-    private val addEnergyTimer = PeriodicTimer(1f, Callback(1, this::addEnergy))
+    private val addEnergyTimer = PeriodicTimer(0.3f, Callback(1, this::addEnergy))
 
     init {
         val left = WallAO(0f, 0f, WallAO.width, Drawer.screenHeight)

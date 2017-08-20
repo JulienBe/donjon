@@ -2,16 +2,23 @@ package be.julien.donjon.lifesim
 
 import be.julien.donjon.util.Rnd
 
-class DNA(val genes: Array<Float> = Array(10){1f}) {
+class DNA(val genes: Array<Float> = Array(10){Rnd.float(2f)}) {
     fun mix(dna: DNA): DNA {
-        val a = Array<Float>(genes.size, {
+        val a = Array(genes.size, {
             i ->
-            if (Rnd.bool()) genes[i] + Rnd.float(mutation) else dna.genes[i] + Rnd.float(mutation)
+            if (Rnd.bool()) mutation(genes[i]) else mutation(dna.genes[i])
         })
+        println("")
+        genes.forEach { print("" + it + ", ") }
         return DNA(a)
     }
 
     companion object {
-        val mutation = 0.05f
+        val mutation = 0.2f
+        val halfMutation = mutation / 2f
+
+        fun mutation(gene: Float): Float {
+            return gene + (halfMutation - Rnd.float(mutation))
+        }
     }
 }
