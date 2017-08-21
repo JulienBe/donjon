@@ -63,10 +63,10 @@ object Physics {
     }
 
     private fun vecInsideSquare(t: Thing, v: Vec2): Boolean {
-        return t.x() < v.x &&
-                t.x() + t.w() > v.x &&
-                t.y() < v.y &&
-                t.h() + t.y() > v.y
+        return t.x() < v.x() &&
+                t.x() + t.w() > v.x() &&
+                t.y() < v.y() &&
+                t.h() + t.y() > v.y()
     }
 
     private fun vecInsideCircle(t: Thing, vec2: Vec2): Boolean {
@@ -84,13 +84,13 @@ object Physics {
         // ccw 1
         // dir x = -y;
 		// dir y = x;
-        val leftX = (other.pos.x + other.dir.x) - (me.pos.x - me.dir.y)
-        val leftY = (other.pos.y + other.dir.y) - (me.pos.y + me.dir.x)
+        val leftX = (other.pos.x() + other.dir.x()) - (me.pos.x() - me.dir.y())
+        val leftY = (other.pos.y() + other.dir.y()) - (me.pos.y() + me.dir.x())
         // cw -1
         // dir x = y;
         // dir y = -x;
-        val rightX = (other.pos.x + other.dir.x) - (me.pos.x + me.dir.y)
-        val rightY = (other.pos.y + other.dir.y) - (me.pos.y - me.dir.x)
+        val rightX = (other.pos.x() + other.dir.x()) - (me.pos.x() + me.dir.y())
+        val rightY = (other.pos.y() + other.dir.y()) - (me.pos.y() - me.dir.x())
         return (leftX * leftX) + (leftY * leftY) > (rightX * rightX) + (rightY * rightY)
     }
 

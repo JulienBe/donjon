@@ -53,9 +53,9 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
     override fun reproduce(life: Life) {
         val mix = dna.mix(life.dna)
-        val otherDir = Vec2.get(dir.x, dir.y)
+        val otherDir = Vec2.get(dir.x(), dir.y())
         otherDir.rotate(-45f)
-        Collect.add(mostBasic(Vec2.get(pos.x, pos.y), otherDir, mix))
+        Collect.add(mostBasic(Vec2.get(pos.x(), pos.y()), otherDir, mix))
         dir.rotate(45f)
         energy.step(51)
         super.reproduce(life)

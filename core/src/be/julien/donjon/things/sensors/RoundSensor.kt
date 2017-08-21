@@ -16,8 +16,7 @@ class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anch
     override fun dimension(): Dimension = dim
 
     override fun act(delta: Float): Boolean {
-        pos.x = anchor.centerX() - dim.halfWidth
-        pos.y = anchor.centerY() - dim.halfHeight
+        pos.set(anchor.centerX() - dim.halfWidth, anchor.centerY() - dim.halfHeight)
         return dead
     }
 

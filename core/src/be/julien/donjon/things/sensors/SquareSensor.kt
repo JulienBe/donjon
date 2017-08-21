@@ -19,7 +19,7 @@ class SquareSensor internal constructor(anchor: Thing, sensorLength: Float, val 
 
     override fun act(delta: Float): Boolean {
         offset.setAngle(offsetAngle + anchor.angle())
-        pos.set(anchor.x() + anchor.hw() + offset.x - hw(), anchor.y() + anchor.hh() + offset.y - hh())
+        pos.set(anchor.x() + anchor.hw() + offset.x() - hw(), anchor.y() + anchor.hh() + offset.y() - hh())
         return dead
     }
 

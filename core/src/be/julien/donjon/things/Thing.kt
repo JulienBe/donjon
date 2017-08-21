@@ -66,8 +66,8 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
 
     fun centerX(): Float = x() + hw()
     fun centerY(): Float = y() + hh()
-    override fun x(): Float = pos.x
-    override fun y(): Float = pos.y
+    override fun x(): Float = pos.x()
+    override fun y(): Float = pos.y()
     override fun hw(): Float = dimension().halfWidth
     override fun w(): Float = dimension().width
     override fun hh(): Float = dimension().halfHeight
@@ -79,10 +79,10 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
     abstract fun dimension(): Dimension
     abstract fun shape(): Shape
     fun rndX(): Float {
-        return pos.x + Rnd.float(dimension().width)
+        return pos.x() + Rnd.float(dimension().width)
     }
     fun rndY(): Float {
-        return pos.y + Rnd.float(dimension().height)
+        return pos.y() + Rnd.float(dimension().height)
     }
 
 }

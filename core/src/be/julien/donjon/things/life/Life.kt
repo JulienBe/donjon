@@ -67,9 +67,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
             is Energy -> energy.add(thing.stealEnergy(energyStealVal()))
             is WallAO -> energy.step(2)
             is Life -> {
-                Vec2.tmp.x = dir.x + thing.dir.y
-                Vec2.tmp.y = dir.y + thing.dir.x
-                Vec2.tmp.nor()
+                Vec2.tmp.set(dir.x() + thing.dir.y(), dir.y() + thing.dir.x()).nor()
                 dir.add(Vec2.tmp)
             }
         }
