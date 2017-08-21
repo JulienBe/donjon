@@ -10,7 +10,6 @@ import be.julien.donjon.things.Thing
 class Collect {
     internal val stuff = HashMap<Mask, GdxArr<Thing>>()
     internal val removedThings = GdxArr<Thing>()
-    internal val particles = GdxArr<Particle>()
     internal var keys: MutableSet<Mask>
 
     init {
@@ -39,14 +38,6 @@ class Collect {
     }
 
     fun act(delta: Float) {
-        particles.addAll(particlesToAdd)
-        particles.removeAll(particlesToRemove, true)
-        particlesToAdd.clear()
-        particles.forEach {
-            if (it.act())
-                particlesToRemove.add(it)
-        }
-
         thingsToAdd.forEach {
             add(it)
         }
@@ -105,13 +96,9 @@ class Collect {
     }
 
     companion object {
-        val particlesToAdd = GdxArr<Particle>()
-        val particlesToRemove = GdxArr<Particle>()
+        val particles = GdxArr<Particle>()
         val thingsToAdd = GdxArr<Thing>()
 
-        fun add(particle: Particle) {
-            particlesToAdd.add(particle)
-        }
         fun add(thing: Thing) {
             thingsToAdd.add(thing)
         }
