@@ -1,7 +1,7 @@
 package be.julien.donjon
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.inputs.InputHub
+import be.julien.donjon.hubs.InputHub
 import be.julien.donjon.world.World
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx

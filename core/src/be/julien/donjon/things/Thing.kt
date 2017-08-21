@@ -10,6 +10,7 @@ import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.Sensor
+import be.julien.donjon.util.Rnd
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
@@ -77,5 +78,11 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
     abstract fun mask(): Mask
     abstract fun dimension(): Dimension
     abstract fun shape(): Shape
+    fun rndX(): Float {
+        return pos.x + Rnd.float(dimension().width)
+    }
+    fun rndY(): Float {
+        return pos.y + Rnd.float(dimension().height)
+    }
 
 }

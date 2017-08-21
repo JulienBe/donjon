@@ -2,6 +2,7 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.hubs.LifeHub
 import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
@@ -86,15 +87,20 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     companion object {
         fun mostBasic(dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
-            return MostBasic(Vec2.getRandWorld(), dir)
+            return created(MostBasic(Vec2.getRandWorld(), dir)) as MostBasic
         }
 
         fun mostBasic(excluded: GdxArr<Thing>): MostBasic {
-            return MostBasic(Vec2.getRandWorld(excluded), Vec2.getRnd())
+            return created(MostBasic(Vec2.getRandWorld(excluded), Vec2.getRnd())) as MostBasic
         }
 
         fun mostBasic(pos: Vec2, dir: Vec2, mix: DNA): MostBasic {
-            return MostBasic(pos, dir, mix)
+            return created(MostBasic(pos, dir, mix)) as MostBasic
+        }
+
+        private fun created(l: Life): Life {
+            LifeHub.lifeCreation(l)
+            return l
         }
     }
 }

@@ -22,4 +22,8 @@ object Rnd {
     fun bool(): Boolean {
         return rnd.nextBoolean()
     }
+
+    fun gauss(): Float {
+        return rnd.nextGaussian().toFloat()
+    }
 }

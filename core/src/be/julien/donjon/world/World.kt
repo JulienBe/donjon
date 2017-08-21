@@ -1,6 +1,7 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.particles.ParticleCreator
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
@@ -11,6 +12,7 @@ import be.julien.donjon.util.Time
 
 class World {
 
+    private val particleCreator = ParticleCreator()
     private val collection = Collect()
     private var debug = false
     private val addEnergyTimer = PeriodicTimer(0.01f, Callback(1, this::addEnergy))

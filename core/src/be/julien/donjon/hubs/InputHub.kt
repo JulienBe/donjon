@@ -1,4 +1,4 @@
-package be.julien.donjon.inputs
+package be.julien.donjon.hubs
 
 import com.badlogic.gdx.InputAdapter
 
