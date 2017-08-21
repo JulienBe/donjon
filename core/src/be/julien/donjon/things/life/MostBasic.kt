@@ -29,6 +29,10 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
     internal val otherLifeMod = dna.genes[9]
     private val sensor = RoundSensor.get(this, 8f)
 
+    override fun energyStealVal(): Int {
+        return 3
+    }
+
     init {
         sensors.add(sensor)
     }
@@ -65,7 +69,7 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
             when (it) {
                 is Energy -> targetValue = compareEnergy(targetValue, target, it)
                 is WallAO -> targetValue = compareWall(targetValue, target, it)
-                is MostBasic -> targetValue = compareOtherLife(targetValue, target, it)
+                is MostBasic -> if (canReproduce()) targetValue = compareOtherLife(targetValue, target, it)
             }
         }
         dir.add(target)
@@ -75,8 +79,6 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
     private fun compareOtherLife(currentTargetValue: Float, target: Vec2, other: MostBasic): Float {
         var newValue = otherLifeBase
-        if (canReproduce())
-            newValue *= canReproduceMod
         if (currentTargetValue > newValue) {
             return currentTargetValue
         } else {
@@ -110,6 +112,6 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
     }
 
     companion object {
-        val dim = Dimension.get(2f, 2f)
+        val dim = Dimension.get(0.5f, 0.5f)
     }
 }

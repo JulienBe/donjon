@@ -10,9 +10,9 @@ import be.julien.donjon.util.Rnd
 
 class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
 
-    var angle = Rnd.float(360f)
-    var stored = 40
-    var speed = determineSpeed()
+    private var angle = Rnd.float(360f)
+    private var stored = 40
+    private var speed = determineSpeed()
 
     private fun determineSpeed() = stored * 8f
     override fun mask(): Mask = Mask.Energy
@@ -31,9 +31,18 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
     }
 
     fun getEnergy(): Int {
-        stored--
-        speed = determineSpeed()
-        return 1
+        return stored
+    }
+
+    fun stealEnergy(i: Int): Int {
+        if (stored > i) {
+            stored -= i
+            speed = determineSpeed()
+            return i
+        } else {
+            stored = 0
+            return stored
+        }
     }
 
     companion object {

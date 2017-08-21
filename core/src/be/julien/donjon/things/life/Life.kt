@@ -10,7 +10,6 @@ import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
-import be.julien.donjon.util.Time
 import be.julien.donjon.util.TimeInt
 import com.badlogic.gdx.graphics.Color
 
@@ -19,6 +18,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     val initEnergy = 20
     internal var energy = initEnergy()
     private val canReproduce = TimeInt.get(0, 1f, 1)
+    open internal fun energyStealVal(): Int = 1
 
     init {
         norSpeed()
@@ -63,9 +63,14 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
 
     override fun collidesWith(thing: Thing) {
         when (thing) {
-            is Energy -> energy.add(thing.getEnergy())
+            is Energy -> energy.add(thing.stealEnergy(energyStealVal()))
             is WallAO -> energy.step(2)
-            is Life -> if (!canReproduce()) dir.rotate(energy.value % 360f * Time.delta)
+            is Life -> {
+                Vec2.tmp.x = dir.x + thing.dir.y
+                Vec2.tmp.y = dir.y + thing.dir.x
+                Vec2.tmp.nor()
+                dir.add(Vec2.tmp)
+            }
         }
     }
 
