@@ -15,6 +15,11 @@ class Vec2 private constructor(x: Float, y: Float) {
         v.y += dir.y() * delta
     }
 
+    fun move(x: Float, y: Float) {
+        v.x += x
+        v.y += y
+    }
+
     fun x(): Float {
         return v.x
     }
@@ -119,5 +124,6 @@ class Vec2 private constructor(x: Float, y: Float) {
             return Vec2(1f, 0f).rotate(angle)
         }
     }
+
 
 }

@@ -7,13 +7,14 @@ import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.Physics
 import be.julien.donjon.physics.shapes.Shape
+import be.julien.donjon.graphics.DrawableDim
 import be.julien.donjon.spatial.Dimension
 import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.sensors.Sensor
 import be.julien.donjon.util.Rnd
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
+abstract class Thing(val pos: Vec2, val dir: Vec2) : DrawableDim, Drawable {
 
     val sensors = GdxArr<Sensor>()
     internal var dead = false
@@ -68,15 +69,11 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : Drawable {
     fun centerY(): Float = y() + hh()
     override fun x(): Float = pos.x()
     override fun y(): Float = pos.y()
-    override fun hw(): Float = dimension().halfWidth
-    override fun w(): Float = dimension().width
-    override fun hh(): Float = dimension().halfHeight
-    override fun h(): Float = dimension().height
     override fun angle(): Float = 0f
     override fun tr(): TextureRegion = AssetMan.square
 
     abstract fun mask(): Mask
-    abstract fun dimension(): Dimension
+    abstract override fun dimension(): Dimension
     abstract fun shape(): Shape
     fun rndX(): Float {
         return pos.x() + Rnd.float(dimension().width)

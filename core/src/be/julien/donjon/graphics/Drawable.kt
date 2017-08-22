@@ -7,10 +7,10 @@ interface Drawable {
     fun w(): Float
     fun hh(): Float
     fun h(): Float
-    fun angle(): Float
     fun x(): Float
     fun y(): Float
     fun tr(): TextureRegion
+    fun angle(): Float
     fun debug(drawer: Drawer) {
     }
 }

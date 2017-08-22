@@ -15,13 +15,13 @@ class DonjonMain : ApplicationAdapter() {
 
     override fun create() {
         drawer = Drawer()
-        world = World()
+        world = World(input)
         Gdx.input.inputProcessor = input
-        input.addInput(Input.Keys.SPACE, { world.spawn() })
-        input.addInput(Input.Keys.D, { world.debug() })
+        input.addKeyUp(Input.Keys.SPACE, { world.spawn() })
     }
 
     override fun render() {
+        input.act()
         world.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)
     }

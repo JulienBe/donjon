@@ -1,7 +1,11 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.hubs.InputHub
 import be.julien.donjon.particles.ParticleCreator
+import be.julien.donjon.player.Ship
+import be.julien.donjon.player.ShipControl
+import be.julien.donjon.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
@@ -10,12 +14,14 @@ import be.julien.donjon.util.Callback
 import be.julien.donjon.util.PeriodicTimer
 import be.julien.donjon.util.Time
 
-class World {
+class World(input: InputHub) {
 
     private val particleCreator = ParticleCreator()
     private val collection = Collect()
     private var debug = false
-    private val addEnergyTimer = PeriodicTimer(0.01f, Callback(1, this::addEnergy))
+    private val addEnergyTimer = PeriodicTimer(0.5f, Callback(1, this::addEnergy))
+    private val ship = Ship(Vec2.get(5f, 5f))
+    private val shipControl = ShipControl(ship, input)
 
     init {
         val left = WallAO(0f, 0f, WallAO.width, Drawer.screenHeight)
@@ -39,6 +45,7 @@ class World {
     fun draw(drawer: Drawer) {
         collection.draw(drawer)
 //        collection.debug(drawer)
+        drawer.drawAO(ship)
     }
 
     fun spawn() {
