@@ -2,11 +2,15 @@ package be.julien.donjon.physics
 
 import be.julien.donjon.physics.shapes.Circle
 import be.julien.donjon.physics.shapes.SquareAO
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Thing
 import be.julien.donjon.util.Util
 
 object Physics {
+
+    val rollBackSteps = 8
+    val rollBackPrecision = (1f / rollBackSteps)
+
     fun angle(to: Thing, from: Thing): Float = angle(to.centerX(), to.centerY(), from.centerX(), from.centerY())
 
     fun angle(xTo: Float, yTo: Float, xFrom: Float, yFrom: Float): Float = Vec2.tmp.set(xTo - xFrom, yTo - yFrom).angle()
@@ -94,9 +98,21 @@ object Physics {
         return (leftX * leftX) + (leftY * leftY) > (rightX * rightX) + (rightY * rightY)
     }
 
-    fun  resolveOverlap(a: Thing, b: Thing, delta: Float) {
-        a.pos.move(a.dir, -delta * b.viscosity(a))
-//        b.pos.move(b.dir, -delta * a.viscosity())
+    fun resolveOverlap(a: Thing, b: Thing) {
+        if (a.fast()) {
+            var cpt = 1
+            while (cpt <= rollBackSteps) {
+                a.pos.rollback(b.viscosity(a) * rollBackPrecision * cpt)
+                cpt++
+                if (checkCollision(a, b)) {
+                    a.pos.rollback(-b.viscosity(a) * rollBackPrecision * cpt)
+                } else {
+                    break
+                }
+            }
+        } else {
+            a.pos.rollback(b.viscosity(a))
+        }
     }
 
     fun contains(thing: Thing, v: Vec2): Boolean {

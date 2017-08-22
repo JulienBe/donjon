@@ -4,9 +4,8 @@ import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.shapes.Circle
 import be.julien.donjon.physics.shapes.Shape
-import be.julien.donjon.spatial.Dimension
+import be.julien.donjon.util.spatial.Dimension
 import be.julien.donjon.things.Thing
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor) {

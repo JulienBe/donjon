@@ -2,7 +2,7 @@ package be.julien.donjon.things.sensors
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.physics.Mask
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 

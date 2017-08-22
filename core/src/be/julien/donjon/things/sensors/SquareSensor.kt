@@ -3,8 +3,8 @@ package be.julien.donjon.things.sensors
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.physics.shapes.SquareAO
-import be.julien.donjon.spatial.Dimension
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Dimension
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Thing
 import com.badlogic.gdx.graphics.Color
 

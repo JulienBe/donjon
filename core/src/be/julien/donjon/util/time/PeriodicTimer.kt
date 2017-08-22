@@ -1,4 +1,4 @@
-package be.julien.donjon.util
+package be.julien.donjon.util.time
 
 class PeriodicTimer(interval: Float, val callback: Callback) {
     val timeInt = TimeInt.get(0, interval, 1, callback)

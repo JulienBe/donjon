@@ -1,6 +1,6 @@
 package be.julien.donjon.graphics
 
-import be.julien.donjon.spatial.Dimension
+import be.julien.donjon.util.spatial.Dimension
 
 interface DrawableDim : Drawable {
     override fun hw(): Float {

@@ -1,4 +1,4 @@
-package be.julien.donjon.util
+package be.julien.donjon.util.time
 
 class TimeInt private constructor(internal var value: Int, private var interval: Float = 1f, internal var increment: Int, var callback: Callback?) {
 

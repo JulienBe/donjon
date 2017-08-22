@@ -3,16 +3,16 @@ package be.julien.donjon.world
 import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.hubs.InputHub
 import be.julien.donjon.particles.ParticleCreator
-import be.julien.donjon.player.Ship
-import be.julien.donjon.player.ShipControl
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.things.player.Ship
+import be.julien.donjon.things.player.ShipControl
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
 import be.julien.donjon.things.life.Life
-import be.julien.donjon.util.Callback
-import be.julien.donjon.util.PeriodicTimer
-import be.julien.donjon.util.Time
+import be.julien.donjon.util.time.Callback
+import be.julien.donjon.util.time.PeriodicTimer
+import be.julien.donjon.util.time.Time
 
 class World(input: InputHub) {
 
@@ -29,10 +29,11 @@ class World(input: InputHub) {
         val top = WallAO(0f, Drawer.screenHeight - WallAO.width, Drawer.screenWidth, WallAO.width)
         val bottom = WallAO(0f, 0f, Drawer.screenWidth, WallAO.width)
         collection.add(left, right, top, bottom)
+        collection.add(ship)
     }
 
     fun act(delta: Float) {
-        collection.check(delta)
+        collection.check()
         collection.act(delta)
         addEnergyTimer.act()
         Time.act(delta)
@@ -45,7 +46,6 @@ class World(input: InputHub) {
     fun draw(drawer: Drawer) {
         collection.draw(drawer)
 //        collection.debug(drawer)
-        drawer.drawAO(ship)
     }
 
     fun spawn() {

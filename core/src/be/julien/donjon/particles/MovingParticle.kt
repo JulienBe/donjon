@@ -1,6 +1,6 @@
 package be.julien.donjon.particles
 
-import be.julien.donjon.spatial.Dimension
+import be.julien.donjon.util.spatial.Dimension
 import be.julien.donjon.util.Rnd
 import be.julien.donjon.world.Collect
 

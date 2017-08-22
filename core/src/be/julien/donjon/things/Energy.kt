@@ -4,8 +4,8 @@ import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.physics.shapes.SquareAO
-import be.julien.donjon.spatial.Dimension
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Dimension
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.util.Rnd
 
 class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {

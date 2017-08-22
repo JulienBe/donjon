@@ -8,8 +8,8 @@ import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.Physics
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.graphics.DrawableDim
-import be.julien.donjon.spatial.Dimension
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Dimension
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.sensors.Sensor
 import be.julien.donjon.util.Rnd
 import com.badlogic.gdx.graphics.g2d.TextureRegion
@@ -19,10 +19,13 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : DrawableDim, Drawable {
     val sensors = GdxArr<Sensor>()
     internal var dead = false
 
+    open fun fast(): Boolean = false
+
     /**
      * It means that it will act one more frame after it's dead as the dead flag is probably stat after it has acted and will be only checked next frame, after it has acted again.
      */
     open fun act(delta: Float): Boolean {
+        pos.validate()
         pos.move(dir, delta)
         return dead
     }
@@ -81,5 +84,6 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : DrawableDim, Drawable {
     fun rndY(): Float {
         return pos.y() + Rnd.float(dimension().height)
     }
+
 
 }

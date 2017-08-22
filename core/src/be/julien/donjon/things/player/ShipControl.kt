@@ -1,4 +1,4 @@
-package be.julien.donjon.player
+package be.julien.donjon.things.player
 
 import be.julien.donjon.hubs.InputHub
 import com.badlogic.gdx.Input

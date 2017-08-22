@@ -69,26 +69,25 @@ class Collect {
 
     fun nbEnergy(): Int = stuff[Mask.Energy]!!.size
 
-    fun check(delta: Float) {
-        for (i in 0.until(keys.size)) {
-            checkMask(i, delta)
-        }
+    fun check() {
+        for (i in 0.until(keys.size))
+            checkMask(i)
     }
 
-    private fun checkMask(i: Int, delta: Float) {
+    private fun checkMask(i: Int) {
         val maskA = keys.elementAt(i)
         for (j in i.until(keys.size)) {
             val maskB = keys.elementAt(j)
             if (maskA.collidesWith(maskB)) {
-                checkCollision(maskA, maskB, delta)
+                checkCollision(maskA, maskB)
             }
             if (maskB.collidesWith(maskA)) {
-                checkCollision(maskB, maskA, delta)
+                checkCollision(maskB, maskA)
             }
         }
     }
 
-    private fun checkCollision(from: Mask, to: Mask, delta: Float) {
+    private fun checkCollision(from: Mask, to: Mask) {
         val arrayFrom = stuff[from]
         val arrayTo = stuff[to]
         arrayFrom!!.forEach { a ->
@@ -96,7 +95,7 @@ class Collect {
                 val b = arrayTo.get(i)
                 if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a)) {
                     a.collidesWith(b)
-                    Physics.resolveOverlap(a, b, delta)
+                    Physics.resolveOverlap(a, b)
                 }
             }
         }

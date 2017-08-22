@@ -2,8 +2,8 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.physics.Physics
-import be.julien.donjon.spatial.Dimension
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Dimension
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO

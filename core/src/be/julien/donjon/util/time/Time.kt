@@ -1,4 +1,4 @@
-package be.julien.donjon.util
+package be.julien.donjon.util.time
 
 object Time {
     var time = 0f
@@ -7,7 +7,7 @@ object Time {
 
     fun act(delta: Float) {
         time += delta
-        this.delta = delta
+        Time.delta = delta
         playerDelta = delta
     }
 }

@@ -1,4 +1,4 @@
-package be.julien.donjon.spatial
+package be.julien.donjon.util.spatial
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.physics.Physics
@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2
 class Vec2 private constructor(x: Float, y: Float) {
 
     private val v = Vector2(x, y)
+    private val previous = Vector2(x, y)
 
     fun move(dir: Vec2, delta: Float) {
         v.x += dir.x() * delta
@@ -30,6 +31,14 @@ class Vec2 private constructor(x: Float, y: Float) {
     fun steerLeft(): Vec2 {
         v.rotate90(1)
         return this
+    }
+
+    fun rollback(viscosity: Float) {
+        v.lerp(previous, viscosity)
+    }
+
+    fun validate() {
+        previous.set(v)
     }
 
     fun steerRight(): Vec2 {
@@ -124,6 +133,5 @@ class Vec2 private constructor(x: Float, y: Float) {
             return Vec2(1f, 0f).rotate(angle)
         }
     }
-
 
 }

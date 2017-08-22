@@ -1,4 +1,4 @@
-package be.julien.donjon.spatial
+package be.julien.donjon.util.spatial
 
 class Dimension private constructor(val width: Float, val height: Float) {
 

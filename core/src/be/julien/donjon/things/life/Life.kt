@@ -7,11 +7,11 @@ import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.physics.shapes.SquareAO
-import be.julien.donjon.spatial.Vec2
+import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
-import be.julien.donjon.util.TimeInt
+import be.julien.donjon.util.time.TimeInt
 import com.badlogic.gdx.graphics.Color
 
 abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), val dna: DNA = DNA()): Thing(pos, dir) {
