@@ -23,16 +23,21 @@ object Physics {
         return noCollision(a, b)
     }
 
-    private fun noCollision(a: Thing, b: Any): Boolean {
-        Util.err("Hu, collision mistake between $a and $b")
+    private fun noCollision(a: Thing, b: Thing): Boolean {
+        Util.err("Hu, collision mistake between $a (${a.shape()}) and $b (${b.shape()})")
         return false
     }
 
     private fun circleCheck(circle: Thing, b: Thing): Boolean {
         when(b.shape()) {
             SquareAO -> return squareCircle(b, circle)
+            Circle -> return circleCircle(b, circle)
         }
         return noCollision(circle, b)
+    }
+
+    private fun circleCircle(a: Thing, b: Thing): Boolean {
+        return a.pos.dst(b.pos) > a.hw() + b.hw()
     }
 
     private fun squareCheck(square: Thing, b: Thing): Boolean {
@@ -120,7 +125,7 @@ object Physics {
             SquareAO -> return vecInsideSquare(thing, v)
             Circle -> return vecInsideCircle(thing, v)
         }
-        return noCollision(thing, v)
+        return false
     }
 
     fun dirCenter(other: Thing, me: Thing): Vec2 {
