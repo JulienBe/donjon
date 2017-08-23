@@ -33,8 +33,8 @@ class World(input: InputHub) {
     }
 
     fun act(delta: Float) {
-        collection.check()
         collection.act(delta)
+        collection.check()
         addEnergyTimer.act()
         Time.act(delta)
     }
