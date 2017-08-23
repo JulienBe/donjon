@@ -93,7 +93,7 @@ class Collect {
         arrayFrom!!.forEach { a ->
             for (i in 0.until(arrayTo!!.size)) {
                 val b = arrayTo.get(i)
-                if (Physics.checkCollision(a, b) && a != b && !a.isSensor(b) && !b.isSensor(a)) {
+                if (a != b && Physics.checkCollision(a, b) && !a.isSensor(b) && !b.isSensor(a)) {
                     a.collidesWith(b)
                     Physics.resolveOverlap(a, b)
                 }
