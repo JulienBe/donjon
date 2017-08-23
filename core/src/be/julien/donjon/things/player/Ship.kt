@@ -4,13 +4,18 @@ import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Circle
 import be.julien.donjon.physics.shapes.Shape
+import be.julien.donjon.things.Energy
 import be.julien.donjon.things.Thing
+import be.julien.donjon.things.WallAO
+import be.julien.donjon.things.life.MostBasic
 import be.julien.donjon.util.spatial.Dimension
 import be.julien.donjon.util.spatial.Vec2
-import be.julien.donjon.util.time.Time
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
+
+    var hp = 100
+
     override fun mask(): Mask = Mask.Life
     override fun shape(): Shape = Circle
     override fun dimension(): Dimension = dim
@@ -18,22 +23,42 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
     override fun x(): Float = pos.x()
     override fun y(): Float = pos.y()
     override fun tr(): TextureRegion = AssetMan.circle
-    override fun fast(): Boolean = false
+    override fun fast(): Boolean = true
+
+    override fun collidesWith(thing: Thing) {
+        super.collidesWith(thing)
+        when (thing) {
+            is Energy -> addHp(thing.stealEnergy(5))
+            is WallAO -> dir.set(0f, 0f)
+            is MostBasic -> pushLife(thing)
+        }
+    }
+
+    override fun act(delta: Float): Boolean {
+        super.act(delta)
+        dir.scl(0.7f)
+        return false
+    }
+
+    private fun pushLife(thing: MostBasic) {
+        thing.pos.move(dir, 0.02f)
+    }
+
+    fun addHp(stealEnergy: Int) {
+        hp += stealEnergy
+    }
 
     fun left() {
-        move(-speed * Time.playerDelta, 0f)
+        dir.setX(-speed)
     }
     fun right() {
-        move(speed * Time.playerDelta, 0f)
+        dir.setX(speed)
     }
     fun up() {
-        move(0f, speed * Time.playerDelta)
+        dir.setY(speed)
     }
     fun down() {
-        move(0f, -speed * Time.playerDelta)
-    }
-    fun move(x: Float, y: Float) {
-        pos.move(x, y)
+        dir.setY(-speed)
     }
 
     companion object {
