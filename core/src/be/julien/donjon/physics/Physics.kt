@@ -5,7 +5,6 @@ import be.julien.donjon.physics.shapes.SquareAO
 import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Thing
 import be.julien.donjon.things.WallAO
-import be.julien.donjon.things.life.Life
 import be.julien.donjon.util.Util
 
 object Physics {
@@ -108,12 +107,27 @@ object Physics {
     fun resolveOverlap(mover: Thing, obstacle: Thing) {
         stuck(mover, obstacle)
         when (obstacle) {
-            is Life -> stuck(mover, obstacle)
-            is WallAO -> bounce(mover, obstacle)
+            is WallAO -> mover.wallFun().invoke(mover, obstacle)
         }
     }
 
-    private fun bounce(mover: Thing, obstacle: WallAO) {
+
+    internal fun slide(mover: Thing, obstacle: WallAO) {
+        val normal = obstacle.normal(mover)
+        val myAngle = mover.dir.angle()
+        if ((myAngle + normal.angle % 180) > 3f) {
+            Vec2.tmp.set(mover.dir)
+            if (mover.dir.isLeftCloser(normal.angle)) {
+                mover.dir.setAngle(normal.angle - 89.9f)
+            } else {
+                mover.dir.setAngle(normal.angle + 89.9f)
+            }
+            // as stuck invalidated previous move, make slide move
+            mover.move()
+        }
+    }
+
+    internal fun bounce(mover: Thing, obstacle: WallAO) {
         val normal = obstacle.normal(mover).vec
         val originalSpeed = mover.dir.len()
         mover.dir.nor()

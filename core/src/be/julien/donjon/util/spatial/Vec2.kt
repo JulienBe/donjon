@@ -101,6 +101,19 @@ class Vec2 private constructor(x: Float, y: Float) {
         return this
     }
 
+    fun isLeftCloser(other: Vec2): Boolean {
+        return isLeftCloser(other.angle())
+    }
+
+    fun isLeftCloser(angleOther: Float): Boolean {
+        val myAngle = v.angle()
+        val upper = (myAngle + 180f) % 360f
+        if (myAngle < 180f)
+            return angleOther > myAngle && angleOther < upper
+        else
+            return angleOther > myAngle || angleOther < upper
+    }
+
     companion object {
         val tmp = Vec2(0f, 0f)
         val zero = Vec2(0f, 0f)
@@ -145,5 +158,10 @@ class Vec2 private constructor(x: Float, y: Float) {
     }
 
     fun len(): Float = v.len()
+
+    fun rotate90(i: Int): Vec2 {
+        v.rotate90(i)
+        return this
+    }
 
 }

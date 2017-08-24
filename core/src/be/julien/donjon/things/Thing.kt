@@ -12,6 +12,7 @@ import be.julien.donjon.util.spatial.Dimension
 import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.sensors.Sensor
 import be.julien.donjon.util.Rnd
+import be.julien.donjon.util.time.Time
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 abstract class Thing(val pos: Vec2, val dir: Vec2) : DrawableDim, Drawable {
@@ -21,13 +22,19 @@ abstract class Thing(val pos: Vec2, val dir: Vec2) : DrawableDim, Drawable {
 
     open fun fast(): Boolean = false
 
+    open fun wallFun() = Physics::bounce
+
     /**
      * It means that it will act one more frame after it's dead as the dead flag is probably stat after it has acted and will be only checked next frame, after it has acted again.
      */
     open fun act(delta: Float): Boolean {
         pos.validate()
-        pos.move(dir, delta)
+        move()
         return dead
+    }
+
+    open fun move() {
+        pos.move(dir, Time.delta)
     }
 
     open fun draw(drawer: Drawer): Unit {
