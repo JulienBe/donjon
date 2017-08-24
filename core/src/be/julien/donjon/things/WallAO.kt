@@ -17,39 +17,38 @@ class WallAO(x: Float, y: Float, width: Float, height: Float,
         Normal(
                 x, y,                                    // bottom left
                 x + width, y,                   // bottom right
-                x + width / 2, y + height / 2, "Down"),
+                x + width / 2, y + height / 2),
         Normal(
                 x + width, y + height,     // top right
                 x, y + height,                  // top left
-                x + dim.halfWidth, y + dim.halfHeight, "Top"),
+                x + dim.halfWidth, y + dim.halfHeight),
        Normal(
                 x, y + height,                 // top left
                 x, y,                                   // bottom left
-               x + dim.halfWidth, y + dim.halfHeight, "LEFT"),
+               x + dim.halfWidth, y + dim.halfHeight),
         Normal(
                 x + width, y,                    // bottom right
                 x + width, y + height,  // top right
-                x + dim.halfWidth, y + dim.halfHeight, "RIGHT")
+                x + dim.halfWidth, y + dim.halfHeight)
     )
 
     override fun shape(): Shape = SquareAO
     override fun dimension(): Dimension = dim
     override fun mask(): Mask = Mask.Wall
 
-    fun normal(t: Thing): Float {
+    fun normal(t: Thing): Normal {
         normals.forEach {
-            if (it.within(t.centerX(), t.centerY())) {
-                return it.normal
-            }
+            if (it.within(t.centerX(), t.centerY()))
+                return it
         }
-        return 0f
+        return Normal.dummy
     }
 
     override fun debug(drawer: Drawer) {
         super.debug(drawer)
         normals.forEach {
             drawer.color(Color.YELLOW)
-            drawer.draw(AssetMan.square, centerX(), centerY(), 0f, 0f, 20f, 0.2f, it.normal)
+            drawer.draw(AssetMan.square, centerX(), centerY(), 0f, 0f, 20f, 0.2f, it.angle)
         }
     }
 
@@ -58,9 +57,14 @@ class WallAO(x: Float, y: Float, width: Float, height: Float,
     }
 }
 
-private class Normal(val x1: Float, val y1: Float, val x2: Float, val y2: Float, val centerX: Float, val centerY: Float, val tag: String) {
-    val normal: Float = Physics.angle(x1, y1, x2, y2) + 90f
+class Normal(private val x1: Float, private val y1: Float, private val x2: Float, private val y2: Float, private val centerX: Float, private val centerY: Float) {
+    val angle: Float = Physics.angle(x1, y1, x2, y2) + 90f
+    val vec = Vec2.get(angle)
     fun within(x: Float, y: Float): Boolean {
         return Physics.intersectLines(x1, y1, x2, y2, centerX, centerY, x, y)
+    }
+
+    companion object {
+        val dummy = Normal(0f, 0f, 0f, 0f, 0f, 0f)
     }
 }

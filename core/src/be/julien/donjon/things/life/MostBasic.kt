@@ -106,7 +106,7 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
         if (currentTargetValue > newValue) {
             return currentTargetValue
         } else {
-            target.set(1f, 0f).rotate(wall.normal(this)).scl(wallMod)
+            target.set(1f, 0f).rotate(wall.normal(this).angle).scl(wallMod)
             return newValue
         }
     }

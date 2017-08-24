@@ -65,9 +65,8 @@ class Vec2 private constructor(x: Float, y: Float) {
         return v.angle()
     }
 
-    fun dst(x: Float, y: Float): Float {
-        return v.dst(x, y)
-    }
+    fun dst(other: Vec2): Float = v.dst(other.v)
+    fun dst(x: Float, y: Float): Float = v.dst(x, y)
 
     fun nor(): Vec2 {
         v.nor()
@@ -86,6 +85,10 @@ class Vec2 private constructor(x: Float, y: Float) {
     fun add(other: Vec2): Vec2 {
         v.add(other.x(), other.y())
         return this
+    }
+
+    fun dot(other: Vec2): Float {
+        return v.dot(other.v)
     }
 
     fun scl(f: Float): Vec2 {
@@ -133,5 +136,14 @@ class Vec2 private constructor(x: Float, y: Float) {
             return Vec2(1f, 0f).rotate(angle)
         }
     }
+
+    fun setX(x: Float) {
+        v.x = x
+    }
+    fun setY(y: Float) {
+        v.y = y
+    }
+
+    fun len(): Float = v.len()
 
 }
