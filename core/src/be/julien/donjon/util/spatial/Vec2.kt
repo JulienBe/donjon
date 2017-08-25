@@ -164,4 +164,8 @@ class Vec2 private constructor(x: Float, y: Float) {
         return this
     }
 
+    override fun toString(): String {
+        return "Vec2(v=$v)"
+    }
+
 }

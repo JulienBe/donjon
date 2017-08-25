@@ -2,7 +2,7 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.hubs.LifeHub
+import be.julien.donjon.hubs.Hub
 import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Shape
@@ -97,7 +97,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
         }
 
         private fun created(l: Life): Life {
-            LifeHub.lifeCreation(l)
+            Hub.lifeCreation(l)
             return l
         }
     }

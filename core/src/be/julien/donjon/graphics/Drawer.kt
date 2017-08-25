@@ -39,12 +39,6 @@ class Drawer {
         batch.color = color
     }
 
-    companion object {
-        internal val ratio: Float =  Gdx.graphics.width.toFloat() / Gdx.graphics.height.toFloat()
-        internal val screenWidth: Float = 160f
-        internal val screenHeight: Float = screenWidth / ratio
-    }
-
     fun drawAO(d: Drawable) {
         batch.draw(d.tr(), d.x(), d.y(), d.w(), d.h())
         color(Color.WHITE)
@@ -62,4 +56,16 @@ class Drawer {
         batch.draw(square, x, y, pivotX, pivotY, width, height, 1f, 1f, angle)
         color(Color.WHITE)
     }
+
+    companion object {
+        private val ratio: Float =  Gdx.graphics.width.toFloat() / Gdx.graphics.height.toFloat()
+        internal val screenWidth: Float = 160f
+        internal val screenHeight: Float = screenWidth / ratio
+        private val widthRatio: Float =  screenWidth / Gdx.graphics.width
+        private val heightRatio: Float =  screenHeight / Gdx.graphics.height
+
+        fun xClick(): Float = Gdx.input.getX(0) * widthRatio
+        fun yClick(): Float = screenHeight - (Gdx.input.getY(0) * heightRatio)
+    }
+
 }

@@ -40,7 +40,7 @@ class World(input: InputHub) {
     }
 
     fun addEnergy() {
-        collection.add(Energy.get())
+//        collection.add(Energy.get())
     }
 
     fun draw(drawer: Drawer) {

@@ -1,13 +1,13 @@
 package be.julien.donjon.particles
 
 import be.julien.donjon.hubs.HubClient
-import be.julien.donjon.hubs.LifeHub
+import be.julien.donjon.hubs.Hub
 import be.julien.donjon.things.life.Life
 
 class ParticleCreator: HubClient {
 
     init {
-        LifeHub.add(this)
+        Hub.addLifeListener(this)
     }
 
     override fun lifeCreated(life: Life) {

@@ -1,5 +1,6 @@
 package be.julien.donjon.things.player
 
+import be.julien.donjon.graphics.Drawer
 import be.julien.donjon.hubs.InputHub
 import com.badlogic.gdx.Input
 
@@ -14,6 +15,7 @@ class ShipControl(val pawn: Ship, inputHub: InputHub) {
         inputHub.addKeyUp(Input.Keys.Q, { pawn.notLateral() } )
         inputHub.addKeyUp(Input.Keys.S, { pawn.notVertical() } )
         inputHub.addKeyUp(Input.Keys.D, { pawn.notLateral() } )
+        inputHub.addClick({ pawn.click(Drawer.xClick(), Drawer.yClick()) })
     }
 
 }

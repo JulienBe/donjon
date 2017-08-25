@@ -38,7 +38,7 @@ object Physics {
     }
 
     private fun circleCircle(a: Thing, b: Thing): Boolean {
-        return a.pos.dst(b.pos) > a.hw() + b.hw()
+        return a.pos.dst(b.pos) < a.hw() + b.hw()
     }
 
     private fun squareCheck(square: Thing, b: Thing): Boolean {

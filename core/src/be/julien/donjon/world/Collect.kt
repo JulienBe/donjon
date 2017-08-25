@@ -18,6 +18,8 @@ class Collect {
         stuff.put(Mask.Sensor, GdxArr<Thing>())
         stuff.put(Mask.Wall, GdxArr<Thing>())
         stuff.put(Mask.Energy, GdxArr<Thing>())
+        stuff.put(Mask.Bullet, GdxArr<Thing>())
+        stuff.put(Mask.Player, GdxArr<Thing>())
         keys = stuff.keys
     }
 
@@ -78,6 +80,7 @@ class Collect {
         val maskA = keys.elementAt(i)
         for (j in i.until(keys.size)) {
             val maskB = keys.elementAt(j)
+            // TODO avoid double
             if (maskA.collidesWith(maskB)) {
                 checkCollision(maskA, maskB)
             }

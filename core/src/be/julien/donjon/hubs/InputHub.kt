@@ -7,6 +7,7 @@ class InputHub : InputAdapter() {
 
     internal val keyUpMapping: MutableMap<Int, () -> Unit> = mutableMapOf()
     internal val keyPressedMapping: MutableMap<Int, () -> Unit> = mutableMapOf()
+    internal var click: (() -> Unit)? = null
 
     override fun keyUp(keycode: Int): Boolean {
         checkKey(keycode, keyUpMapping)
@@ -18,6 +19,8 @@ class InputHub : InputAdapter() {
             if (Gdx.input.isKeyPressed(key))
                 value.invoke()
         }
+        if (Gdx.input.isTouched)
+            click?.invoke()
     }
 
     fun addKeyUp(key: Int, function: () -> Unit) {
@@ -33,5 +36,9 @@ class InputHub : InputAdapter() {
             if (keycode == key)
                 value.invoke()
         }
+    }
+
+    fun addClick(function: () -> Unit) {
+        click = function
     }
 }
