@@ -115,13 +115,12 @@ object Physics {
     internal fun slide(mover: Thing, obstacle: WallAO) {
         val normal = obstacle.normal(mover)
         val myAngle = mover.dir.angle()
-        if ((myAngle + normal.angle % 180) > 3f) {
+        if (((myAngle + normal.angle) % 180f) > 3f) {
             Vec2.tmp.set(mover.dir)
-            if (mover.dir.isLeftCloser(normal.angle)) {
+            if (mover.dir.isLeftCloser(normal.angle))
                 mover.dir.setAngle(normal.angle - 89.9f)
-            } else {
+            else
                 mover.dir.setAngle(normal.angle + 89.9f)
-            }
             // as stuck invalidated previous move, make slide move
             mover.move()
         }

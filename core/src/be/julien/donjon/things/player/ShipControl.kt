@@ -10,6 +10,10 @@ class ShipControl(val pawn: Ship, inputHub: InputHub) {
         inputHub.addKeyPressed(Input.Keys.Q, { pawn.left() } )
         inputHub.addKeyPressed(Input.Keys.S, { pawn.down() } )
         inputHub.addKeyPressed(Input.Keys.D, { pawn.right() } )
+        inputHub.addKeyUp(Input.Keys.Z, { pawn.notVertical() } )
+        inputHub.addKeyUp(Input.Keys.Q, { pawn.notLateral() } )
+        inputHub.addKeyUp(Input.Keys.S, { pawn.notVertical() } )
+        inputHub.addKeyUp(Input.Keys.D, { pawn.notLateral() } )
     }
 
 }

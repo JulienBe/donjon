@@ -33,15 +33,8 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
         super.collidesWith(thing)
         when (thing) {
             is Energy -> addHp(thing.stealEnergy(5))
-//            is WallAO -> dir.set(0f, 0f)
             is MostBasic -> pushLife(thing)
         }
-    }
-
-    override fun act(delta: Float): Boolean {
-        super.act(delta)
-        dir.scl(0.7f)
-        return false
     }
 
     private fun pushLife(thing: MostBasic) {
@@ -54,19 +47,29 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
 
     fun left() {
         dir.setX(-speed)
+        dir.nor().scl(speed)
     }
     fun right() {
         dir.setX(speed)
+        dir.nor().scl(speed)
     }
     fun up() {
         dir.setY(speed)
+        dir.nor().scl(speed)
     }
     fun down() {
         dir.setY(-speed)
+        dir.nor().scl(speed)
+    }
+    fun notLateral() {
+        dir.setX(0f)
+    }
+    fun notVertical() {
+        dir.setY(0f)
     }
 
     companion object {
         val dim = Dimension.get(3f, 3f)
-        val speed = 10f
+        val speed = 100f
     }
 }
