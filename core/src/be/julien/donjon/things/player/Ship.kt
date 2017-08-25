@@ -25,7 +25,7 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
 
     var hp = 100
     var canFire = true
-    val fireCooldown = 0.2f
+    val fireCooldown = 0.3f
     val fireTimer = PeriodicTimer(fireCooldown, Callback.get(1, {canFire = true}))
 
     override fun mask(): Mask = Mask.Player
@@ -89,7 +89,7 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
 
     fun click(x: Float, y: Float) {
         if (canFire) {
-            val b = Bullet.get(Vec2.get(centerX(), centerY()), Vec2.get(x - centerX(), y - centerY()))
+            val b = Bullet.get(Vec2.get(centerX(), centerY()), Vec2.get(x - centerX(), y - centerY()), this)
             Hub.bulletCreation(b)
             Collect.thingsToAdd.add(b)
             canFire = false

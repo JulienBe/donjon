@@ -23,7 +23,6 @@ object Rnd {
         return rnd.nextBoolean()
     }
 
-    fun gauss(): Float {
-        return rnd.nextGaussian().toFloat()
-    }
+    fun gauss(): Float = rnd.nextGaussian().toFloat()
+    fun gauss(spread: Float): Float = gauss() * spread
 }

@@ -11,7 +11,7 @@ import be.julien.donjon.util.spatial.Vec2
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-class Bullet private constructor(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
+class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing(pos, dir) {
 
     var bounce = 0
 
@@ -45,6 +45,10 @@ class Bullet private constructor(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
         val speed = 100f
         val maxBounce = 2
 
-        fun get(pos: Vec2, dir: Vec2): Bullet = Bullet(pos, dir)
+        fun get(pos: Vec2, dir: Vec2, owner: Thing): Bullet {
+            val b = Bullet(pos, dir, owner)
+            b.pos.set(pos.x() - dim.halfWidth, pos.y() - dim.halfHeight)
+            return b
+        }
     }
 }
