@@ -2,6 +2,7 @@ package be.julien.donjon.things.player
 
 import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.hubs.Hub
 import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.shapes.Circle
 import be.julien.donjon.physics.shapes.Shape
@@ -28,6 +29,11 @@ class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing
     override fun collidesWith(thing: Thing) {
         bounce++
         super.collidesWith(thing)
+    }
+
+    override fun die() {
+        Hub.bulletRemoval(this)
+        super.die()
     }
 
     override fun act(delta: Float): Boolean {

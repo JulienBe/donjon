@@ -25,4 +25,8 @@ object Hub {
         bulletListeners.forEach { it.bulletCreated(b) }
     }
 
+    fun bulletRemoval(bullet: Bullet) {
+        bulletListeners.forEach { it.bulletRemoved(bullet) }
+    }
+
 }
