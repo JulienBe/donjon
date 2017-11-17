@@ -5,9 +5,9 @@ import com.badlogic.gdx.InputAdapter
 
 class InputHub : InputAdapter() {
 
-    internal val keyUpMapping: MutableMap<Int, () -> Unit> = mutableMapOf()
-    internal val keyPressedMapping: MutableMap<Int, () -> Unit> = mutableMapOf()
-    internal var click: (() -> Unit)? = null
+    private val keyUpMapping: MutableMap<Int, () -> Unit> = mutableMapOf()
+    private val keyPressedMapping: MutableMap<Int, () -> Unit> = mutableMapOf()
+    private var click: (() -> Unit)? = null
 
     override fun keyUp(keycode: Int): Boolean {
         checkKey(keycode, keyUpMapping)
