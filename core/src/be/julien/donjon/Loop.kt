@@ -7,16 +7,23 @@ import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 
-class DonjonMain : ApplicationAdapter() {
+class Loop : ApplicationAdapter() {
 
-    internal lateinit var world: World
-    internal val input = InputHub()
+    private lateinit var world: World
+    private val input = InputHub()
     lateinit internal var drawer: Drawer
 
+    /**
+     * Init is deferred here so libGDX has done its init properly
+     */
     override fun create() {
         drawer = Drawer()
         world = World(input)
         Gdx.input.inputProcessor = input
+        addInputKeys()
+    }
+
+    private fun addInputKeys() {
         input.addKeyUp(Input.Keys.SPACE, { world.spawn() })
     }
 
