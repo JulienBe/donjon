@@ -1,7 +1,7 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.hubs.InputHub
+import be.julien.seed.InputHub
 import be.julien.donjon.particles.ParticleCreator
 import be.julien.donjon.things.player.Ship
 import be.julien.donjon.things.player.ShipControl

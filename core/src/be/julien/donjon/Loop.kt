@@ -1,11 +1,11 @@
 package be.julien.donjon
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.hubs.InputHub
+import be.julien.donjon.handlers.GdxInputHandler
 import be.julien.donjon.world.World
+import be.julien.seed.InputHub
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 
 class Loop : ApplicationAdapter() {
 
@@ -19,16 +19,10 @@ class Loop : ApplicationAdapter() {
     override fun create() {
         drawer = Drawer()
         world = World(input)
-        Gdx.input.inputProcessor = input
-        addInputKeys()
-    }
-
-    private fun addInputKeys() {
-        input.addKeyUp(Input.Keys.SPACE, { world.spawn() })
     }
 
     override fun render() {
-        input.act()
+        input.act(GdxInputHandler)
         world.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)
     }

@@ -1,7 +1,7 @@
 package be.julien.donjon.things.player
 
 import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.hubs.InputHub
+import be.julien.seed.InputHub
 import com.badlogic.gdx.Input
 
 class ShipControl(val pawn: Ship, inputHub: InputHub) {
