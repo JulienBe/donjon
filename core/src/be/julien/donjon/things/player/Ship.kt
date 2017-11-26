@@ -1,27 +1,27 @@
 package be.julien.donjon.things.player
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.hubs.Hub
-import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.Physics
-import be.julien.donjon.physics.shapes.Circle
-import be.julien.donjon.physics.shapes.Shape
 import be.julien.donjon.things.Energy
-import be.julien.donjon.things.Thing
-import be.julien.donjon.things.WallAO
 import be.julien.donjon.things.life.MostBasic
-import be.julien.donjon.util.spatial.Dimension
-import be.julien.donjon.util.spatial.Vec2
-import be.julien.donjon.util.time.Callback
-import be.julien.donjon.util.time.PeriodicTimer
-import be.julien.donjon.util.time.Time
 import be.julien.donjon.world.Collect
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.TextureRegion
+import be.julien.seed.Dimension
+import be.julien.seed.Thing
+import be.julien.seed.Vec2
+import be.julien.seed.WallAO
+import be.julien.seed.graphics.Color
+import be.julien.seed.graphics.Drawer
+import be.julien.seed.physics.Mask
+import be.julien.seed.physics.shapes.Circle
+import be.julien.seed.physics.shapes.Shape
+import be.julien.seed.time.Callback
+import be.julien.seed.time.PeriodicTimer
+import be.julien.seed.time.Time
 import kotlin.reflect.KFunction2
 
-class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
+class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f), AssetMan.square) {
 
     var hp = 100
     var canFire = true
@@ -34,7 +34,7 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
     override fun angle(): Float = 0f
     override fun x(): Float = pos.x()
     override fun y(): Float = pos.y()
-    override fun tr(): TextureRegion = AssetMan.circle
+    override fun img(): Any = AssetMan.circle
     override fun fast(): Boolean = true
 
     override fun wallFun(): KFunction2<Thing, WallAO, Unit> = Physics::slide
@@ -52,7 +52,7 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
     }
 
     override fun draw(drawer: Drawer) {
-        drawer.color(Color.FIREBRICK)
+        drawer.color(Color.WHITE)
         super.draw(drawer)
     }
 

@@ -1,6 +1,6 @@
 package be.julien.donjon.things.life.brain
 
-import be.julien.donjon.util.Rnd
+import be.julien.seed.Rnd
 
 class Perceptron(n: Int) : Brain(n) {
 

@@ -1,18 +1,18 @@
 package be.julien.donjon.world
 
-import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.graphics.AssetMan
+import be.julien.donjon.graphics.GdxDrawer
 import be.julien.seed.InputHub
 import be.julien.donjon.particles.ParticleCreator
 import be.julien.donjon.things.player.Ship
 import be.julien.donjon.things.player.ShipControl
-import be.julien.donjon.util.spatial.Vec2
-import be.julien.donjon.things.Energy
-import be.julien.donjon.things.Thing
-import be.julien.donjon.things.WallAO
 import be.julien.donjon.things.life.Life
-import be.julien.donjon.util.time.Callback
-import be.julien.donjon.util.time.PeriodicTimer
-import be.julien.donjon.util.time.Time
+import be.julien.seed.Thing
+import be.julien.seed.Vec2
+import be.julien.seed.WallAO
+import be.julien.seed.time.Callback
+import be.julien.seed.time.PeriodicTimer
+import be.julien.seed.time.Time
 
 class World(input: InputHub) {
 
@@ -24,10 +24,10 @@ class World(input: InputHub) {
     private val shipControl = ShipControl(ship, input)
 
     init {
-        val left = WallAO(0f, 0f, WallAO.width, Drawer.screenHeight)
-        val right = WallAO(Drawer.screenWidth - WallAO.width, 0f, WallAO.width, Drawer.screenHeight)
-        val top = WallAO(0f, Drawer.screenHeight - WallAO.width, Drawer.screenWidth, WallAO.width)
-        val bottom = WallAO(0f, 0f, Drawer.screenWidth, WallAO.width)
+        val left = WallAO(0f, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square)
+        val right = WallAO(GdxDrawer.screenWidth - WallAO.width, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square)
+        val top = WallAO(0f, GdxDrawer.screenHeight - WallAO.width, GdxDrawer.screenWidth, WallAO.width, AssetMan.square)
+        val bottom = WallAO(0f, 0f, GdxDrawer.screenWidth, WallAO.width, AssetMan.square)
         collection.add(left, right, top, bottom)
         collection.add(ship)
     }
@@ -43,7 +43,7 @@ class World(input: InputHub) {
 //        collection.add(Energy.get())
     }
 
-    fun draw(drawer: Drawer) {
+    fun draw(drawer: GdxDrawer) {
         collection.draw(drawer)
 //        collection.debug(drawer)
     }
@@ -77,10 +77,10 @@ class World(input: InputHub) {
             return 0f
         }
         fun trimX(x: Float): Float {
-            return trim(x, Drawer.screenWidth - 1f)
+            return trim(x, GdxDrawer.screenWidth - 1f)
         }
         fun trimY(y: Float): Float {
-            return trim(y, Drawer.screenHeight - 1f)
+            return trim(y, GdxDrawer.screenHeight - 1f)
         }
     }
 

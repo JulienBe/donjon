@@ -1,10 +1,10 @@
 package be.julien.donjon.particles
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.util.spatial.Dimension
-import be.julien.donjon.util.Rnd
 import be.julien.donjon.world.Collect
+import be.julien.seed.Dimension
+import be.julien.seed.Rnd
+import be.julien.seed.graphics.Drawer
 
 open class Particle(var x: Float, var y: Float, var ttl: Int) {
     open fun act(): Boolean {

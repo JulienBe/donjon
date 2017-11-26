@@ -1,6 +1,6 @@
 package be.julien.donjon.lifesim
 
-import be.julien.donjon.util.Rnd
+import be.julien.seed.Rnd
 
 class DNA(val genes: Array<Float> = Array(10){Rnd.float(2f)}) {
     fun mix(dna: DNA): DNA {

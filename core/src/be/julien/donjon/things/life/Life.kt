@@ -1,20 +1,24 @@
 package be.julien.donjon.things.life
 
 import be.julien.donjon.GdxArr
-import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.graphics.AssetMan
+import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.hubs.Hub
 import be.julien.donjon.lifesim.DNA
-import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.shapes.Shape
-import be.julien.donjon.physics.shapes.SquareAO
-import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Energy
-import be.julien.donjon.things.Thing
-import be.julien.donjon.things.WallAO
-import be.julien.donjon.util.time.TimeInt
-import com.badlogic.gdx.graphics.Color
+import be.julien.seed.Thing
+import be.julien.seed.Vec2
+import be.julien.seed.WallAO
+import be.julien.seed.graphics.Color
+import be.julien.seed.graphics.Drawer
+import be.julien.seed.physics.Mask
+import be.julien.seed.physics.shapes.Shape
+import be.julien.seed.physics.shapes.SquareAO
+import be.julien.seed.time.TimeInt
 
-abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWorld(), val dna: DNA = DNA()): Thing(pos, dir) {
+abstract class Life(
+        pos: Vec2 = Vec2.getRandWorld(10f, 10f), dir: Vec2 = Vec2.getRandWorld(10f, 10f),
+        val dna: DNA = DNA()): Thing(pos, dir, AssetMan.square) {
 
     val initEnergy = 20
     internal var energy = initEnergy()
@@ -58,7 +62,7 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     }
 
     override fun draw(drawer: Drawer) {
-        drawer.color(Color.GRAY)
+        drawer.color(Color.WHITE)
         super.draw(drawer)
     }
 
@@ -85,11 +89,11 @@ abstract class Life(pos: Vec2 = Vec2.getRandWorld(), dir: Vec2 = Vec2.getRandWor
     companion object {
         fun mostBasic(dir: Vec2 = Vec2.getRnd()): MostBasic {
             dir.nor()
-            return created(MostBasic(Vec2.getRandWorld(), dir)) as MostBasic
+            return created(MostBasic(Vec2.getRandWorld(GdxDrawer.screenWidth, GdxDrawer.screenHeight), dir)) as MostBasic
         }
 
-        fun mostBasic(excluded: GdxArr<Thing>): MostBasic {
-            return created(MostBasic(Vec2.getRandWorld(excluded), Vec2.getRnd())) as MostBasic
+        fun mostBasic(excluded: Iterable<Thing>): MostBasic {
+            return created(MostBasic(Vec2.getRandWorld(excluded, GdxDrawer.screenWidth, GdxDrawer.screenHeight), Vec2.getRnd())) as MostBasic
         }
 
         fun mostBasic(pos: Vec2, dir: Vec2, mix: DNA): MostBasic {

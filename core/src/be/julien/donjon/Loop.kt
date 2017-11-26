@@ -1,6 +1,6 @@
 package be.julien.donjon
 
-import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.handlers.GdxInputHandler
 import be.julien.donjon.world.World
 import be.julien.seed.InputHub
@@ -11,13 +11,13 @@ class Loop : ApplicationAdapter() {
 
     private lateinit var world: World
     private val input = InputHub()
-    lateinit internal var drawer: Drawer
+    lateinit internal var drawer: GdxDrawer
 
     /**
      * Init is deferred here so libGDX has done its init properly
      */
     override fun create() {
-        drawer = Drawer()
+        drawer = GdxDrawer()
         world = World(input)
     }
 

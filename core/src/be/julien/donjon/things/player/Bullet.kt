@@ -1,18 +1,19 @@
 package be.julien.donjon.things.player
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.hubs.Hub
-import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.shapes.Circle
-import be.julien.donjon.physics.shapes.Shape
-import be.julien.donjon.things.Thing
-import be.julien.donjon.util.spatial.Dimension
-import be.julien.donjon.util.spatial.Vec2
-import com.badlogic.gdx.graphics.Color
+import be.julien.seed.Dimension
+import be.julien.seed.Thing
+import be.julien.seed.Vec2
+import be.julien.seed.graphics.Color
+import be.julien.seed.graphics.Drawer
+import be.julien.seed.physics.Mask
+import be.julien.seed.physics.shapes.Circle
+import be.julien.seed.physics.shapes.Shape
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing(pos, dir) {
+class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing(pos, dir, AssetMan.square) {
 
     var bounce = 0
 
@@ -23,7 +24,7 @@ class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing
     override fun mask(): Mask = Mask.Bullet
     override fun dimension(): Dimension = dim
     override fun shape(): Shape = Circle
-    override fun tr(): TextureRegion = AssetMan.circle
+    override fun img(): Any = AssetMan.circle
     override fun viscosity(a: Thing): Float = 0.5f
 
     override fun collidesWith(thing: Thing) {
@@ -42,7 +43,7 @@ class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing
     }
 
     override fun draw(drawer: Drawer) {
-        drawer.color(Color.CYAN)
+        drawer.color(Color.WHITE)
         super.draw(drawer)
     }
 

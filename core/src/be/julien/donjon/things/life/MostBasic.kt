@@ -1,15 +1,16 @@
 package be.julien.donjon.things.life
 
+import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.physics.Physics
-import be.julien.donjon.util.spatial.Dimension
-import be.julien.donjon.util.spatial.Vec2
 import be.julien.donjon.things.Energy
-import be.julien.donjon.things.Thing
-import be.julien.donjon.things.WallAO
-import be.julien.donjon.things.sensors.RoundSensor
 import be.julien.donjon.things.sensors.Sensor
 import be.julien.donjon.world.Collect
+import be.julien.seed.Dimension
+import be.julien.seed.Thing
+import be.julien.seed.Vec2
+import be.julien.seed.WallAO
+import be.julien.seed.sensors.RoundSensor
 
 class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
@@ -38,6 +39,9 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
     }
 
     override fun dimension(): Dimension = dim
+    override fun img(): Any {
+        return AssetMan.square
+    }
 
     override fun act(delta: Float): Boolean {
         colliders(sensor, delta)

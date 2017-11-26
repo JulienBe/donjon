@@ -1,17 +1,18 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.GdxArr
-import be.julien.donjon.graphics.Drawer
+import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.particles.Particle
-import be.julien.donjon.physics.Mask
 import be.julien.donjon.physics.Physics
-import be.julien.donjon.things.Thing
+import be.julien.donjon.things.sensors.Sensor
+import be.julien.seed.Thing
+import be.julien.seed.physics.Mask
 
 class Collect {
-    internal val stuff = HashMap<Mask, GdxArr<Thing>>()
-    internal val removedThings = GdxArr<Thing>()
-    internal val removedParticles = GdxArr<Particle>()
-    internal var keys: MutableSet<Mask>
+    private val stuff = HashMap<Mask, GdxArr<Thing>>()
+    private val removedThings = GdxArr<Thing>()
+    private val removedParticles = GdxArr<Particle>()
+    private var keys: MutableSet<Mask>
 
     init {
         stuff.put(Mask.Life, GdxArr<Thing>())
@@ -30,7 +31,9 @@ class Collect {
     fun add(vararg things: Thing) {
         things.forEach {
             stuff[it.mask()]!!.add(it)
-            stuff[Mask.Sensor]!!.addAll(it.sensors)
+            it.sensors.forEach {
+                sensor: Sensor -> stuff[Mask.Sensor]!!.add(sensor)
+            }
         }
     }
 
@@ -62,7 +65,7 @@ class Collect {
         }
     }
 
-    fun draw(drawer: Drawer) {
+    fun draw(drawer: GdxDrawer) {
         stuff.forEach { mask, gdxArr ->
             gdxArr.forEach { it.draw(drawer) }
         }
@@ -113,7 +116,7 @@ class Collect {
         }
     }
 
-    fun debug(drawer: Drawer) {
+    fun debug(drawer: GdxDrawer) {
         walls().forEach { it.debug(drawer) }
     }
 

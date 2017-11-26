@@ -1,14 +1,17 @@
 package be.julien.donjon.things
 
-import be.julien.donjon.graphics.Drawer
-import be.julien.donjon.physics.Mask
-import be.julien.donjon.physics.shapes.Shape
-import be.julien.donjon.physics.shapes.SquareAO
-import be.julien.donjon.util.spatial.Dimension
-import be.julien.donjon.util.spatial.Vec2
-import be.julien.donjon.util.Rnd
+import be.julien.donjon.graphics.AssetMan
+import be.julien.donjon.graphics.GdxDrawer
+import be.julien.seed.Dimension
+import be.julien.seed.Rnd
+import be.julien.seed.Thing
+import be.julien.seed.Vec2
+import be.julien.seed.graphics.Drawer
+import be.julien.seed.physics.Mask
+import be.julien.seed.physics.shapes.Shape
+import be.julien.seed.physics.shapes.SquareAO
 
-class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
+class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, AssetMan.square) {
 
     private var angle = Rnd.float(360f)
     private var stored = 40
@@ -18,6 +21,7 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
     override fun mask(): Mask = Mask.Energy
     override fun dimension(): Dimension = dim
     override fun shape(): Shape = SquareAO
+    override fun img(): Any = AssetMan.square
 
     override fun act(delta: Float): Boolean {
         if (stored <= 0)
@@ -48,7 +52,7 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
     companion object {
         val dim = Dimension.get(1f, 1f)
         fun get(): Energy {
-            return Energy(Vec2.getRandWorld(), Vec2.get(0f, 0f))
+            return Energy(Vec2.getRandWorld(GdxDrawer.screenWidth, GdxDrawer.screenHeight), Vec2.get(0f, 0f))
         }
     }
 
