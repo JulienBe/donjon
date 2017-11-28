@@ -1,17 +1,15 @@
 package be.julien.donjon.things.player
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.hubs.Hub
-import be.julien.seed.Dimension
-import be.julien.seed.Thing
-import be.julien.seed.Vec2
+import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Thing
 import be.julien.seed.graphics.Color
 import be.julien.seed.graphics.Drawer
 import be.julien.seed.physics.Mask
+import be.julien.seed.physics.Vec2
 import be.julien.seed.physics.shapes.Circle
 import be.julien.seed.physics.shapes.Shape
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing(pos, dir, AssetMan.square) {
 

@@ -1,6 +1,6 @@
 package be.julien.donjon.handlers
 
-import be.julien.seed.InputHandler
+import be.julien.seed.utils.InputHandler
 import com.badlogic.gdx.Gdx
 
 object GdxInputHandler : InputHandler {

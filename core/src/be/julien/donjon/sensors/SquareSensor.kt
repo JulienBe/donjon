@@ -1,14 +1,14 @@
-package be.julien.seed.sensors
+package be.julien.donjon.sensors
 
 import be.julien.donjon.graphics.AssetMan
 import be.julien.seed.physics.shapes.Shape
 import be.julien.seed.physics.shapes.SquareAO
-import be.julien.donjon.things.sensors.Sensor
-import be.julien.seed.Dimension
-import be.julien.seed.Vec2
-import be.julien.seed.Thing
+import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Thing
 import be.julien.seed.graphics.Color
 import be.julien.seed.graphics.Drawer
+import be.julien.seed.physics.Vec2
+import be.julien.seed.sensors.Sensor
 
 class SquareSensor internal constructor(anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float):
         Sensor(anchor, img) {

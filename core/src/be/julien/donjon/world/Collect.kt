@@ -1,12 +1,12 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.GdxArr
-import be.julien.donjon.graphics.GdxDrawer
+import be.julien.donjon.GdxDrawer
 import be.julien.donjon.particles.Particle
-import be.julien.donjon.physics.Physics
-import be.julien.donjon.things.sensors.Sensor
-import be.julien.seed.Thing
+import be.julien.seed.basics.Thing
 import be.julien.seed.physics.Mask
+import be.julien.seed.physics.Physics
+import be.julien.seed.sensors.Sensor
 
 class Collect {
     private val stuff = HashMap<Mask, GdxArr<Thing>>()

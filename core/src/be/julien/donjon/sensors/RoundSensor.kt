@@ -1,12 +1,12 @@
-package be.julien.seed.sensors
+package be.julien.donjon.sensors
 
 import be.julien.donjon.graphics.AssetMan
 import be.julien.seed.physics.shapes.Circle
 import be.julien.seed.physics.shapes.Shape
-import be.julien.donjon.things.sensors.Sensor
-import be.julien.seed.Dimension
-import be.julien.seed.Thing
+import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Thing
 import be.julien.seed.graphics.Drawer
+import be.julien.seed.sensors.Sensor
 
 class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor, img) {
     override fun img(): () -> Any {

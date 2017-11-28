@@ -1,8 +1,8 @@
 package be.julien.donjon.particles
 
 import be.julien.donjon.world.Collect
-import be.julien.seed.Dimension
-import be.julien.seed.Rnd
+import be.julien.seed.basics.Dimension
+import be.julien.seed.utils.Rnd
 
 class ParticleMoving(x: Float, y: Float, ttl: Int, var dirX: Float = Rnd.gauss(), var dirY: Float = Rnd.gauss()): Particle(x, y, ttl) {
     override fun act(): Boolean {

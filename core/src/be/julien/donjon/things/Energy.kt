@@ -1,15 +1,15 @@
 package be.julien.donjon.things
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.GdxDrawer
-import be.julien.seed.Dimension
-import be.julien.seed.Rnd
-import be.julien.seed.Thing
-import be.julien.seed.Vec2
+import be.julien.donjon.GdxDrawer
+import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Thing
 import be.julien.seed.graphics.Drawer
 import be.julien.seed.physics.Mask
+import be.julien.seed.physics.Vec2
 import be.julien.seed.physics.shapes.Shape
 import be.julien.seed.physics.shapes.SquareAO
+import be.julien.seed.utils.Rnd
 
 class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, AssetMan.square) {
 

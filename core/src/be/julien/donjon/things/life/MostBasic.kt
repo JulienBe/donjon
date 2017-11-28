@@ -2,15 +2,15 @@ package be.julien.donjon.things.life
 
 import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.lifesim.DNA
-import be.julien.donjon.physics.Physics
+import be.julien.donjon.sensors.RoundSensor
 import be.julien.donjon.things.Energy
-import be.julien.donjon.things.sensors.Sensor
 import be.julien.donjon.world.Collect
-import be.julien.seed.Dimension
-import be.julien.seed.Thing
-import be.julien.seed.Vec2
-import be.julien.seed.WallAO
-import be.julien.seed.sensors.RoundSensor
+import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Thing
+import be.julien.seed.basics.WallAO
+import be.julien.seed.physics.Physics
+import be.julien.seed.physics.Vec2
+import be.julien.seed.sensors.Sensor
 
 class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 

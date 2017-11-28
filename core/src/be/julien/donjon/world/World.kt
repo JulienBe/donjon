@@ -1,18 +1,18 @@
 package be.julien.donjon.world
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.GdxDrawer
-import be.julien.seed.InputHub
+import be.julien.donjon.GdxDrawer
 import be.julien.donjon.particles.ParticleCreator
 import be.julien.donjon.things.player.Ship
 import be.julien.donjon.things.player.ShipControl
 import be.julien.donjon.things.life.Life
-import be.julien.seed.Thing
-import be.julien.seed.Vec2
-import be.julien.seed.WallAO
+import be.julien.seed.basics.Thing
+import be.julien.seed.basics.WallAO
+import be.julien.seed.physics.Vec2
 import be.julien.seed.time.Callback
 import be.julien.seed.time.PeriodicTimer
 import be.julien.seed.time.Time
+import be.julien.seed.utils.InputHub
 
 class World(input: InputHub) {
 

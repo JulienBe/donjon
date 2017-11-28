@@ -1,9 +1,8 @@
 package be.julien.donjon
 
-import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.handlers.GdxInputHandler
 import be.julien.donjon.world.World
-import be.julien.seed.InputHub
+import be.julien.seed.utils.InputHub
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 

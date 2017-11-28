@@ -1,5 +1,7 @@
-package be.julien.donjon.graphics
+package be.julien.donjon
 
+import be.julien.donjon.graphics.AssetMan
+import be.julien.seed.graphics.Drawable
 import be.julien.seed.graphics.Drawer
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color

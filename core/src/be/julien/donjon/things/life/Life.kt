@@ -1,17 +1,16 @@
 package be.julien.donjon.things.life
 
-import be.julien.donjon.GdxArr
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.GdxDrawer
+import be.julien.donjon.GdxDrawer
 import be.julien.donjon.hubs.Hub
 import be.julien.donjon.lifesim.DNA
 import be.julien.donjon.things.Energy
-import be.julien.seed.Thing
-import be.julien.seed.Vec2
-import be.julien.seed.WallAO
+import be.julien.seed.basics.Thing
+import be.julien.seed.basics.WallAO
 import be.julien.seed.graphics.Color
 import be.julien.seed.graphics.Drawer
 import be.julien.seed.physics.Mask
+import be.julien.seed.physics.Vec2
 import be.julien.seed.physics.shapes.Shape
 import be.julien.seed.physics.shapes.SquareAO
 import be.julien.seed.time.TimeInt

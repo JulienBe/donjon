@@ -1,12 +1,11 @@
 package be.julien.donjon.particles
 
 import be.julien.donjon.graphics.AssetMan
-import be.julien.donjon.graphics.GdxDrawer
 import be.julien.donjon.world.Collect
-import be.julien.seed.Dimension
-import be.julien.seed.Rnd
-import be.julien.seed.Vec2
+import be.julien.seed.basics.Dimension
 import be.julien.seed.graphics.Drawer
+import be.julien.seed.physics.Vec2
+import be.julien.seed.utils.Rnd
 
 class ParticleSpark(x: Float, y: Float, ttl: Int, baseDir: Vec2): Particle(x, y, ttl) {
 
