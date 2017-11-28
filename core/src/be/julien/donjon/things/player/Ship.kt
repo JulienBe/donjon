@@ -37,7 +37,7 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f), AssetMan.square) {
     override fun img(): Any = AssetMan.circle
     override fun fast(): Boolean = true
 
-    override fun wallFun(): KFunction2<Thing, WallAO, Unit> = Physics::slide
+    override fun onWallHit(): KFunction2<Thing, WallAO, Unit> = Physics::slide
 
     override fun collidesWith(thing: Thing) {
         when (thing) {

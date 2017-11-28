@@ -8,7 +8,6 @@ class DNA(val genes: Array<Float> = Array(10){Rnd.float(2f)}) {
             i ->
             if (Rnd.bool()) mutation(genes[i]) else mutation(dna.genes[i])
         })
-        println("")
         genes.forEach { print("" + it + ", ") }
         return DNA(a)
     }
