@@ -15,18 +15,16 @@ class Collect {
     private var keys: MutableSet<Mask>
 
     init {
-        stuff.put(Mask.Life, GdxArr<Thing>())
-        stuff.put(Mask.Sensor, GdxArr<Thing>())
-        stuff.put(Mask.Wall, GdxArr<Thing>())
-        stuff.put(Mask.Energy, GdxArr<Thing>())
-        stuff.put(Mask.Bullet, GdxArr<Thing>())
-        stuff.put(Mask.Player, GdxArr<Thing>())
+        stuff.put(Mask.Life, GdxArr())
+        stuff.put(Mask.Sensor, GdxArr())
+        stuff.put(Mask.Wall, GdxArr())
+        stuff.put(Mask.Energy, GdxArr())
+        stuff.put(Mask.Bullet, GdxArr())
+        stuff.put(Mask.Player, GdxArr())
         keys = stuff.keys
     }
 
-    fun walls(): GdxArr<Thing> {
-        return stuff.get(Mask.Wall)!!
-    }
+    fun walls(): GdxArr<Thing> = stuff[Mask.Wall]!!
 
     fun add(vararg things: Thing) {
         things.forEach {

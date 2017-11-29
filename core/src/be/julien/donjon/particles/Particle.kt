@@ -7,9 +7,7 @@ import be.julien.seed.graphics.Drawer
 import be.julien.seed.utils.Rnd
 
 open class Particle(var x: Float, var y: Float, var ttl: Int) {
-    open fun act(): Boolean {
-        return ttl-- < 0
-    }
+    open fun act(): Boolean = ttl-- < 0
 
     open fun draw(drawer: Drawer) {
         drawer.drawAO(AssetMan.circle, x, y, dim.width, dim.height)

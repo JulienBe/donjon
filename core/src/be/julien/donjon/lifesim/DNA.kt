@@ -16,8 +16,6 @@ class DNA(val genes: Array<Float> = Array(10){Rnd.float(2f)}) {
         val mutation = 0.2f
         val halfMutation = mutation / 2f
 
-        fun mutation(gene: Float): Float {
-            return gene + (halfMutation - Rnd.float(mutation))
-        }
+        fun mutation(gene: Float): Float = gene + (halfMutation - Rnd.float(mutation))
     }
 }

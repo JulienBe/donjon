@@ -70,18 +70,14 @@ class World(input: InputHub) {
         val energy = 40
         fun trim(i: Float, max: Float): Float {
             if (i > 0)
-                if (i < max)
-                    return i
+                return if (i < max)
+                    i
                 else
-                    return max
+                    max
             return 0f
         }
-        fun trimX(x: Float): Float {
-            return trim(x, GdxDrawer.screenWidth - 1f)
-        }
-        fun trimY(y: Float): Float {
-            return trim(y, GdxDrawer.screenHeight - 1f)
-        }
+        fun trimX(x: Float): Float = trim(x, GdxDrawer.screenWidth - 1f)
+        fun trimY(y: Float): Float = trim(y, GdxDrawer.screenHeight - 1f)
     }
 
 }
