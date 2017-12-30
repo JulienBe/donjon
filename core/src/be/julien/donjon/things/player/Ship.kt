@@ -20,7 +20,7 @@ import be.julien.seed.time.PeriodicTimer
 import be.julien.seed.time.Time
 import kotlin.reflect.KFunction2
 
-class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f), AssetMan.square) {
+class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f)) {
 
     var hp = 100
     var canFire = true

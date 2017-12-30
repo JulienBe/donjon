@@ -11,7 +11,7 @@ import be.julien.seed.physics.shapes.Shape
 import be.julien.seed.physics.shapes.SquareAO
 import be.julien.seed.utils.Rnd
 
-class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, AssetMan.square) {
+class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir) {
 
     private var thisAngle = Rnd.float(360f)
     private var stored = 40

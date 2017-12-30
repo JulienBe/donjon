@@ -1,8 +1,8 @@
 package be.julien.donjon.world
 
-import be.julien.donjon.graphics.AssetMan
 import be.julien.donjon.GdxDrawer
 import be.julien.donjon.particles.ParticleCreator
+import be.julien.donjon.things.WallAOBasic
 import be.julien.donjon.things.player.Ship
 import be.julien.donjon.things.player.ShipControl
 import be.julien.donjon.things.life.Life
@@ -25,10 +25,10 @@ class World(input: InputHub) {
     private val shipControl = ShipControl(ship, input)
 
     init {
-        val left = WallAO(0f, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square, WallSide.right)
-        val right = WallAO(GdxDrawer.screenWidth - WallAO.width, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square, WallSide.left)
-        val top = WallAO(0f, GdxDrawer.screenHeight - WallAO.width, GdxDrawer.screenWidth, WallAO.width, AssetMan.square, WallSide.bottom)
-        val bottom = WallAO(0f, 0f, GdxDrawer.screenWidth, WallAO.width, AssetMan.square, WallSide.top)
+        val left = WallAOBasic(0f, 0f, WallAO.width, GdxDrawer.screenHeight, WallSide.right)
+        val right = WallAOBasic(GdxDrawer.screenWidth - WallAO.width, 0f, WallAO.width, GdxDrawer.screenHeight, WallSide.left)
+        val top = WallAOBasic(0f, GdxDrawer.screenHeight - WallAO.width, GdxDrawer.screenWidth, WallAO.width, WallSide.bottom)
+        val bottom = WallAOBasic(0f, 0f, GdxDrawer.screenWidth, WallAO.width, WallSide.top)
         collection.add(left, right, top, bottom)
         collection.add(ship)
     }

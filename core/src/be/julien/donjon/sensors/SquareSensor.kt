@@ -4,18 +4,20 @@ import be.julien.donjon.graphics.AssetMan
 import be.julien.seed.physics.shapes.Shape
 import be.julien.seed.physics.shapes.SquareAO
 import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Sensor
 import be.julien.seed.basics.Thing
 import be.julien.seed.graphics.Color
 import be.julien.seed.graphics.Drawer
 import be.julien.seed.physics.Vec2
-import be.julien.seed.sensors.Sensor
 
 class SquareSensor internal constructor(anchor: Thing, sensorLength: Float, val offsetAngle: Float, width: Float):
-        Sensor(anchor, img) {
+        Sensor(anchor) {
 
     internal val offset = Vec2.get(sensorLength, 0f)
     internal val dim = Dimension.get(width, width)
 
+    override val img: Any
+        get() = AssetMan.square
     override val shape: Shape
         get() = SquareAO
     override val dimension: Dimension

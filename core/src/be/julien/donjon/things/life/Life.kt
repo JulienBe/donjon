@@ -17,7 +17,7 @@ import be.julien.seed.time.TimeInt
 
 abstract class Life(
         pos: Vec2 = Vec2.getRandWorld(10f, 10f), dir: Vec2 = Vec2.getRandWorld(10f, 10f),
-        val dna: DNA = DNA()): Thing(pos, dir, AssetMan.square) {
+        val dna: DNA = DNA()): Thing(pos, dir) {
 
     val initEnergy = 20
     internal var energy = initEnergy()
@@ -27,6 +27,8 @@ abstract class Life(
         get() = Mask.Life
     override val shape: Shape
         get() = SquareAO
+    override val img: Any
+        get() = AssetMan.square
 
     init {
         norSpeed()

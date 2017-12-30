@@ -11,7 +11,7 @@ import be.julien.seed.physics.Vec2
 import be.julien.seed.physics.shapes.Circle
 import be.julien.seed.physics.shapes.Shape
 
-class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing(pos, dir, AssetMan.square) {
+class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing(pos, dir) {
 
     var bounce = 0
 
@@ -25,7 +25,7 @@ class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing
     override val dimension: Dimension
         get() = dim
     override val img: Any
-        get() = AssetMan.circle
+        get() = AssetMan.square
 
     override fun viscosity(a: Thing): Float = 0.5f
 

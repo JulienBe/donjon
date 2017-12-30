@@ -6,11 +6,11 @@ import be.julien.donjon.sensors.RoundSensor
 import be.julien.donjon.things.Energy
 import be.julien.donjon.world.Collect
 import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Sensor
 import be.julien.seed.basics.Thing
 import be.julien.seed.basics.WallAO
 import be.julien.seed.physics.Physics
 import be.julien.seed.physics.Vec2
-import be.julien.seed.sensors.Sensor
 
 class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 

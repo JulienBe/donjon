@@ -4,11 +4,11 @@ import be.julien.donjon.graphics.AssetMan
 import be.julien.seed.physics.shapes.Circle
 import be.julien.seed.physics.shapes.Shape
 import be.julien.seed.basics.Dimension
+import be.julien.seed.basics.Sensor
 import be.julien.seed.basics.Thing
 import be.julien.seed.graphics.Drawer
-import be.julien.seed.sensors.Sensor
 
-class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor, img) {
+class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor) {
 
     val dim = Dimension.get(radius, radius)
 
@@ -16,6 +16,8 @@ class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anch
         get() = dim
     override val shape: Shape
         get() = Circle
+    override val img: Any
+        get() = AssetMan.circle
 
     override fun act(delta: Float): Boolean {
         pos.set(anchor.centerX - dim.halfWidth, anchor.centerY - dim.halfHeight)
