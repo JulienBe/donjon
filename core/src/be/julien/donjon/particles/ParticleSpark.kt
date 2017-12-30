@@ -9,16 +9,16 @@ import be.julien.seed.utils.Rnd
 
 class ParticleSpark(x: Float, y: Float, ttl: Int, baseDir: Vec2): Particle(x, y, ttl) {
 
-    val dir = Vec2.get(baseDir.x(), baseDir.y()).nor().scl(speed * (Math.abs(Rnd.gauss() * speedSpread))).rotate(Rnd.gauss(spread))
-    val angle = dir.angle()
+    val dir = Vec2.get(baseDir.x, baseDir.y).nor().scl(speed * (Math.abs(Rnd.gauss() * speedSpread))).rotate(Rnd.gauss(spread))
+    val angle = dir.angle
 
     override fun draw(drawer: Drawer) {
         drawer.draw(AssetMan.square, x, y, dim.halfWidth, dim.halfHeight, dim.width, dim.height, angle)
     }
 
     override fun act(): Boolean {
-        x += dir.x()
-        y += dir.y()
+        x += dir.x
+        y += dir.y
         return super.act()
     }
 

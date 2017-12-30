@@ -52,11 +52,11 @@ class GdxDrawer : Drawer {
     }
 
     override fun drawAO(d: Drawable) {
-        batch.draw(d.img() as TextureRegion, d.x(), d.y(), d.w(), d.h())
+        batch.draw(d.img as TextureRegion, d.x, d.y, d.w, d.h)
         color(Color.WHITE)
     }
     override fun drawNAO(d: Drawable) {
-        batch.draw(d.img() as TextureRegion, d.x(), d.y(), d.hw(), d.hh(), d.w(), d.h(), 1f, 1f, d.angle())
+        batch.draw(d.img as TextureRegion, d.x, d.y, d.hw, d.hh, d.w, d.h, 1f, 1f, d.angle)
         color(Color.WHITE)
     }
 

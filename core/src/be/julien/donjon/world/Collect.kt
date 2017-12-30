@@ -28,7 +28,7 @@ class Collect {
 
     fun add(vararg things: Thing) {
         things.forEach {
-            stuff[it.mask()]!!.add(it)
+            stuff[it.mask]!!.add(it)
             it.sensors.forEach {
                 sensor: Sensor -> stuff[Mask.Sensor]!!.add(sensor)
             }
@@ -37,7 +37,7 @@ class Collect {
 
     fun remove(vararg things: Thing) {
         things.forEach {
-            stuff[it.mask()]!!.removeValue(it, true)
+            stuff[it.mask]!!.removeValue(it, true)
         }
     }
 

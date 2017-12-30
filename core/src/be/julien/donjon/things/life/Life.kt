@@ -23,12 +23,14 @@ abstract class Life(
     internal var energy = initEnergy()
     private val canReproduce = TimeInt.get(0, 1f, 1)
     open internal fun energyStealVal(): Int = 1
+    override val mask: Mask
+        get() = Mask.Life
+    override val shape: Shape
+        get() = SquareAO
 
     init {
         norSpeed()
     }
-
-    override fun shape(): Shape = SquareAO
 
     internal fun norSpeed() {
         dir.nor().scl(10f)
@@ -70,7 +72,7 @@ abstract class Life(
             is Energy -> energy.add(thing.stealEnergy(energyStealVal()))
             is WallAO -> energy.step(2)
             is Life -> {
-                Vec2.tmp.set(dir.x() + thing.dir.y(), dir.y() + thing.dir.x()).nor()
+                Vec2.tmp.set(dir.x + thing.dir.y, dir.y + thing.dir.x).nor()
                 dir.add(Vec2.tmp)
             }
         }
@@ -81,9 +83,6 @@ abstract class Life(
             return 0.1f
         return 0.8f
     }
-
-    override fun angle(): Float = dir.angle()
-    override fun mask(): Mask = Mask.Life
 
     companion object {
         fun mostBasic(dir: Vec2 = Vec2.getRnd()): MostBasic {

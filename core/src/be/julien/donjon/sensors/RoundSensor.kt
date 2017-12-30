@@ -9,16 +9,16 @@ import be.julien.seed.graphics.Drawer
 import be.julien.seed.sensors.Sensor
 
 class RoundSensor private constructor(anchor: Thing, radius: Float): Sensor(anchor, img) {
-    override fun img(): () -> Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     val dim = Dimension.get(radius, radius)
-    override fun shape(): Shape = Circle
-    override fun dimension(): Dimension = dim
+
+    override val dimension: Dimension
+        get() = dim
+    override val shape: Shape
+        get() = Circle
 
     override fun act(delta: Float): Boolean {
-        pos.set(anchor.centerX() - dim.halfWidth, anchor.centerY() - dim.halfHeight)
+        pos.set(anchor.centerX - dim.halfWidth, anchor.centerY - dim.halfHeight)
         return dead
     }
 

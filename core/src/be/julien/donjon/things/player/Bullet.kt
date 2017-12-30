@@ -18,11 +18,15 @@ class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing
     init {
         dir.nor().scl(speed)
     }
+    override val mask: Mask
+        get() = Mask.Bullet
+    override val shape: Shape
+        get() = Circle
+    override val dimension: Dimension
+        get() = dim
+    override val img: Any
+        get() = AssetMan.circle
 
-    override fun mask(): Mask = Mask.Bullet
-    override fun dimension(): Dimension = dim
-    override fun shape(): Shape = Circle
-    override fun img(): Any = AssetMan.circle
     override fun viscosity(a: Thing): Float = 0.5f
 
     override fun collidesWith(thing: Thing) {
@@ -52,7 +56,7 @@ class Bullet private constructor(pos: Vec2, dir: Vec2, val owner: Thing) : Thing
 
         fun get(pos: Vec2, dir: Vec2, owner: Thing): Bullet {
             val b = Bullet(pos, dir, owner)
-            b.pos.set(pos.x() - dim.halfWidth, pos.y() - dim.halfHeight)
+            b.pos.set(pos.x - dim.halfWidth, pos.y - dim.halfHeight)
             return b
         }
     }

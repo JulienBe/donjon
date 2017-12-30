@@ -27,16 +27,20 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f), AssetMan.square) {
     val fireCooldown = 0.3f
     val fireTimer = PeriodicTimer(fireCooldown, Callback.get(1, {canFire = true}))
 
-    override fun mask(): Mask = Mask.Player
-    override fun shape(): Shape = Circle
-    override fun dimension(): Dimension = dim
-    override fun angle(): Float = 0f
-    override fun x(): Float = pos.x()
-    override fun y(): Float = pos.y()
-    override fun img(): Any = AssetMan.circle
-    override fun fast(): Boolean = true
+    override val mask: Mask
+        get() = Mask.Player
+    override val shape: Shape
+        get() = Circle
+    override val dimension: Dimension
+        get() = dim
+    override val angle: Float
+        get() = 0f
+    override val img: Any
+        get() = AssetMan.circle
+    override val fast: Boolean
+        get() = true
 
-    override fun onWallHit(): KFunction2<Thing, WallAO, Unit> = Physics::slide
+    override fun onWallHit(): KFunction2<Thing, WallAO, Unit> = Physics::setOnWall
 
     override fun collidesWith(thing: Thing) {
         when (thing) {
@@ -88,7 +92,7 @@ class Ship(pos: Vec2): Thing(pos, Vec2.get(0f, 0f), AssetMan.square) {
 
     fun click(x: Float, y: Float) {
         if (canFire) {
-            val b = Bullet.get(Vec2.get(centerX(), centerY()), Vec2.get(x - centerX(), y - centerY()), this)
+            val b = Bullet.get(Vec2.get(centerX, centerY), Vec2.get(x - centerX, y - centerY), this)
             Hub.bulletCreation(b)
             Collect.thingsToAdd.add(b)
             canFire = false

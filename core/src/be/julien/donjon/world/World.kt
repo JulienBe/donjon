@@ -8,6 +8,7 @@ import be.julien.donjon.things.player.ShipControl
 import be.julien.donjon.things.life.Life
 import be.julien.seed.basics.Thing
 import be.julien.seed.basics.WallAO
+import be.julien.seed.basics.WallSide
 import be.julien.seed.physics.Vec2
 import be.julien.seed.time.Callback
 import be.julien.seed.time.PeriodicTimer
@@ -24,10 +25,10 @@ class World(input: InputHub) {
     private val shipControl = ShipControl(ship, input)
 
     init {
-        val left = WallAO(0f, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square)
-        val right = WallAO(GdxDrawer.screenWidth - WallAO.width, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square)
-        val top = WallAO(0f, GdxDrawer.screenHeight - WallAO.width, GdxDrawer.screenWidth, WallAO.width, AssetMan.square)
-        val bottom = WallAO(0f, 0f, GdxDrawer.screenWidth, WallAO.width, AssetMan.square)
+        val left = WallAO(0f, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square, WallSide.right)
+        val right = WallAO(GdxDrawer.screenWidth - WallAO.width, 0f, WallAO.width, GdxDrawer.screenHeight, AssetMan.square, WallSide.left)
+        val top = WallAO(0f, GdxDrawer.screenHeight - WallAO.width, GdxDrawer.screenWidth, WallAO.width, AssetMan.square, WallSide.bottom)
+        val bottom = WallAO(0f, 0f, GdxDrawer.screenWidth, WallAO.width, AssetMan.square, WallSide.top)
         collection.add(left, right, top, bottom)
         collection.add(ship)
     }

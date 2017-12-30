@@ -21,6 +21,7 @@ class Loop : ApplicationAdapter() {
     }
 
     override fun render() {
+        println("\t" + Gdx.graphics.frameId)
         input.act(GdxInputHandler)
         world.act(Gdx.graphics.deltaTime)
         drawer.batch(world::draw)

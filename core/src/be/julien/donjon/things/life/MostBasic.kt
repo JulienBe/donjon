@@ -14,11 +14,6 @@ import be.julien.seed.sensors.Sensor
 
 class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
-    /*
-    0.9051367, 0.9773993, 0.79385370, 1.10078560, 1.0269687, 0.9688986, 0.70713985,
-    0.8363497, 0.9080985, 0.82114320, 1.05114350, 1.0641985, 1.0684454, 0.6140407,
-    0.8813086, 0.9116909, 0.77517015, 0.96981364, 1.0421330, 1.0323613, 0.5678359,
-     */
     internal val wallBase = dna.genes[1] // 0.87 0.87 0.85
     internal val wallMod = dna.genes[2] // 1.09 1.1 1.15
     internal val energyMod = dna.genes[3] // 1.07 1.10 1.07
@@ -29,6 +24,10 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
     internal val canReproduceMod = dna.genes[8]
     internal val otherLifeMod = dna.genes[9]
     private val sensor = RoundSensor.get(this, 8f)
+    override val dimension: Dimension
+        get() = dim
+    override val img: Any
+        get() = AssetMan.square
 
     override fun energyStealVal(): Int {
         return 3
@@ -36,11 +35,6 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
     init {
         sensors.add(sensor)
-    }
-
-    override fun dimension(): Dimension = dim
-    override fun img(): Any {
-        return AssetMan.square
     }
 
     override fun act(delta: Float): Boolean {
@@ -57,9 +51,9 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
 
     override fun reproduce(life: Life) {
         val mix = dna.mix(life.dna)
-        val otherDir = Vec2.get(dir.x(), dir.y())
+        val otherDir = Vec2.get(dir.x, dir.y)
         otherDir.rotate(-45f)
-        Collect.add(mostBasic(Vec2.get(pos.x(), pos.y()), otherDir, mix))
+        Collect.add(mostBasic(Vec2.get(pos.x, pos.y), otherDir, mix))
         dir.rotate(45f)
         energy.step(51)
         super.reproduce(life)
@@ -86,7 +80,7 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
         if (currentTargetValue > newValue) {
             return currentTargetValue
         } else {
-            target.set(other.centerX(), other.centerY()).nor().scl(otherLifeMod)
+            target.set(other.centerX, other.centerY).nor().scl(otherLifeMod)
             return newValue
         }
     }
@@ -110,7 +104,7 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
         if (currentTargetValue > newValue) {
             return currentTargetValue
         } else {
-            target.set(1f, 0f).rotate(wall.normal(this).angle).scl(wallMod)
+            target.set(wall.exposedLine.bounceVector.x, wall.exposedLine.bounceVector.y).scl(wallMod)
             return newValue
         }
     }

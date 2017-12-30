@@ -14,12 +14,12 @@ class ParticleCreator: HubClient {
 
     override fun lifeCreated(life: Life) {
         for (i in 0..life.initEnergy)
-            ParticleMoving.spawn(life.rndX(), life.rndY())
+            ParticleMoving.spawn(life.rndX, life.rndY)
     }
 
     override fun bulletCreated(b: Bullet) {
         for (i in 0..40) {
-            ParticleSpark.spawn(b.centerX(), b.centerY(), b.dir)
+            ParticleSpark.spawn(b.centerX, b.centerY, b.dir)
         }
     }
 

@@ -13,20 +13,26 @@ import be.julien.seed.utils.Rnd
 
 class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, AssetMan.square) {
 
-    private var angle = Rnd.float(360f)
+    private var thisAngle = Rnd.float(360f)
     private var stored = 40
     private var speed = determineSpeed()
+    override val angle: Float
+        get() = thisAngle
+    override val mask: Mask
+        get() = Mask.Energy
+    override val dimension: Dimension
+        get() = dim
+    override val shape: Shape
+        get() = SquareAO
+    override val img: Any
+        get() = AssetMan.square
 
     private fun determineSpeed() = stored * 8f
-    override fun mask(): Mask = Mask.Energy
-    override fun dimension(): Dimension = dim
-    override fun shape(): Shape = SquareAO
-    override fun img(): Any = AssetMan.square
 
     override fun act(delta: Float): Boolean {
         if (stored <= 0)
             die()
-        angle += delta * speed
+        thisAngle += delta * speed
         return super.act(delta)
     }
 
@@ -49,6 +55,10 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, AssetMan.square) {
         }
     }
 
+    override fun viscosity(a: Thing): Float {
+        return 0.5f
+    }
+
     companion object {
         val dim = Dimension.get(1f, 1f)
         fun get(): Energy {
@@ -56,9 +66,4 @@ class Energy(pos: Vec2, dir: Vec2) : Thing(pos, dir, AssetMan.square) {
         }
     }
 
-    override fun viscosity(a: Thing): Float {
-        return 0.5f
-    }
-
-    override fun angle(): Float = angle
 }

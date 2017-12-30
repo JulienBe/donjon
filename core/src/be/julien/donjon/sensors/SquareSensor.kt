@@ -16,12 +16,14 @@ class SquareSensor internal constructor(anchor: Thing, sensorLength: Float, val 
     internal val offset = Vec2.get(sensorLength, 0f)
     internal val dim = Dimension.get(width, width)
 
-    override fun shape(): Shape = SquareAO
-    override fun dimension(): Dimension = dim
+    override val shape: Shape
+        get() = SquareAO
+    override val dimension: Dimension
+        get() = dim
 
     override fun act(delta: Float): Boolean {
-        offset.setAngle(offsetAngle + anchor.angle())
-        pos.set(anchor.x() + anchor.hw() + offset.x() - hw(), anchor.y() + anchor.hh() + offset.y() - hh())
+        offset.setAngle(offsetAngle + anchor.angle)
+        pos.set(anchor.x + anchor.hw + offset.x - hw, anchor.y + anchor.hh + offset.y - hh)
         return dead
     }
 
