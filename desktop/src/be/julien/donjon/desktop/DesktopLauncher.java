@@ -1,15 +1,15 @@
 package be.julien.donjon.desktop;
 
+import be.julien.donjon.ui.MainScreen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import be.julien.donjon.Loop;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1280;
-		config.height = 800;
+		config.height = 720;
 		System.out.println("Startup");
-		new LwjglApplication(new Loop(), config);
+		new LwjglApplication(new MainScreen(), config);
 	}
 }

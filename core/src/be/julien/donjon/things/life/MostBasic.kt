@@ -76,7 +76,7 @@ class MostBasic(pos: Vec2, dir: Vec2, dna: DNA = DNA()) : Life(pos, dir, dna) {
     }
 
     private fun compareOtherLife(currentTargetValue: Float, target: Vec2, other: MostBasic): Float {
-        var newValue = otherLifeBase
+        val newValue = otherLifeBase
         if (currentTargetValue > newValue) {
             return currentTargetValue
         } else {
