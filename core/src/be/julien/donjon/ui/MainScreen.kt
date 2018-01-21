@@ -33,7 +33,7 @@ class MainScreen : ApplicationAdapter() {
     override fun render() {
         super.render()
         Time.act(Gdx.graphics.deltaTime)
-        menu.act()
+        menu.act(GdxUiInput)
         Globals.drawer.batch(this::draw)
     }
 
