@@ -6,10 +6,10 @@ import be.julien.seed.physics.Vec2
 import be.julien.seed.time.Time
 import be.julien.seed.ui.Button
 import be.julien.seed.ui.Menu
-import com.badlogic.gdx.ApplicationAdapter
+import com.badlogic.gdx.Game
 import com.badlogic.gdx.Gdx
 
-class MainScreen : ApplicationAdapter() {
+class MainMenu(val game: Game) : MyScreen() {
 
     val play = Button(
             Vec2.get(72f, 50f),
@@ -20,18 +20,19 @@ class MainScreen : ApplicationAdapter() {
                     "*   **",
                     "* **",
                     "**"),
-            ButtonPiece.Companion::getPiece
+            ButtonPiece.Companion::getPiece,
+            this::changeToGameScreen
             )
     val menu = Menu(arrayOf(
             play
     ))
 
-    override fun create() {
-        super.create()
+    private fun changeToGameScreen() {
+        println("MainMenu.changeToGameScreen")
+        game.screen = Loop()
     }
 
-    override fun render() {
-        super.render()
+    override fun render(delta: Float) {
         Time.act(Gdx.graphics.deltaTime)
         menu.act(GdxUiInput)
         Globals.drawer.batch(this::draw)

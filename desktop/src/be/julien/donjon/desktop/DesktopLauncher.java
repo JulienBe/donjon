@@ -1,6 +1,6 @@
 package be.julien.donjon.desktop;
 
-import be.julien.donjon.ui.MainScreen;
+import be.julien.donjon.ui.EntryPoint;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		config.width = 1280;
 		config.height = 720;
 		System.out.println("Startup");
-		new LwjglApplication(new MainScreen(), config);
+		new LwjglApplication(new EntryPoint(), config);
 	}
 }

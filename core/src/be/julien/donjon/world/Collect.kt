@@ -14,6 +14,9 @@ class Collect {
     private val removedParticles = GdxArr<Particle>()
     private var keys: MutableSet<Mask>
 
+    val size: Int
+        get() = stuff.size
+
     init {
         stuff.put(Mask.Life, GdxArr())
         stuff.put(Mask.Sensor, GdxArr())
